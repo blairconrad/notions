@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder", "BookFinder\BookFinder.csproj", "{4229A253-16D8-4EB0-A420-43558B01AEE4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder.Tests", "BookFinder.Tests\BookFinder.Tests.csproj", "{13B33E41-3276-4ECB-84C2-54E8D05EB031}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder.Core", "BookFinder.Core\BookFinder.Core.csproj", "{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Debug.ActiveCfg = Debug|.NET
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Debug.Build.0 = Debug|.NET
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Release.ActiveCfg = Release|.NET
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Release.Build.0 = Release|.NET
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Debug.ActiveCfg = Debug|.NET
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Debug.Build.0 = Debug|.NET
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Release.ActiveCfg = Release|.NET
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Release.Build.0 = Release|.NET
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Debug.ActiveCfg = Debug|.NET
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Debug.Build.0 = Debug|.NET
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Release.ActiveCfg = Release|.NET
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

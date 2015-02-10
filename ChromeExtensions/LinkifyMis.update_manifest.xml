@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+  <app appid='djngpgfnmofmmnfpchapiljfhkmlakma'>
+    <updatecheck codebase='http://wikihealthcare.agfa.net/download/attachments/132482029/LinkifyMis.crx' version='0.7.2010.514' />
+  </app>
+</gupdate>

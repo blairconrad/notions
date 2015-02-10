@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+</head>
+<body>
+<table id="things_you_should_take_back">
+  <thead>
+    <tr>
+      <th><span id="count">0</span> Things you should take back</th>
+    </tr>
+  </thead>
+  <tbody>
+     <!-- data rows -->
+  </tbody>
+</table>
+<script>
+$(document).ready(function()
+{     
+   function refresh_table_count(table_selector)
+   {
+     var count = $(table_selector + ' tbody tr').length;
+     $(table_selector + ' thead #count').html(count);
+   }
+   refresh_table_count('#things_you_should_take_back');
+});
+</script>
+</body>
+</html>

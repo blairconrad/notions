@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>2011-08-05-2011-08-05</Generatedon>
+    <Parser>OpenCoverParser</Parser>
+    <Assemblies>1</Assemblies>
+    <Files>5</Files>
+    <Coverage>71.6%</Coverage>
+    <Coveredlines>126</Coveredlines>
+    <Coverablelines>176</Coverablelines>
+    <Totallines>495</Totallines>
+  </Summary>
+  <Assemblies>
+    <Assembly name="BookFinder.Core.DLL" coverage="71.6">
+      <Class name="BookFinder.BookDepository" coverage="85.7" />
+      <Class name="BookFinder.BookListViewModel" coverage="50" />
+      <Class name="BookFinder.BoolProperty" coverage="50" />
+      <Class name="BookFinder.BoundPropertyStrategy" coverage="0" />
+      <Class name="BookFinder.ListProperty" coverage="75" />
+      <Class name="BookFinder.Property" coverage="100" />
+      <Class name="BookFinder.StringProperty" coverage="100" />
+      <Class name="BookFinder.ViewModelBase" coverage="81" />
+    </Assembly>
+  </Assemblies>
+</CoverageReport>

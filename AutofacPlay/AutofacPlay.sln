@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 Resolve Dependencies", "1 Resolve Dependencies\1 Resolve Dependencies.csproj", "{CFACB66D-3D44-4FD2-885F-12C043B63C57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2 Auto Register", "2 Auto Register\2 Auto Register.csproj", "{5F6EDB22-0BB3-4390-9CD0-C1D610326CB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPlay.Core", "AutofacPlay.Core\AutofacPlay.Core.csproj", "{CD1B459B-37F2-4D73-BD5E-D34D93A08070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 Wire Properties", "3 Wire Properties\3 Wire Properties.csproj", "{20E32D02-841D-4230-96D5-23C13D2DBF14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0 ContainerBuildersAreSeparate", "0 ContainerBuildersAreSeparate\0 ContainerBuildersAreSeparate.csproj", "{FDC72182-4BAF-472D-A6ED-CC42E8EC7D22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4 Hide Private Component", "4 Hide Private Component\4 Hide Private Component.csproj", "{A2853AC6-F586-406B-8ABB-B3833BF9A3CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacPlay.Tests", "AutofacPlay.Tests\AutofacPlay.Tests.csproj", "{0374ACF8-6220-4930-B599-D6CB2CE30AF1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFACB66D-3D44-4FD2-885F-12C043B63C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFACB66D-3D44-4FD2-885F-12C043B63C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFACB66D-3D44-4FD2-885F-12C043B63C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFACB66D-3D44-4FD2-885F-12C043B63C57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F6EDB22-0BB3-4390-9CD0-C1D610326CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6EDB22-0BB3-4390-9CD0-C1D610326CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6EDB22-0BB3-4390-9CD0-C1D610326CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6EDB22-0BB3-4390-9CD0-C1D610326CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1B459B-37F2-4D73-BD5E-D34D93A08070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1B459B-37F2-4D73-BD5E-D34D93A08070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1B459B-37F2-4D73-BD5E-D34D93A08070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1B459B-37F2-4D73-BD5E-D34D93A08070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E32D02-841D-4230-96D5-23C13D2DBF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E32D02-841D-4230-96D5-23C13D2DBF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E32D02-841D-4230-96D5-23C13D2DBF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E32D02-841D-4230-96D5-23C13D2DBF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC72182-4BAF-472D-A6ED-CC42E8EC7D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC72182-4BAF-472D-A6ED-CC42E8EC7D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC72182-4BAF-472D-A6ED-CC42E8EC7D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC72182-4BAF-472D-A6ED-CC42E8EC7D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2853AC6-F586-406B-8ABB-B3833BF9A3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2853AC6-F586-406B-8ABB-B3833BF9A3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2853AC6-F586-406B-8ABB-B3833BF9A3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2853AC6-F586-406B-8ABB-B3833BF9A3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0374ACF8-6220-4930-B599-D6CB2CE30AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0374ACF8-6220-4930-B599-D6CB2CE30AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0374ACF8-6220-4930-B599-D6CB2CE30AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0374ACF8-6220-4930-B599-D6CB2CE30AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

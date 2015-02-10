@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[paper=a4paper,left=20mm,right=20mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{color}
+\usepackage{colortbl}
+\definecolor{green}{rgb}{0,1,0.12}
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{gray}{rgb}{0.86,0.86,0.86}
+
+\usepackage[pdftex,
+            colorlinks=true, linkcolor=red, urlcolor=green, citecolor=red,%
+            raiselinks=true,%
+            bookmarks=true,%
+            bookmarksopenlevel=1,%
+            bookmarksopen=true,%
+            bookmarksnumbered=true,%
+            hyperindex=true,% 
+            plainpages=false,% correct hyperlinks
+            pdfpagelabels=true%,% view TeX pagenumber in PDF reader
+            %pdfborder={0 0 0.5}
+            ]{hyperref}
+
+\hypersetup{pdftitle={Coverage Report},
+            pdfauthor={ReportGenerator - 1.1.1.0}
+           }
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{ReportGenerator - 1.1.1.0}
+
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+\section{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Generated on:} & 2011-08-05-2011-08-05\\
+\textbf{Parser:} & OpenCoverParser\\
+\textbf{Assemblies:} & 1\\
+\textbf{Files:} & 5\\
+\textbf{Coverage:} & 71.6\%\\
+\textbf{Covered lines:} & 126\\
+\textbf{Coverable lines:} & 176\\
+\textbf{Total lines:} & 495\\
+\end{longtable}
+\section{Assemblies}
+\begin{longtable}[l]{ll}
+\textbf{BookFinder.Core.DLL} & \textbf{71.6\%}\\
+BookFinder.BookDepository & 85.7\%\\
+BookFinder.BookListViewModel & 50\%\\
+BookFinder.BoolProperty & 50\%\\
+BookFinder.BoundPropertyStrategy & 0\%\\
+BookFinder.ListProperty & 75\%\\
+BookFinder.Property & 100\%\\
+BookFinder.StringProperty & 100\%\\
+BookFinder.ViewModelBase & 81\%\\
+\end{longtable}
+\end{document}

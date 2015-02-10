@@ -1,0 +1,11 @@
+<html>
+  <script>
+    chrome.extension.onRequest.addListener(function(request, sender) 
+         {
+             if (request.msg == "show") 
+             {
+                 chrome.pageAction.show(sender.tab.id);
+             }
+         });
+  </script>
+</html>

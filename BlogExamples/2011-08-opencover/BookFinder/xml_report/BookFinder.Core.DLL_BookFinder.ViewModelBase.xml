@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="BookFinder.ViewModelBase">
+  <Summary>
+    <Class>BookFinder.ViewModelBase</Class>
+    <Assembly>BookFinder.Core.DLL</Assembly>
+    <Files>
+      <File>D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\ViewModelBase.cs</File>
+    </Files>
+    <Coverage>81%</Coverage>
+    <Coveredlines>81</Coveredlines>
+    <Coverablelines>100</Coverablelines>
+    <Totallines>168</Totallines>
+  </Summary>
+  <Files>
+    <File name="D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\ViewModelBase.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" content="using System.Collections;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" content="using System.Reflection;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" content="using System.Windows.Forms;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" content="namespace BookFinder" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" content="{" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" content="    public class ViewModelBase" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" content="    {" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" content="        protected Control View;" />
+      <LineAnalysis line="11" visits="2" coverage="Covered" content="        private BindingFlags myBindingFlags = BindingFlags.Instance | BindingFlags.Public;" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="13" visits="2" coverage="Covered" content="        public ViewModelBase(Control view)" />
+      <LineAnalysis line="14" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="15" visits="2" coverage="Covered" content="            View = view;" />
+      <LineAnalysis line="16" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" content="        protected void BindToView()" />
+      <LineAnalysis line="19" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="20" visits="2" coverage="Covered" content="            ArrayList allControls = AllControlsDescendingFrom(View);" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="22" visits="22" coverage="Covered" content="            foreach ( MethodInfo handler in EventHandlers() )" />
+      <LineAnalysis line="23" visits="8" coverage="Covered" content="            {" />
+      <LineAnalysis line="24" visits="8" coverage="Covered" content="                FindEventToListenTo(allControls, handler);" />
+      <LineAnalysis line="25" visits="8" coverage="Covered" content="            }" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="27" visits="26" coverage="Covered" content="            foreach ( FieldInfo field in PropertyFields() )" />
+      <LineAnalysis line="28" visits="10" coverage="Covered" content="            {" />
+      <LineAnalysis line="29" visits="10" coverage="Covered" content="                FindPropertyToBindTo(allControls, field);" />
+      <LineAnalysis line="30" visits="10" coverage="Covered" content="            }" />
+      <LineAnalysis line="31" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" content="        private void FindPropertyToBindTo(ArrayList allControls, FieldInfo field)" />
+      <LineAnalysis line="34" visits="10" coverage="Covered" content="        {" />
+      <LineAnalysis line="35" visits="50" coverage="Covered" content="            foreach ( Control control in allControls )" />
+      <LineAnalysis line="36" visits="10" coverage="Covered" content="            {" />
+      <LineAnalysis line="37" visits="10" coverage="Covered" content="                if ( BindPropertyToControl(control, field) )" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" content="                {" />
+      <LineAnalysis line="39" visits="0" coverage="NotCovered" content="                    return;" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" content="                }" />
+      <LineAnalysis line="41" visits="10" coverage="Covered" content="            }" />
+      <LineAnalysis line="42" visits="10" coverage="Covered" content="        }" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" content="        private void FindEventToListenTo(ArrayList allControls, MethodInfo handler)" />
+      <LineAnalysis line="45" visits="8" coverage="Covered" content="        {" />
+      <LineAnalysis line="46" visits="40" coverage="Covered" content="            foreach ( Control control in allControls )" />
+      <LineAnalysis line="47" visits="8" coverage="Covered" content="            {" />
+      <LineAnalysis line="48" visits="8" coverage="Covered" content="                if ( ListenToEvent(control, handler) )" />
+      <LineAnalysis line="49" visits="0" coverage="NotCovered" content="                {" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" content="                    return;" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" content="                }" />
+      <LineAnalysis line="52" visits="8" coverage="Covered" content="            }" />
+      <LineAnalysis line="53" visits="8" coverage="Covered" content="        }" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" content="        public IEnumerable PropertyFields()" />
+      <LineAnalysis line="56" visits="4" coverage="Covered" content="        {" />
+      <LineAnalysis line="57" visits="4" coverage="Covered" content="            ArrayList fields = new ArrayList();" />
+      <LineAnalysis line="58" visits="52" coverage="Covered" content="            foreach ( FieldInfo field in this.GetType().GetFields(myBindingFlags) )" />
+      <LineAnalysis line="59" visits="20" coverage="Covered" content="            {" />
+      <LineAnalysis line="60" visits="20" coverage="Covered" content="                if ( typeof (Property).IsAssignableFrom(field.FieldType) )" />
+      <LineAnalysis line="61" visits="20" coverage="Covered" content="                {" />
+      <LineAnalysis line="62" visits="20" coverage="Covered" content="                    fields.Add(field);" />
+      <LineAnalysis line="63" visits="20" coverage="Covered" content="                }" />
+      <LineAnalysis line="64" visits="20" coverage="Covered" content="            }" />
+      <LineAnalysis line="65" visits="4" coverage="Covered" content="            return fields;" />
+      <LineAnalysis line="66" visits="4" coverage="Covered" content="        }" />
+      <LineAnalysis line="67" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="68" visits="-1" coverage="NotCoverable" content="        private IEnumerable EventHandlers()" />
+      <LineAnalysis line="69" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="70" visits="2" coverage="Covered" content="            ArrayList eventHandlers = new ArrayList();" />
+      <LineAnalysis line="71" visits="42" coverage="Covered" content="            foreach ( MethodInfo method in this.GetType().GetMethods(myBindingFlags) )" />
+      <LineAnalysis line="72" visits="18" coverage="Covered" content="            {" />
+      <LineAnalysis line="73" visits="18" coverage="Covered" content="                if ( isEventHandler(method) )" />
+      <LineAnalysis line="74" visits="8" coverage="Covered" content="                {" />
+      <LineAnalysis line="75" visits="8" coverage="Covered" content="                    eventHandlers.Add(method);" />
+      <LineAnalysis line="76" visits="8" coverage="Covered" content="                }" />
+      <LineAnalysis line="77" visits="18" coverage="Covered" content="            }" />
+      <LineAnalysis line="78" visits="2" coverage="Covered" content="            return eventHandlers;" />
+      <LineAnalysis line="79" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" content="        private bool isEventHandler(MethodInfo info)" />
+      <LineAnalysis line="82" visits="18" coverage="Covered" content="        {" />
+      <LineAnalysis line="83" visits="18" coverage="Covered" content="            ParameterInfo[] parameters = info.GetParameters();" />
+      <LineAnalysis line="84" visits="18" coverage="Covered" content="            return" />
+      <LineAnalysis line="85" visits="-1" coverage="NotCoverable" content="                (info.ReturnType == typeof (void) &amp;&amp;" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" content="                 parameters.Length == 2 &amp;&amp;" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" content="                 parameters[0].ParameterType == typeof (object) &amp;&amp;" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" content="                 (typeof (EventArgs)).IsAssignableFrom(parameters[1].ParameterType));" />
+      <LineAnalysis line="89" visits="18" coverage="Covered" content="        }" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="92" visits="-1" coverage="NotCoverable" content="        private bool ListenToEvent(Control control, MethodInfo method)" />
+      <LineAnalysis line="93" visits="8" coverage="Covered" content="        {" />
+      <LineAnalysis line="94" visits="8" coverage="Covered" content="            string eventName = ControlAttributeName(control, method.Name);" />
+      <LineAnalysis line="95" visits="8" coverage="Covered" content="            if ( eventName == null )" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" content="            {" />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" content="                return false;" />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" content="            }" />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="100" visits="8" coverage="Covered" content="            EventInfo eventInfo = control.GetType().GetEvent(eventName, myBindingFlags);" />
+      <LineAnalysis line="101" visits="8" coverage="Covered" content="            if ( eventInfo == null )" />
+      <LineAnalysis line="102" visits="8" coverage="Covered" content="            {" />
+      <LineAnalysis line="103" visits="8" coverage="Covered" content="                return false;" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" content="            }" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="106" visits="0" coverage="NotCovered" content="            eventInfo.GetAddMethod().Invoke(control, new object[]" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" content="                                                         {" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" content="                                                             Delegate.CreateDelegate(eventInfo.EventHandlerType, this," />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" content="                                                                                     method.Name)" />
+      <LineAnalysis line="110" visits="-1" coverage="NotCoverable" content="                                                         });" />
+      <LineAnalysis line="111" visits="0" coverage="NotCovered" content="            return true;" />
+      <LineAnalysis line="112" visits="8" coverage="Covered" content="        }" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="114" visits="-1" coverage="NotCoverable" content="        private bool BindPropertyToControl(Control control, FieldInfo field)" />
+      <LineAnalysis line="115" visits="10" coverage="Covered" content="        {" />
+      <LineAnalysis line="116" visits="10" coverage="Covered" content="            string controlPropertyName = ControlAttributeName(control, field.Name);" />
+      <LineAnalysis line="117" visits="10" coverage="Covered" content="            if ( controlPropertyName == null )" />
+      <LineAnalysis line="118" visits="0" coverage="NotCovered" content="            {" />
+      <LineAnalysis line="119" visits="0" coverage="NotCovered" content="                return false;" />
+      <LineAnalysis line="120" visits="-1" coverage="NotCoverable" content="            }" />
+      <LineAnalysis line="121" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="122" visits="10" coverage="Covered" content="            PropertyInfo controlProperty = control.GetType().GetProperty(controlPropertyName, myBindingFlags);" />
+      <LineAnalysis line="123" visits="10" coverage="Covered" content="            if ( controlProperty == null )" />
+      <LineAnalysis line="124" visits="10" coverage="Covered" content="            {" />
+      <LineAnalysis line="125" visits="10" coverage="Covered" content="               return false;" />
+      <LineAnalysis line="126" visits="-1" coverage="NotCoverable" content="            }" />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="128" visits="0" coverage="NotCovered" content="            BoundPropertyStrategy propertyStorageStrategy = new BoundPropertyStrategy(control, controlProperty);" />
+      <LineAnalysis line="129" visits="0" coverage="NotCovered" content="            ConstructorInfo propertyConstructor = field.FieldType.GetConstructor(new Type[] {typeof (PropertyStorageStrategy)});" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" content="            object propertyField = propertyConstructor.Invoke(new object[] {propertyStorageStrategy});" />
+      <LineAnalysis line="131" visits="0" coverage="NotCovered" content="            field.SetValue(this, propertyField);" />
+      <LineAnalysis line="132" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="133" visits="0" coverage="NotCovered" content="            return true;" />
+      <LineAnalysis line="134" visits="10" coverage="Covered" content="        }" />
+      <LineAnalysis line="135" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="136" visits="-1" coverage="NotCoverable" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="137" visits="-1" coverage="NotCoverable" content="        /// Given a control and a ViewModel member, checks to see if the control name" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" content="        /// prefixes the viewModelMember. If so, returns the remainder of the member name." />
+      <LineAnalysis line="139" visits="-1" coverage="NotCoverable" content="        /// Otherwise, returns &lt;c&gt;null&lt;/c&gt;." />
+      <LineAnalysis line="140" visits="-1" coverage="NotCoverable" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="141" visits="-1" coverage="NotCoverable" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" content="        /// Used to find controls that contain attributes that we can bind to. For example," />
+      <LineAnalysis line="143" visits="-1" coverage="NotCoverable" content="        /// given a control called &quot;Search&quot;, and a viewModelMember called &quot;SearchClick&quot;, this" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" content="        /// method should return &quot;Click&quot;, allowing us to look for the &lt;c&gt;control.Click&lt;/c&gt; member." />
+      <LineAnalysis line="145" visits="-1" coverage="NotCoverable" content="        /// Given a control called &quot;Save&quot; and a viewModelMember called &quot;SearchClick&quot;, the" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" content="        /// method will return &lt;c&gt;null&lt;/c&gt; - there's nothing here to try to bind to." />
+      <LineAnalysis line="147" visits="-1" coverage="NotCoverable" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="148" visits="-1" coverage="NotCoverable" content="        private string ControlAttributeName(Control control, string viewModelMemberName)" />
+      <LineAnalysis line="149" visits="18" coverage="Covered" content="        {" />
+      <LineAnalysis line="150" visits="18" coverage="Covered" content="            if ( viewModelMemberName.ToLower().StartsWith(control.Name.ToLower()) )" />
+      <LineAnalysis line="151" visits="18" coverage="Covered" content="            {" />
+      <LineAnalysis line="152" visits="18" coverage="Covered" content="                return viewModelMemberName.Substring(control.Name.Length);" />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" content="            }" />
+      <LineAnalysis line="154" visits="0" coverage="NotCovered" content="            return null;" />
+      <LineAnalysis line="155" visits="18" coverage="Covered" content="        }" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" content="        private static ArrayList AllControlsDescendingFrom(Control baseControl)" />
+      <LineAnalysis line="158" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="159" visits="2" coverage="Covered" content="            ArrayList allControls = new ArrayList();" />
+      <LineAnalysis line="160" visits="2" coverage="Covered" content="            allControls.Add(baseControl);" />
+      <LineAnalysis line="161" visits="6" coverage="Covered" content="            foreach ( Control control in baseControl.Controls )" />
+      <LineAnalysis line="162" visits="0" coverage="NotCovered" content="            {" />
+      <LineAnalysis line="163" visits="0" coverage="NotCovered" content="                allControls.AddRange(AllControlsDescendingFrom(control));" />
+      <LineAnalysis line="164" visits="0" coverage="NotCovered" content="            }" />
+      <LineAnalysis line="165" visits="2" coverage="Covered" content="            return allControls;" />
+      <LineAnalysis line="166" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" content="       }" />
+      <LineAnalysis line="168" visits="-1" coverage="NotCoverable" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

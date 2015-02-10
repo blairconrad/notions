@@ -1,0 +1,1 @@
+c:\portableapps\portableapps\emacs-22.3\bin\runemacs post.html

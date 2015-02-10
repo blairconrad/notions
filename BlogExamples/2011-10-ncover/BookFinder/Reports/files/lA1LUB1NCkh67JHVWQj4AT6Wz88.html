@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<!-- saved from url=(0022)http://www.ncover.com/ -->
+    <title>NCover Code Coverage Report - New Project</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+	<link rel="stylesheet" type="text/css" href="../default.css" />
+	
+	<script type="text/javascript" src="../sorttable.js"></script>
+    <script type="text/javascript" src="../prototype.js"></script>
+    <!--[if IE]>
+		<script type="text/javascript" src="../excanvas.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="../blech.js"></script>
+    <script type="text/javascript" src="../ncover.js"></script>
+  </head>
+  <body>
+    <div id="hdrbar">
+      <div id="hdrbar_left">
+        <a href="../coveragesummary.html" target="doc">New Project</a>
+      </div>
+    </div>
+    <div id="content">
+      
+
+<div id="page_title">
+  <em>Code Coverage Statistics for Source File</em>
+  <h1>BookFinder.Core\BookDepository.cs</h1>
+</div>
+
+
+
+<div id="page_stats">
+	<div id="left">
+		<p>Symbol Coverage: <span class="highlight uncovered">87.50%</span> (14 of 16)</p><p>Branch Coverage: <span class="highlight acceptable">87.50%</span> (7 of 8)</p><p>Cyclomatic Complexity Avg: <span class="highlight">2.00</span> Max:<span class="highlight acceptable">4</span> </p>
+
+<p>
+  Code Lines:
+  <span class="highlight">14</span>
+</p>
+	</div>
+	
+</div>
+<br style="clear: both;" />
+
+
+
+
+<table id="sourceTable" class="source">
+  <tr>
+  <th class="linenum" title="Line #">L</th>
+  <th class="linenum" title="Visit Count">V</th>
+  <th class="sourceline" style="text-align: left;">Source</th>
+  </tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L1">1</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>using System.Collections;</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L2">2</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L3">3</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>namespace BookFinder</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L4">4</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>{</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L5">5</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>    public class BookDepository: IBookDepository</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L6">6</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>    {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L7">7</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        static IDictionary details;</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L8">8</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L9">9</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L10">10</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>        <span class="covered">public BookDepository()</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L11">11</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L12">12</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">details = new Hashtable();</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L13">13</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">details[&quot;The Time Traveler's Wife&quot;] = &quot;naked in the Newberry&quot;;</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L14">14</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">details[&quot;Ender's Game&quot;] = &quot;little kid saves the world&quot;;</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L15">15</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">details[&quot;Maus&quot;] = &quot;why pigs?&quot;;</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L16">16</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>        <span class="covered">}</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L17">17</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L18">18</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        public ICollection Find(string titleSubstring)</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L19">19</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L20">20</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">ArrayList titles = new ArrayList();</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L21">21</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            foreach ( <span class="covered">string title in details.Keys </span>)</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L22">22</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>            {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L23">23</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 6 times"> 6</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>                <span class="covered">if ( title.IndexOf(titleSubstring) &gt;= 0 )</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L24">24</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>                {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L25">25</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 1 time"> 1</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>                    <span class="covered">titles.Add(title);</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L26">26</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>                }</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L27">27</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>            }</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L28">28</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="covered">return titles;</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="coveredLine">
+  
+    <pre><a name="L29">29</a></pre>
+  </td>
+  
+  
+    <td class="coveredLine">
+  
+	  <pre title="Visited 2 times"> 2</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>        <span class="covered">}</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L30">30</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L31">31</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        public string Details(string title)</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L32">32</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>        {</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="uncoveredLine">
+  
+    <pre><a name="L33">33</a></pre>
+  </td>
+  
+  
+    <td class="uncoveredLine">
+  
+	  <pre title="Visited 0 times"> 0</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>            <span class="uncovered">return (string) details[title];</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+    <td class="uncoveredLine">
+  
+    <pre><a name="L34">34</a></pre>
+  </td>
+  
+  
+    <td class="uncoveredLine">
+  
+	  <pre title="Visited 0 times"> 0</pre>
+    
+  </td>
+  
+  <td class="sourceline">
+    <pre>        <span class="uncovered">}</span></pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L35">35</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>    }</pre>
+  </td>
+</tr>
+
+
+  <tr>
+  
+     <td>
+  
+    <pre><a name="L36">36</a></pre>
+  </td>
+  
+  
+		<td>
+  
+  </td>
+  
+  <td class="sourceline">
+    <pre>}</pre>
+  </td>
+</tr>
+
+
+
+</table>
+
+<script type="text\\javascript" language="javascript">
+document.getElementById('coveredCheck').checked = false;
+</script>
+    </div>
+    <div id="footer">
+	  Generated By  
+      <a href="http://www.ncover.com" target="_top">NCover</a><br />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,353 @@
+﻿{
+ "DotCoverVersion": "1.1.252.2",
+ "CoverageTree": {
+  "Kind": "Root",
+  "Name": "Root",
+  "CoveredStatements": 161,
+  "TotalStatements": 218,
+  "CoveragePercent": 74,
+  "Children": [
+   {
+    "Kind": "Assembly",
+    "Name": "BookFinder.Core",
+    "CoveredStatements": 161,
+    "TotalStatements": 218,
+    "CoveragePercent": 74,
+    "Children": [
+     {
+      "Kind": "Namespace",
+      "Name": "BookFinder",
+      "CoveredStatements": 161,
+      "TotalStatements": 218,
+      "CoveragePercent": 74,
+      "Children": [
+       {
+        "Kind": "Type",
+        "Name": "BoundPropertyStrategy",
+        "CoveredStatements": 0,
+        "TotalStatements": 11,
+        "CoveragePercent": 0,
+        "Children": [
+         {
+          "Kind": "Method",
+          "Name": "Get():System.Object",
+          "CoveredStatements": 0,
+          "TotalStatements": 3,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Method",
+          "Name": "Set(System.Object):System.Void",
+          "CoveredStatements": 0,
+          "TotalStatements": 3,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(System.Object,System.Reflection.PropertyInfo):System.Void",
+          "CoveredStatements": 0,
+          "TotalStatements": 5,
+          "CoveragePercent": 0
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "BoolProperty",
+        "CoveredStatements": 3,
+        "TotalStatements": 9,
+        "CoveragePercent": 33,
+        "Children": [
+         {
+          "Kind": "Property",
+          "Name": "Value:System.Boolean",
+          "CoveredStatements": 0,
+          "TotalStatements": 6,
+          "CoveragePercent": 0,
+          "Children": [
+           {
+            "Kind": "Method",
+            "Name": "get_Value():System.Boolean",
+            "CoveredStatements": 0,
+            "TotalStatements": 3,
+            "CoveragePercent": 0
+           },
+           {
+            "Kind": "Method",
+            "Name": "set_Value(System.Boolean):System.Void",
+            "CoveredStatements": 0,
+            "TotalStatements": 3,
+            "CoveragePercent": 0
+           }
+          ]
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(BookFinder.PropertyStorageStrategy):System.Void",
+          "CoveredStatements": 3,
+          "TotalStatements": 3,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "BookListViewModel",
+        "CoveredStatements": 17,
+        "TotalStatements": 31,
+        "CoveragePercent": 55,
+        "Children": [
+         {
+          "Kind": "Method",
+          "Name": "TitleTextChanged(System.Object,System.EventArgs):System.Void",
+          "CoveredStatements": 0,
+          "TotalStatements": 4,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Method",
+          "Name": "BookListSelectedIndexChanged(System.Object,System.EventArgs):System.Void",
+          "CoveredStatements": 0,
+          "TotalStatements": 4,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Method",
+          "Name": "TitleKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs):System.Void",
+          "CoveredStatements": 0,
+          "TotalStatements": 6,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(System.Windows.Forms.Control,BookFinder.IBookDepository):System.Void",
+          "CoveredStatements": 5,
+          "TotalStatements": 5,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Method",
+          "Name": "FindClick(System.Object,System.EventArgs):System.Void",
+          "CoveredStatements": 12,
+          "TotalStatements": 12,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "ListProperty",
+        "CoveredStatements": 6,
+        "TotalStatements": 9,
+        "CoveragePercent": 67,
+        "Children": [
+         {
+          "Kind": "Property",
+          "Name": "Value:System.Collections.IList",
+          "CoveredStatements": 3,
+          "TotalStatements": 6,
+          "CoveragePercent": 50,
+          "Children": [
+           {
+            "Kind": "Method",
+            "Name": "set_Value(System.Collections.IList):System.Void",
+            "CoveredStatements": 0,
+            "TotalStatements": 3,
+            "CoveragePercent": 0
+           },
+           {
+            "Kind": "Method",
+            "Name": "get_Value():System.Collections.IList",
+            "CoveredStatements": 3,
+            "TotalStatements": 3,
+            "CoveragePercent": 100
+           }
+          ]
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(BookFinder.PropertyStorageStrategy):System.Void",
+          "CoveredStatements": 3,
+          "TotalStatements": 3,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "ViewModelBase",
+        "CoveredStatements": 101,
+        "TotalStatements": 121,
+        "CoveragePercent": 83,
+        "Children": [
+         {
+          "Kind": "Method",
+          "Name": "BindPropertyToControl(System.Windows.Forms.Control,System.Reflection.FieldInfo):System.Boolean",
+          "CoveredStatements": 8,
+          "TotalStatements": 15,
+          "CoveragePercent": 53
+         },
+         {
+          "Kind": "Method",
+          "Name": "AllControlsDescendingFrom(System.Windows.Forms.Control):System.Collections.ArrayList",
+          "CoveredStatements": 8,
+          "TotalStatements": 12,
+          "CoveragePercent": 67
+         },
+         {
+          "Kind": "Method",
+          "Name": "ListenToEvent(System.Windows.Forms.Control,System.Reflection.MethodInfo):System.Boolean",
+          "CoveredStatements": 8,
+          "TotalStatements": 12,
+          "CoveragePercent": 67
+         },
+         {
+          "Kind": "Method",
+          "Name": "FindEventToListenTo(System.Collections.ArrayList,System.Reflection.MethodInfo):System.Void",
+          "CoveredStatements": 9,
+          "TotalStatements": 11,
+          "CoveragePercent": 82
+         },
+         {
+          "Kind": "Method",
+          "Name": "FindPropertyToBindTo(System.Collections.ArrayList,System.Reflection.FieldInfo):System.Void",
+          "CoveredStatements": 9,
+          "TotalStatements": 11,
+          "CoveragePercent": 82
+         },
+         {
+          "Kind": "Method",
+          "Name": "ControlAttributeName(System.Windows.Forms.Control,System.String):System.String",
+          "CoveredStatements": 5,
+          "TotalStatements": 6,
+          "CoveragePercent": 83
+         },
+         {
+          "Kind": "Method",
+          "Name": "isEventHandler(System.Reflection.MethodInfo):System.Boolean",
+          "CoveredStatements": 4,
+          "TotalStatements": 4,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(System.Windows.Forms.Control):System.Void",
+          "CoveredStatements": 5,
+          "TotalStatements": 5,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Method",
+          "Name": "EventHandlers():System.Collections.IEnumerable",
+          "CoveredStatements": 14,
+          "TotalStatements": 14,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Method",
+          "Name": "PropertyFields():System.Collections.IEnumerable",
+          "CoveredStatements": 14,
+          "TotalStatements": 14,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Method",
+          "Name": "BindToView():System.Void",
+          "CoveredStatements": 17,
+          "TotalStatements": 17,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "BookDepository",
+        "CoveredStatements": 21,
+        "TotalStatements": 24,
+        "CoveragePercent": 88,
+        "Children": [
+         {
+          "Kind": "Method",
+          "Name": "Details(System.String):System.String",
+          "CoveredStatements": 0,
+          "TotalStatements": 3,
+          "CoveragePercent": 0
+         },
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor():System.Void",
+          "CoveredStatements": 7,
+          "TotalStatements": 7,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Method",
+          "Name": "Find(System.String):System.Collections.ICollection",
+          "CoveredStatements": 14,
+          "TotalStatements": 14,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "Property",
+        "CoveredStatements": 4,
+        "TotalStatements": 4,
+        "CoveragePercent": 100,
+        "Children": [
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(BookFinder.PropertyStorageStrategy):System.Void",
+          "CoveredStatements": 4,
+          "TotalStatements": 4,
+          "CoveragePercent": 100
+         }
+        ]
+       },
+       {
+        "Kind": "Type",
+        "Name": "StringProperty",
+        "CoveredStatements": 9,
+        "TotalStatements": 9,
+        "CoveragePercent": 100,
+        "Children": [
+         {
+          "Kind": "Constructor",
+          "Name": ".ctor(BookFinder.PropertyStorageStrategy):System.Void",
+          "CoveredStatements": 3,
+          "TotalStatements": 3,
+          "CoveragePercent": 100
+         },
+         {
+          "Kind": "Property",
+          "Name": "Value:System.String",
+          "CoveredStatements": 6,
+          "TotalStatements": 6,
+          "CoveragePercent": 100,
+          "Children": [
+           {
+            "Kind": "Method",
+            "Name": "get_Value():System.String",
+            "CoveredStatements": 3,
+            "TotalStatements": 3,
+            "CoveragePercent": 100
+           },
+           {
+            "Kind": "Method",
+            "Name": "set_Value(System.String):System.Void",
+            "CoveredStatements": 3,
+            "TotalStatements": 3,
+            "CoveragePercent": 100
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

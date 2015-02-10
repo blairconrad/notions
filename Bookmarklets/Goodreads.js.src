@@ -1,0 +1,16 @@
+javascript:
+re = /\b(\d{3}-?)?\d-?(\d{4}-?)(\d{4}-?)(\d|[Xx])\b/;
+var isbn = window.getSelection();
+if ( '' == isbn )
+{
+  var m = re.exec(location.href);
+   if(m != null)
+  {
+    isbn=m[0];
+  }
+}
+
+isbn = new String(isbn);
+isbn = isbn.replace('-', '', 'g');
+location.href='http://www.goodreads.com/search/search?search[query]=' + isbn + '&search_type=books&search[field]=on';
+

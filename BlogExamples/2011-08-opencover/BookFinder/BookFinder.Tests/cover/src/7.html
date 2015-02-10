@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_7 = [
+   [9,9,9,60,'dccv']
+, [10,9,10,10,'dccv']
+, [11,13,11,36,'dccv']
+, [12,9,12,10,'dccv']
+, [17,9,17,79,'dccv']
+, [18,9,18,10,'dccv']
+, [18,10,18,11,'dccv']
+, [22,17,22,18,'dccv']
+, [22,19,22,49,'dccv']
+, [22,50,22,51,'dccv']
+, [23,17,23,18,'dccv']
+, [23,19,23,38,'dccv']
+, [23,39,23,40,'dccv']
+, [29,9,29,77,'dccv']
+, [30,9,30,10,'dccv']
+, [30,10,30,11,'dccv']
+, [41,9,41,77,'dccv']
+, [42,9,42,10,'dccv']
+, [42,10,42,11,'dccv']
+, [46,17,46,18,'dccv']
+, [46,19,46,48,'dccv']
+, [46,49,46,50,'dccv']
+, [34,17,34,18,'dcuc']
+, [34,19,34,47,'dcuc']
+, [34,48,34,49,'dcuc']
+, [35,17,35,18,'dcuc']
+, [35,19,35,38,'dcuc']
+, [35,39,35,40,'dcuc']
+, [47,17,47,18,'dcuc']
+, [47,19,47,38,'dcuc']
+, [47,39,47,40,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src7" class="dotCoverSource"><pre>using System.Collections;
+
+namespace BookFinder
+{
+    public abstract class Property
+    {
+        protected PropertyStorageStrategy storage;
+
+        protected Property(PropertyStorageStrategy storage)
+        {
+            this.storage = storage;
+        }
+    }
+
+    public class StringProperty : Property
+    {
+        public StringProperty(PropertyStorageStrategy storage) : base(storage)
+        {}
+
+        public string Value
+        {
+            get { return (string) storage.Get(); }
+            set { storage.Set(value); }
+        }
+    }
+
+    public class BoolProperty : Property
+    {
+        public BoolProperty(PropertyStorageStrategy storage) : base(storage)
+        {}
+
+        public bool Value
+        {
+            get { return (bool) storage.Get(); }
+            set { storage.Set(value); }
+        }
+    }
+
+    public class ListProperty : Property
+    {
+        public ListProperty(PropertyStorageStrategy storage) : base(storage)
+        {}
+
+        public IList Value
+        {
+            get { return (IList) storage.Get(); }
+            set { storage.Set(value); }
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src7', RANGES_7)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_5 = [
+   [10,9,10,32,'dccv']
+, [11,9,11,10,'dccv']
+, [12,13,12,39,'dccv']
+, [13,13,13,75,'dccv']
+, [14,13,14,68,'dccv']
+, [15,13,15,43,'dccv']
+, [16,9,16,10,'dccv']
+, [19,9,19,10,'dccv']
+, [20,13,20,48,'dccv']
+, [21,13,21,20,'dccv']
+, [21,39,21,51,'dccv']
+, [21,23,21,35,'dccv']
+, [22,13,22,14,'dccv']
+, [23,17,23,58,'dccv']
+, [24,17,24,18,'dccv']
+, [25,21,25,39,'dccv']
+, [26,17,26,18,'dccv']
+, [27,13,27,14,'dccv']
+, [21,36,21,38,'dccv']
+, [28,13,28,27,'dccv']
+, [29,9,29,10,'dccv']
+, [32,9,32,10,'dcuc']
+, [33,13,33,44,'dcuc']
+, [34,9,34,10,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src5" class="dotCoverSource"><pre>using System.Collections;
+
+namespace BookFinder
+{
+    public class BookDepository: IBookDepository
+    {
+        static IDictionary details;
+
+
+        public BookDepository()
+        {
+            details = new Hashtable();
+            details[&quot;The Time Traveler's Wife&quot;] = &quot;naked in the Newberry&quot;;
+            details[&quot;Ender's Game&quot;] = &quot;little kid saves the world&quot;;
+            details[&quot;Maus&quot;] = &quot;why pigs?&quot;;
+        }
+
+        public ICollection Find(string titleSubstring)
+        {
+            ArrayList titles = new ArrayList();
+            foreach ( string title in details.Keys )
+            {
+                if ( title.IndexOf(titleSubstring) &gt;= 0 )
+                {
+                    titles.Add(title);
+                }
+            }
+            return titles;
+        }
+
+        public string Details(string title)
+        {
+            return (string) details[title];
+        }
+    }
+}</pre></code><script type="text/javascript">
+			applyranges('src5', RANGES_5)
+		</script>
+	</body>
+</html>

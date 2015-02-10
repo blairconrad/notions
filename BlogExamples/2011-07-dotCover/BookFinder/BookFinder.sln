@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder", "BookFinder\BookFinder.csproj", "{4229A253-16D8-4EB0-A420-43558B01AEE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder.Tests", "BookFinder.Tests\BookFinder.Tests.csproj", "{13B33E41-3276-4ECB-84C2-54E8D05EB031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinder.Core", "BookFinder.Core\BookFinder.Core.csproj", "{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4229A253-16D8-4EB0-A420-43558B01AEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B33E41-3276-4ECB-84C2-54E8D05EB031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2011AC2-8879-4A04-A2AC-E4ABFB730B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="BookFinder.BookDepository">
+  <Summary>
+    <Class>BookFinder.BookDepository</Class>
+    <Assembly>BookFinder.Core.DLL</Assembly>
+    <Files>
+      <File>D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\BookDepository.cs</File>
+    </Files>
+    <Coverage>85.7%</Coverage>
+    <Coveredlines>18</Coveredlines>
+    <Coverablelines>21</Coverablelines>
+    <Totallines>36</Totallines>
+  </Summary>
+  <Files>
+    <File name="D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\BookDepository.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" content="using System.Collections;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" content="namespace BookFinder" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" content="{" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" content="    public class BookDepository: IBookDepository" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" content="    {" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" content="        static IDictionary details;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="10" visits="2" coverage="Covered" content="        public BookDepository()" />
+      <LineAnalysis line="11" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="12" visits="2" coverage="Covered" content="            details = new Hashtable();" />
+      <LineAnalysis line="13" visits="2" coverage="Covered" content="            details[&quot;The Time Traveler's Wife&quot;] = &quot;naked in the Newberry&quot;;" />
+      <LineAnalysis line="14" visits="2" coverage="Covered" content="            details[&quot;Ender's Game&quot;] = &quot;little kid saves the world&quot;;" />
+      <LineAnalysis line="15" visits="2" coverage="Covered" content="            details[&quot;Maus&quot;] = &quot;why pigs?&quot;;" />
+      <LineAnalysis line="16" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" content="        public ICollection Find(string titleSubstring)" />
+      <LineAnalysis line="19" visits="2" coverage="Covered" content="        {" />
+      <LineAnalysis line="20" visits="2" coverage="Covered" content="            ArrayList titles = new ArrayList();" />
+      <LineAnalysis line="21" visits="18" coverage="Covered" content="            foreach ( string title in details.Keys )" />
+      <LineAnalysis line="22" visits="6" coverage="Covered" content="            {" />
+      <LineAnalysis line="23" visits="6" coverage="Covered" content="                if ( title.IndexOf(titleSubstring) &gt;= 0 )" />
+      <LineAnalysis line="24" visits="1" coverage="Covered" content="                {" />
+      <LineAnalysis line="25" visits="1" coverage="Covered" content="                    titles.Add(title);" />
+      <LineAnalysis line="26" visits="1" coverage="Covered" content="                }" />
+      <LineAnalysis line="27" visits="6" coverage="Covered" content="            }" />
+      <LineAnalysis line="28" visits="2" coverage="Covered" content="            return titles;" />
+      <LineAnalysis line="29" visits="2" coverage="Covered" content="        }" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" content="" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" content="        public string Details(string title)" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" content="        {" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" content="            return (string) details[title];" />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" content="        }" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" content="    }" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

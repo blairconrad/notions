@@ -1,0 +1,12 @@
+javascript:
+var re=/(^|[^\d])(\d{7,9}[\dX])([^\d]|$)/i;
+var text = window.getSelection();
+if ( '' == text )
+{
+  text = location.href;
+}
+if ( re.test(text) )
+{
+   var isbn=RegExp.$2;
+   void(win=window.open('http://books.wpl.ca'+'/search/i='+isbn,'LibraryLookup','scrollbars=1,resizable=1,width=575,height=500'))
+}

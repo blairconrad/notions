@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
+<coverage profilerVersion="3.4.18.6937" driverVersion="3.4.18.6937" exportversion="3" viewdisplayname="" startTime="2011-10-19T14:51:03.6140713Z" measureTime="2011-10-19T14:51:05.2892388Z" projectName="New Project" buildid="fd317ee8-8dd6-408a-8338-a2732e9d102d" coveragenodeid="0" failed="false" satisfactorybranchthreshold="80" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="95" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="New Project" viewfilterstyle="None" viewreportstyle="SymbolCoverageAndCyclomaticComplexity" viewsortstyle="Name">
+  <rebasedpaths />
+  <filters />
+  <documents>
+    <doc id="8" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Core\BookDepository.cs" cs="C17FF40F7106E8FFABAC28F03289ECBA" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="20" nid="0" />
+    <doc id="6" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Core\BookListViewModel.cs" cs="AA958E56A51F25B4D0A18D14EEC98185" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="20" nid="0" />
+    <doc id="7" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Core\BoundPropertyStrategy.cs" cs="CB298A0ACB38362E74C678559EDBE5B6" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="20" nid="0" />
+    <doc id="5" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Core\Property.cs" cs="E892D73B25AC5E9A59D1184E8F933EEB" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="20" nid="0" />
+    <doc id="4" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Core\ViewModelBase.cs" cs="0E5525F279AF69FE5622B8ED16FFEBA4" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="20" nid="0" />
+    <doc id="1" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Tests\BookListViewModelTests.cs" cs="EA57FBC779B635DA8242FB56FC7E85C7" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
+    <doc id="2" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Tests\ValuePropertyBinder.cs" cs="F8C76B936502AA72D3F59B974D77DAED" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
+    <doc id="3" excluded="false" url="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Tests\ValuePropertyStrategy.cs" cs="91D1B47BFDC9C33DC24F585515D15B00" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
+    <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
+  </documents>
+  <module moduleId="20" name="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Tests\bin\Debug\BookFinder.Core.dll" assembly="BookFinder.Core" assemblyIdentity="BookFinder.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="BookFinder.BookDepository" signature="BookFinder.BookDepository" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="0" l="10" el="10" c="9" ec="32" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="8" l="12" el="12" c="13" ec="39" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="12" l="13" el="13" c="13" ec="75" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="27" l="14" el="14" c="13" ec="68" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="3C" l="15" el="15" c="13" ec="43" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="51" l="16" el="16" c="9" ec="10" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="52" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+      </method>
+      <method name="Details" signature="Details(System.String title) : System.String" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="33" el="33" c="13" ec="44" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="0" o="14" l="34" el="34" c="9" ec="10" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+      </method>
+      <method name="Find" signature="Find(System.String titleSubstring) : System.Collections.ICollection" excluded="false" instrumented="true" cc="4" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="20" el="20" c="13" ec="48" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="8" l="21" el="21" c="39" ec="51" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="6" o="1A" l="21" el="21" c="23" ec="35" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="6" o="27" l="23" el="23" c="17" ec="58" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="6" o="35" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+        <seqpnt vc="1" o="38" l="25" el="25" c="21" ec="39" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="1" o="41" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+        <seqpnt vc="6" o="42" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+        <seqpnt vc="8" o="42" l="21" el="21" c="36" ec="38" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="8" o="4C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+        <seqpnt vc="2" o="61" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+        <seqpnt vc="2" o="6D" l="28" el="28" c="13" ec="27" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="71" l="29" el="29" c="9" ec="10" ex="false" fl="65536" doc="8" nid="0" />
+        <seqpnt vc="2" o="72" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="8" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.BookListViewModel" signature="BookFinder.BookListViewModel" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(System.Windows.Forms.Control view,BookFinder.IBookDepository bookDepository) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="0" l="17" el="18" c="9" ec="24" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="9" l="20" el="20" c="13" ec="50" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="10" l="21" el="21" c="13" ec="26" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="17" l="22" el="22" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="18" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+      </method>
+      <method name="BookListSelectedIndexChanged" signature="BookListSelectedIndexChanged(System.Object sender,System.EventArgs e) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="52" el="52" c="13" ec="67" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="18" l="53" el="53" c="13" ec="62" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="30" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="0" o="30" l="54" el="54" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+      </method>
+      <method name="FindClick" signature="FindClick(System.Object sender,System.EventArgs e) : void" excluded="false" instrumented="true" cc="3" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="40" el="40" c="13" ec="70" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="18" l="41" el="41" c="13" ec="55" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="24" l="43" el="43" c="13" ec="35" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="2" o="2C" l="44" el="44" c="38" ec="43" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="35" l="44" el="44" c="23" ec="34" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="42" l="46" el="46" c="17" ec="41" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="1" o="4B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="3" o="4B" l="44" el="44" c="35" ec="37" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="3" o="55" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="2" o="6A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="2" o="76" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="2" o="76" l="48" el="48" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+      </method>
+      <method name="TitleKeyPress" signature="TitleKeyPress(System.Object sender,System.Windows.Forms.KeyPressEventArgs e) : void" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="32" el="32" c="13" ec="50" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="0" o="13" l="34" el="34" c="17" ec="39" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="1D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="0" o="1D" l="36" el="36" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+      </method>
+      <method name="TitleTextChanged" signature="TitleTextChanged(System.Object sender,System.EventArgs e) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="26" el="26" c="13" ec="46" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="D" l="27" el="27" c="13" ec="72" ex="false" fl="65536" doc="6" nid="0" />
+        <seqpnt vc="0" o="2A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="6" nid="0" />
+        <seqpnt vc="0" o="2A" l="28" el="28" c="9" ec="10" ex="false" fl="65536" doc="6" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.BoolProperty" signature="BookFinder.BoolProperty" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(BookFinder.PropertyStorageStrategy storage) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="0" l="29" el="29" c="9" ec="77" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="2" o="9" l="30" el="30" c="10" ec="11" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="2" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="get_Value" signature="get_Value() : System.Boolean" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="34" el="34" c="19" ec="47" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="0" o="14" l="34" el="34" c="48" ec="49" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="set_Value" signature="set_Value(System.Boolean value) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="35" el="35" c="19" ec="38" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="0" o="13" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+        <seqpnt vc="0" o="13" l="35" el="35" c="39" ec="40" ex="false" fl="65536" doc="5" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.BoundPropertyStrategy" signature="BookFinder.BoundPropertyStrategy" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(System.Object obj,System.Reflection.PropertyInfo property) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="0" l="19" el="19" c="10" ec="73" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="8" l="21" el="21" c="13" ec="28" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="F" l="22" el="22" c="13" ec="42" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="16" l="23" el="23" c="10" ec="11" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="17" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+      </method>
+      <method name="Get" signature="Get() : System.Object" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="32" el="32" c="13" ec="53" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="16" l="33" el="33" c="10" ec="11" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="17" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+      </method>
+      <method name="Set" signature="Set(System.Object value) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="27" el="27" c="13" ec="53" ex="false" fl="65536" doc="7" nid="0" />
+        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="7" nid="0" />
+        <seqpnt vc="0" o="15" l="28" el="28" c="10" ec="11" ex="false" fl="65536" doc="7" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.ListProperty" signature="BookFinder.ListProperty" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(BookFinder.PropertyStorageStrategy storage) : void" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
+        <seqpnt vc="4" o="0" l="41" el="41" c="9" ec="77" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="9" l="42" el="42" c="10" ec="11" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="get_Value" signature="get_Value() : System.Collections.IList" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
+        <seqpnt vc="4" o="1" l="46" el="46" c="19" ec="48" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="14" l="46" el="46" c="49" ec="50" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="set_Value" signature="set_Value(System.Collections.IList value) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="47" el="47" c="19" ec="38" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+        <seqpnt vc="0" o="E" l="47" el="47" c="39" ec="40" ex="false" fl="65536" doc="5" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.Property" signature="BookFinder.Property" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(BookFinder.PropertyStorageStrategy storage) : void" excluded="false" instrumented="true" cc="1" vc="10" nid="0">
+        <seqpnt vc="10" o="0" l="9" el="9" c="9" ec="60" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="10" o="8" l="11" el="11" c="13" ec="36" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="10" o="F" l="12" el="12" c="9" ec="10" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="10" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.StringProperty" signature="BookFinder.StringProperty" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(BookFinder.PropertyStorageStrategy storage) : void" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
+        <seqpnt vc="4" o="0" l="17" el="17" c="9" ec="79" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="9" l="18" el="18" c="10" ec="11" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="4" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="get_Value" signature="get_Value() : System.String" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="22" el="22" c="19" ec="49" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="2" o="14" l="22" el="22" c="50" ec="51" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="2" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+      </method>
+      <method name="set_Value" signature="set_Value(System.String value) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="23" el="23" c="19" ec="38" ex="false" fl="65536" doc="5" nid="0" />
+        <seqpnt vc="2" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="5" nid="0" />
+        <seqpnt vc="2" o="E" l="23" el="23" c="39" ec="40" ex="false" fl="65536" doc="5" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.ViewModelBase" signature="BookFinder.ViewModelBase" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(System.Windows.Forms.Control view) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="0" l="11" el="11" c="9" ec="91" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="8" l="13" el="13" c="9" ec="43" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="10" l="15" el="15" c="13" ec="25" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="17" l="16" el="16" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="18" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="AllControlsDescendingFrom" signature="AllControlsDescendingFrom(System.Windows.Forms.Control baseControl) : System.Collections.ArrayList [static]" excluded="false" instrumented="true" cc="3" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="159" el="159" c="13" ec="53" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="7" l="160" el="160" c="13" ec="42" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="10" l="161" el="161" c="42" ec="62" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="1E" l="161" el="161" c="23" ec="38" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="2B" l="163" el="163" c="17" ec="74" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="39" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="39" l="161" el="161" c="39" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="43" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="58" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="64" l="165" el="165" c="13" ec="32" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="68" l="166" el="166" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="69" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="BindPropertyToControl" signature="BindPropertyToControl(System.Windows.Forms.Control control,System.Reflection.FieldInfo field) : System.Boolean" excluded="false" instrumented="true" cc="3" vc="10" nid="0">
+        <seqpnt vc="10" o="1" l="116" el="116" c="13" ec="84" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="F" l="117" el="117" c="13" ec="47" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="1A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="0" o="1D" l="119" el="119" c="17" ec="30" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="22" l="122" el="122" c="13" ec="111" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="35" l="123" el="123" c="13" ec="43" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="40" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="43" l="125" el="125" c="16" ec="29" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="48" l="128" el="128" c="13" ec="113" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="50" l="129" el="129" c="13" ec="129" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="74" l="130" el="130" c="13" ec="103" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="8B" l="131" el="131" c="13" ec="49" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="95" l="133" el="133" c="13" ec="25" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="9A" l="134" el="134" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="9C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="BindToView" signature="BindToView() : void" excluded="false" instrumented="true" cc="5" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="20" el="20" c="13" ec="69" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="E" l="22" el="22" c="45" ec="60" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="1C" l="22" el="22" c="23" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="29" l="24" el="24" c="17" ec="59" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="33" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="33" l="22" el="22" c="42" ec="44" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="3D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="52" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="5F" l="27" el="27" c="42" ec="58" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="6D" l="27" el="27" c="23" ec="38" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="7A" l="29" el="29" c="17" ec="58" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="84" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="12" o="84" l="27" el="27" c="39" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="12" o="8E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="A3" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="AF" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="AF" l="31" el="31" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+      </method>
+      <method name="ControlAttributeName" signature="ControlAttributeName(System.Windows.Forms.Control control,System.String viewModelMemberName) : System.String" excluded="false" instrumented="true" cc="2" vc="18" nid="0">
+        <seqpnt vc="18" o="1" l="150" el="150" c="13" ec="84" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="1C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="18" o="1F" l="152" el="152" c="17" ec="75" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="33" l="154" el="154" c="13" ec="25" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="37" l="155" el="155" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="38" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="EventHandlers" signature="EventHandlers() : System.Collections.IEnumerable" excluded="false" instrumented="true" cc="3" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="70" el="70" c="13" ec="55" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="8" l="71" el="71" c="44" ec="85" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="1F" l="71" el="71" c="23" ec="40" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="25" l="73" el="73" c="17" ec="46" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="33" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="36" l="75" el="75" c="21" ec="47" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="3F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="18" o="46" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="20" o="46" l="71" el="71" c="41" ec="43" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="51" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="2" o="53" l="78" el="78" c="13" ec="34" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="57" l="79" el="79" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="2" o="58" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="FindEventToListenTo" signature="FindEventToListenTo(System.Collections.ArrayList allControls,System.Reflection.MethodInfo handler) : void" excluded="false" instrumented="true" cc="4" vc="8" nid="0">
+        <seqpnt vc="8" o="2" l="46" el="46" c="42" ec="53" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="B" l="46" el="46" c="23" ec="38" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="18" l="48" el="48" c="17" ec="55" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="25" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="0" o="28" l="50" el="50" c="21" ec="28" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="16" o="2B" l="46" el="46" c="39" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="16" o="33" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="44" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="50" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="50" l="53" el="53" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+      </method>
+      <method name="FindPropertyToBindTo" signature="FindPropertyToBindTo(System.Collections.ArrayList allControls,System.Reflection.FieldInfo field) : void" excluded="false" instrumented="true" cc="4" vc="10" nid="0">
+        <seqpnt vc="10" o="2" l="35" el="35" c="42" ec="53" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="B" l="35" el="35" c="23" ec="38" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="18" l="37" el="37" c="17" ec="61" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="25" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="0" o="28" l="39" el="39" c="21" ec="28" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="10" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="20" o="2B" l="35" el="35" c="39" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="33" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="44" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="50" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="50" l="42" el="42" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+      </method>
+      <method name="isEventHandler" signature="isEventHandler(System.Reflection.MethodInfo info) : System.Boolean" excluded="false" instrumented="true" cc="4" vc="18" nid="0">
+        <seqpnt vc="18" o="1" l="83" el="83" c="13" ec="63" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="8" l="84" el="88" c="13" ec="86" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="18" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="1E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="32" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="10" o="4E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="18" o="51" l="89" el="89" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="18" o="52" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="ListenToEvent" signature="ListenToEvent(System.Windows.Forms.Control control,System.Reflection.MethodInfo method) : System.Boolean" excluded="false" instrumented="true" cc="3" vc="8" nid="0">
+        <seqpnt vc="8" o="1" l="94" el="94" c="13" ec="75" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="F" l="95" el="95" c="13" ec="37" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="18" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="0" o="1B" l="97" el="97" c="17" ec="30" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="1F" l="100" el="100" c="13" ec="89" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="32" l="101" el="101" c="13" ec="37" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="3B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="8" o="3E" l="103" el="103" c="17" ec="30" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="42" l="106" el="110" c="13" ec="61" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="6F" l="111" el="111" c="13" ec="25" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="73" l="112" el="112" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="8" o="74" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="PropertyFields" signature="PropertyFields() : System.Collections.IEnumerable" excluded="false" instrumented="true" cc="3" vc="4" nid="0">
+        <seqpnt vc="4" o="1" l="57" el="57" c="13" ec="48" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="4" o="8" l="58" el="58" c="42" ec="82" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="1F" l="58" el="58" c="23" ec="38" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="25" l="60" el="60" c="17" ec="75" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="41" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="20" o="44" l="62" el="62" c="21" ec="39" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="20" o="4D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="20" o="54" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="24" o="54" l="58" el="58" c="39" ec="41" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="24" o="5F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="4" o="61" l="65" el="65" c="13" ec="27" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="4" o="65" l="66" el="66" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="4" o="66" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="19" name="D:\bconrad\Documents\Source\BlogExamples\2011-08-opencover\BookFinder\BookFinder.Tests\bin\Debug\BookFinder.Tests.dll" assembly="BookFinder.Tests" assemblyIdentity="BookFinder.Tests, Version=1.0.4309.17698, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="BookFinder.Tests.BookListViewModelTests" signature="BookFinder.Tests.BookListViewModelTests" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+      <method name="FindClick_WithTitleG_FindsEndersGame" signature="FindClick_WithTitleG_FindsEndersGame() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="20" el="20" c="13" ec="38" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="17" l="21" el="21" c="13" ec="38" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="25" l="23" el="23" c="13" ec="76" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="45" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="1" o="45" l="24" el="24" c="10" ec="11" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+      <method name="FindClick_WithTitleZ_DoesNotFindEndersGame" signature="FindClick_WithTitleZ_DoesNotFindEndersGame() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="29" el="29" c="13" ec="40" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="17" l="30" el="30" c="13" ec="38" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="25" l="32" el="32" c="13" ec="77" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="45" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="1" o="45" l="33" el="33" c="10" ec="11" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+      <method name="SetUp" signature="SetUp() : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="13" el="13" c="13" ec="81" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="16" l="14" el="14" c="13" ec="42" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="22" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="2" o="22" l="15" el="15" c="10" ec="11" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.Tests.FakeBookDepository" signature="BookFinder.Tests.FakeBookDepository" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.Tests.ValuePropertyBinder" signature="BookFinder.Tests.ValuePropertyBinder" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+      </method>
+      <method name="Bind" signature="Bind(BookFinder.ViewModelBase viewModel) : void [static]" excluded="false" instrumented="true" cc="3" vc="2" nid="0">
+        <seqpnt vc="2" o="2" l="11" el="11" c="43" ec="69" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="11" l="11" el="11" c="24" ec="39" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="1F" l="13" el="13" c="18" ec="128" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="30" l="15" el="15" c="18" ec="134" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="54" l="16" el="16" c="18" ec="108" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="6A" l="17" el="17" c="18" ec="59" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="74" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="12" o="74" l="11" el="11" c="40" ec="42" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="12" o="7F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="2" o="95" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="2" o="A1" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="2" o="A1" l="19" el="19" c="10" ec="11" ex="false" fl="65536" doc="2" nid="0" />
+      </method>
+      <method name="MakeStartingValue" signature="MakeStartingValue(System.Type fieldType) : System.Object [static]" excluded="false" instrumented="true" cc="4" vc="10" nid="0">
+        <seqpnt vc="10" o="1" l="23" el="23" c="13" ec="77" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="12" l="25" el="25" c="13" ec="49" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="24" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="4" o="27" l="25" el="25" c="52" ec="75" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="6" o="2F" l="26" el="26" c="13" ec="50" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="6" o="41" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="4" o="44" l="26" el="26" c="53" ec="63" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="2" o="4C" l="27" el="27" c="13" ec="48" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="2" o="5E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="2" o="61" l="27" el="27" c="51" ec="64" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="0" o="6B" l="28" el="28" c="20" ec="32" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="6F" l="29" el="29" c="10" ec="11" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="10" o="70" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+      </method>
+    </class>
+    <class name="BookFinder.Tests.ValuePropertyStrategy" signature="BookFinder.Tests.ValuePropertyStrategy" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(System.Object initialValue) : void" excluded="false" instrumented="true" cc="1" vc="10" nid="0">
+        <seqpnt vc="10" o="0" l="11" el="11" c="10" ec="59" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="10" o="8" l="13" el="13" c="13" ec="37" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="10" o="F" l="14" el="14" c="10" ec="11" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="10" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+      </method>
+      <method name="Get" signature="Get() : System.Object" excluded="false" instrumented="true" cc="1" vc="6" nid="0">
+        <seqpnt vc="6" o="1" l="23" el="23" c="13" ec="24" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="6" o="A" l="24" el="24" c="10" ec="11" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="6" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+      </method>
+      <method name="Set" signature="Set(System.Object value) : void" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="18" el="18" c="13" ec="25" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="2" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+        <seqpnt vc="2" o="8" l="19" el="19" c="10" ec="11" ex="false" fl="65536" doc="3" nid="0" />
+      </method>
+    </class>
+  </module>
+</coverage>

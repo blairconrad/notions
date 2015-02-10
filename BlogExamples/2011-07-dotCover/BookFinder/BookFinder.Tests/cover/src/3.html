@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_3 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src3" class="dotCoverSource"><pre>namespace BookFinder.Tests
+{
+   public class ValuePropertyStrategy: PropertyStorageStrategy 
+   {
+         private object obj;
+
+         /// &lt;summary&gt;
+         /// Create a new property that proxies a property on a host object
+         /// &lt;/summary&gt;
+         /// &lt;param name=&quot;initialValue&quot;&gt;the initial value&lt;/param&gt;
+         public ValuePropertyStrategy(object initialValue)
+         {
+            this.obj = initialValue;
+         }
+
+         public void Set(object value)
+         {
+            obj = value;
+         }
+
+         public object Get()
+         {
+            return obj;
+         }
+   }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src3', RANGES_3)
+		</script>
+	</body>
+</html>

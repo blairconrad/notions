@@ -1,0 +1,9 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="0 ContainerBuildersAreSeparate\bin\Debug\0 ContainerBuildersAreSeparate.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="0 ContainerBuildersAreSeparate\bin\Release\0 ContainerBuildersAreSeparate.dll" />
+  </Config>
+</NUnitProject>

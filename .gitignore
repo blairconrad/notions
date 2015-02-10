@@ -1,0 +1,4 @@
+*.pyc
+*.csproj.user
+bin
+obj

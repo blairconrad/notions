@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_1 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src1" class="dotCoverSource"><pre>using System.Windows.Forms;
+using NUnit.Framework;
+
+namespace BookFinder.Tests
+{
+   [TestFixture]
+   public class BookListViewModelTests
+   {
+         private BookListViewModel vm;
+         [SetUp]
+         public void SetUp()
+         {
+            vm = new BookListViewModel(new Control(), new FakeBookDepository());
+            ValuePropertyBinder.Bind(vm);
+         }
+
+         [Test]
+         public void FindClick_WithTitleG_FindsEndersGame()
+         {
+            vm.TitleText.Value = &quot;G&quot;;
+            vm.FindClick(null, null);
+
+            Assert.IsTrue(vm.BookListItems.Value.Contains(&quot;Ender's Game&quot;));
+         }
+
+         [Test]
+         public void FindClick_WithTitleZ_DoesNotFindEndersGame()
+         {
+            vm.TitleText.Value = (&quot;Z&quot;);
+            vm.FindClick(null, null);
+
+            Assert.IsFalse(vm.BookListItems.Value.Contains(&quot;Ender's Game&quot;));
+         }
+   }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src1', RANGES_1)
+		</script>
+	</body>
+</html>

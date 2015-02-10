@@ -1,0 +1,15 @@
+javascript:
+var re=/\b(\d{3}-?)?\d-?(\d{4}-?)(\d{4}-?)(\d[Xx])\b/;
+var isbn = window.getSelection();
+if ( '' == isbn )
+{
+  if(re.test(location.href))
+  {
+   isbn=RegExp.$0;
+  }
+}
+
+isbn = new String(isbn);
+isbn = isbn.replace('-', '', 'g');
+location.href='http://www.allconsuming.net/search/query?q=' + isbn + '&product=book&x=0&y=0';
+

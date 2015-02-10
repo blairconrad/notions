@@ -1,0 +1,12 @@
+run.py 100 %1
+run.py 300 %1
+run.py 1000 %1
+run.py 3000 %1
+run.py 10000 %1
+run.py 30000 %1
+run.py 100000 %1
+run.py 300000 %1
+run.py 1000000 %1
+run.py 3000000 %1
+run.py 10000000 %1
+run.py 30000000 %1

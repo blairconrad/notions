@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_6 = [
+   [17,9,18,24,'dccv']
+, [19,9,19,10,'dccv']
+, [20,13,20,50,'dccv']
+, [21,13,21,26,'dccv']
+, [22,9,22,10,'dccv']
+, [39,9,39,10,'dccv']
+, [40,13,40,70,'dccv']
+, [41,13,41,55,'dccv']
+, [43,13,43,35,'dccv']
+, [44,13,44,20,'dccv']
+, [44,38,44,43,'dccv']
+, [44,23,44,34,'dccv']
+, [45,13,45,14,'dccv']
+, [46,17,46,41,'dccv']
+, [47,13,47,14,'dccv']
+, [44,35,44,37,'dccv']
+, [48,9,48,10,'dccv']
+, [25,9,25,10,'dcuc']
+, [26,13,26,46,'dcuc']
+, [27,13,27,72,'dcuc']
+, [28,9,28,10,'dcuc']
+, [31,9,31,10,'dcuc']
+, [32,13,32,50,'dcuc']
+, [33,13,33,14,'dcuc']
+, [34,17,34,39,'dcuc']
+, [35,13,35,14,'dcuc']
+, [36,9,36,10,'dcuc']
+, [51,9,51,10,'dcuc']
+, [52,13,52,67,'dcuc']
+, [53,13,53,62,'dcuc']
+, [54,9,54,10,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src6" class="dotCoverSource"><pre>using System;
+using System.Collections;
+using System.Windows.Forms;
+using BookFinder;
+
+namespace BookFinder
+{
+    public class BookListViewModel : ViewModelBase
+    {
+        public StringProperty TitleText;
+        public BoolProperty FindEnabled;
+        public ListProperty BookListItems;
+        public ListProperty BookListSelectedItems;
+        public StringProperty DetailsText;
+
+        IBookDepository bookDepository;
+        public BookListViewModel(Control view, IBookDepository bookDepository)
+            :base(view)
+        {
+            this.bookDepository = bookDepository;
+            BindToView();
+        }
+
+        public void TitleTextChanged(object sender, EventArgs e)
+        {
+            string newText = TitleText.Value;
+            FindEnabled.Value = (newText != null &amp; newText.Length &gt; 0);
+        }
+
+        public void TitleKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( e.KeyChar == (char) Keys.Enter )
+            {
+                FindClick(null, null);
+            }
+        }
+
+        public void FindClick(object sender, EventArgs e)
+        {
+            ICollection books = bookDepository.Find(TitleText.Value);
+            IList bookListItems = BookListItems.Value;
+
+            bookListItems.Clear();
+            foreach ( string book in books )
+            {
+                bookListItems.Add(book);
+            }
+        }
+
+        public void BookListSelectedIndexChanged(object sender, EventArgs e)
+        {
+            string book = (string) BookListSelectedItems.Value[0];
+            DetailsText.Value = bookDepository.Details(book);
+        }
+    }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src6', RANGES_6)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+  <script>
+    chrome.extension.onRequest.addListener(function(request, sender, sendResponse) 
+         {
+             if (request.msg == "update_title" ) 
+             {
+                 chrome.tabs.get(sender.tab.id, function (tab)
+                                 {
+                                     var url = tab.url;
+                                     chrome.bookmarks.search(url, function (results)
+                                                             {
+                                                                 for ( index in results )
+                                                                 {
+                                                                     if ( url == results[index].url )
+                                                                     {
+                                                                         sendResponse({'title': results[index].title});
+                                                                         chrome.pageAction.show(sender.tab.id);
+                                                                     }
+                                                                 }
+                                                             }
+                                                            );
+                                 });
+             }
+         });
+  </script>
+</html>

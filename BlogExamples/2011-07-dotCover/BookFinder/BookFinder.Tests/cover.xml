@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root Name="Root" CoveredStatements="161" TotalStatements="218" CoveragePercent="74" ReportType="XML" DotCoverVersion="1.1.252.2">
+  <Assembly Name="BookFinder.Core" CoveredStatements="161" TotalStatements="218" CoveragePercent="74">
+    <Namespace Name="BookFinder" CoveredStatements="161" TotalStatements="218" CoveragePercent="74">
+      <Type Name="BoundPropertyStrategy" CoveredStatements="0" TotalStatements="11" CoveragePercent="0">
+        <Method Name="Get():object" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Set(object):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Constructor Name="BoundPropertyStrategy(object,PropertyInfo)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+      </Type>
+      <Type Name="BoolProperty" CoveredStatements="3" TotalStatements="9" CoveragePercent="33">
+        <Property Name="Value:bool" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <Method Name="get" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <Method Name="set" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Property>
+        <Constructor Name="BoolProperty(PropertyStorageStrategy)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+      </Type>
+      <Type Name="BookListViewModel" CoveredStatements="17" TotalStatements="31" CoveragePercent="55">
+        <Method Name="TitleTextChanged(object,EventArgs):void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="BookListSelectedIndexChanged(object,EventArgs):void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="TitleKeyPress(object,KeyPressEventArgs):void" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" />
+        <Constructor Name="BookListViewModel(Control,IBookDepository)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" />
+        <Method Name="FindClick(object,EventArgs):void" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" />
+      </Type>
+      <Type Name="ListProperty" CoveredStatements="6" TotalStatements="9" CoveragePercent="67">
+        <Property Name="Value:IList" CoveredStatements="3" TotalStatements="6" CoveragePercent="50">
+          <Method Name="set" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <Method Name="get" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        </Property>
+        <Constructor Name="ListProperty(PropertyStorageStrategy)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+      </Type>
+      <Type Name="ViewModelBase" CoveredStatements="101" TotalStatements="121" CoveragePercent="83">
+        <Method Name="BindPropertyToControl(Control,FieldInfo):bool" CoveredStatements="8" TotalStatements="15" CoveragePercent="53" />
+        <Method Name="AllControlsDescendingFrom(Control):ArrayList" CoveredStatements="8" TotalStatements="12" CoveragePercent="67" />
+        <Method Name="ListenToEvent(Control,MethodInfo):bool" CoveredStatements="8" TotalStatements="12" CoveragePercent="67" />
+        <Method Name="FindEventToListenTo(ArrayList,MethodInfo):void" CoveredStatements="9" TotalStatements="11" CoveragePercent="82" />
+        <Method Name="FindPropertyToBindTo(ArrayList,FieldInfo):void" CoveredStatements="9" TotalStatements="11" CoveragePercent="82" />
+        <Method Name="ControlAttributeName(Control,string):string" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" />
+        <Method Name="isEventHandler(MethodInfo):bool" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+        <Constructor Name="ViewModelBase(Control)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" />
+        <Method Name="EventHandlers():IEnumerable" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" />
+        <Method Name="PropertyFields():IEnumerable" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" />
+        <Method Name="BindToView():void" CoveredStatements="17" TotalStatements="17" CoveragePercent="100" />
+      </Type>
+      <Type Name="BookDepository" CoveredStatements="21" TotalStatements="24" CoveragePercent="88">
+        <Method Name="Details(string):string" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Constructor Name="BookDepository()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" />
+        <Method Name="Find(string):ICollection" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" />
+      </Type>
+      <Type Name="Property" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+        <Constructor Name="Property(PropertyStorageStrategy)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" />
+      </Type>
+      <Type Name="StringProperty" CoveredStatements="9" TotalStatements="9" CoveragePercent="100">
+        <Constructor Name="StringProperty(PropertyStorageStrategy)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        <Property Name="Value:string" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
+          <Method Name="get" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+          <Method Name="set" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" />
+        </Property>
+      </Type>
+    </Namespace>
+  </Assembly>
+</Root>

@@ -1,0 +1,23 @@
+{
+  "name": "Your Title Here",
+  "version": "0.7.2010.1126",
+  "description": "Changes a tab title to the bookmark title, if the tab location is a bookmark",
+  "background_page": "background.html",
+  "page_action": 
+  {
+    "default_icon": "icon.png",
+    "default_title": "Your Title Here"
+  },
+   "content_scripts": [
+    {
+        "js": ["title.js"],
+        "matches": ["<all_urls>"]
+    }
+   ],
+   "permissions": [ "tabs", "bookmarks" ],
+   "icons": {
+       "16": "icon16.png",
+       "48": "icon48.png",
+       "128": "icon128.png"
+   }
+}

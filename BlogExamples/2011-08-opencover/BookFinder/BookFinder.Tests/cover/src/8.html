@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_8 = [
+   [19,10,19,73,'dcuc']
+, [20,10,20,11,'dcuc']
+, [21,13,21,28,'dcuc']
+, [22,13,22,42,'dcuc']
+, [23,10,23,11,'dcuc']
+, [26,10,26,11,'dcuc']
+, [27,13,27,53,'dcuc']
+, [28,10,28,11,'dcuc']
+, [31,10,31,11,'dcuc']
+, [32,13,32,53,'dcuc']
+, [33,10,33,11,'dcuc']
+];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src8" class="dotCoverSource"><pre>using System.Reflection;
+using System.Collections;
+
+namespace BookFinder
+{
+    /// &lt;summary&gt;
+   /// A property that proxies another one, referring instead to a property on a host object.
+   /// &lt;/summary&gt;
+   public class BoundPropertyStrategy: PropertyStorageStrategy 
+   {
+         private object obj;
+         private PropertyInfo propertyInfo;
+
+         /// &lt;summary&gt;
+         /// Create a new property that proxies a property on a host object
+         /// &lt;/summary&gt;
+         /// &lt;param name=&quot;obj&quot;&gt;the host object&lt;/param&gt;
+         /// &lt;param name=&quot;property&quot;&gt;the property to proxy&lt;/param&gt;
+         public BoundPropertyStrategy(object obj, PropertyInfo property)
+         {
+            this.obj = obj;
+            this.propertyInfo = property;
+         }
+
+         public void Set(object value)
+         {
+            propertyInfo.SetValue(obj, value, null);
+         }
+
+         public object Get()
+         {
+            return propertyInfo.GetValue(obj, null); 
+         }
+   }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src8', RANGES_8)
+		</script>
+	</body>
+</html>

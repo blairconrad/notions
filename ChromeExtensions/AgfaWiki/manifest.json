@@ -1,0 +1,21 @@
+{
+  "name": "Agfa Wiki",
+  "version": "1.0.2010.706",
+  "description": "Improve Agfa Wiki editing experience",
+  "page_action": 
+  {
+    "default_icon": "icon16.png",
+    "default_title": "Agfa Wiki"
+  },
+   "content_scripts": [
+    {
+        "js": ["wiki.js"],
+        "matches": ["http://wikihealthcare.agfa.net/pages/editpage*", "https://wikihealthcare.agfa.net/pages/editpage*" ]
+    }
+   ],
+   "icons": {
+       "16": "icon16.png",
+       "48": "icon48.png",
+       "128": "icon128.png"
+   }
+}

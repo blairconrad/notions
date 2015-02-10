@@ -1,0 +1,161 @@
+had to -register and -arch64!
+
+
+
+
+
+
+[104 /cover trunk]: ..\..\OpenCover\OpenCover.Console.exe -arch:64 -register  -target:D:\Sandbox\impax65\outputs\intermediates\bin\win32\nunit-console.exe -targetdir:.. -targetargs:bin\debug\BookFinder.Tests.dll -output:..\..\opencover.xml -filter:+[BookFinder.Core]*
+NUnit version 2.4.8
+Copyright (C) 2002-2007 Charlie Poole.
+Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
+Copyright (C) 2000-2002 Philip Craig.
+All Rights Reserved.
+
+Runtime Environment -
+   OS Version: Microsoft Windows NT 6.1.7601 Service Pack 1
+  CLR Version: 2.0.50727.5446 ( Net 2.0.50727.5446 )
+
+..
+Tests run: 2, Failures: 0, Not run: 0, Time: 0.208 seconds
+
+
+Visited Classes 7 of 8 (87.5)
+Visited Methods 22 of 32 (68.75)
+Visited Points 161 of 218 (73.8532110091743)
+Unvisited Classes
+BookFinder.BoundPropertyStrategy
+Unvisited Methods
+System.String BookFinder.BookDepository::Details(System.String)
+System.Void BookFinder.BookListViewModel::TitleTextChanged(System.Object,System.EventArgs)
+System.Void BookFinder.BookListViewModel::TitleKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)
+System.Void BookFinder.BookListViewModel::BookListSelectedIndexChanged(System.Object,System.EventArgs)
+System.Boolean BookFinder.BoolProperty::get_Value()
+System.Void BookFinder.BoolProperty::set_Value(System.Boolean)
+System.Void BookFinder.ListProperty::set_Value(System.Collections.IList)
+System.Void BookFinder.BoundPropertyStrategy::.ctor(System.Object,System.Reflection.PropertyInfo)
+System.Void BookFinder.BoundPropertyStrategy::Set(System.Object)
+System.Object BookFinder.BoundPropertyStrategy::Get()
+
+
+[114 /BookFinder trunk]: D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe
+
+Parameters:
+    Reportfile(s) Targetdirectory [ReportType]
+
+Explanations:
+   Reportfile(s): The reports that should be parsed (separated by semicolon)
+   Targetdirectory: The directory where the HTMl report should be saved
+   ReportType: The output format and scope (Html, HtmlSummary, Xml, XmlSummary, Latex, LatexSummary)
+
+Default values:
+   ReportType: Html
+
+Examples:
+   "Partcover.xml" "C:\report"
+   "Partcover.xml" "C:\report" Latex
+   "Partcover1.xml;PartCover2.xml" "report"
+
+
+[115 /BookFinder trunk]: D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml report
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+Creating summary
+Report generation took 0 seconds
+
+
+[132 /BookFinder trunk]:  D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml latex_report Latex
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+Creating summary
+Report generation took 0 seconds
+
+
+[134 /BookFinder trunk]:  D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml  html_summary HtmlSummary
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+Creating summary
+Report generation took 0 seconds
+
+
+[135 /BookFinder trunk]:  D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml  xml_summary XmlSummary
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+Creating summary
+Report generation took 0 seconds
+
+
+[136 /BookFinder trunk]:  D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml  xml_report Xml
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+Creating summary
+Report generation took 0 seconds
+
+
+[137 /BookFinder trunk]:  D:\Sandbox\coverage\client\outputs\intermediates\bin\win32\ReportGenerator.exe .\opencover.xml  latex_summary LatexSummary
+Loading report '.\opencover.xml'
+ Initiating parser for OpenCover
+  Current Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL
+Analyzing 8 classes
+ Creating report 1/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookDepository)
+ Creating report 5/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.StringProperty)
+ Creating report 3/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ListProperty)
+ Creating report 4/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BookListViewModel)
+ Creating report 2/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoolProperty)
+ Creating report 6/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.BoundPropertyStrategy)
+ Creating report 7/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.Property)
+ Creating report 8/8 (Assembly: D:\Users\bconrad\AppData\Local\Temp\nunit20\ShadowCopyCache\10072_634481425769172213\Tests\assembly\dl3\61acee6c\de719abb_8553cc01\BookFinder.Core.DLL, Class: BookFinder.ViewModelBase)
+Creating summary
+Report generation took 0 seconds
+
+

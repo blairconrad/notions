@@ -1,0 +1,1 @@
+%windir%\Microsoft.NET\Framework\v1.1.4322\csc /debug /out:BookFinder.Core.dll /target:library *.cs

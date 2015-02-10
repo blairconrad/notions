@@ -1,0 +1,24 @@
+{
+  "name": "Linkify MIS",
+  "version": "0.7.2010.514",
+  "description": "Adds links in the MIS",
+  "update_url": "http://wikihealthcare.agfa.net/download/attachments/132482029/LinkifyMis.update_manifest.xml",
+  "background_page": "background.html",
+  "page_action": 
+  {
+    "default_icon": "icon16.png",
+    "default_title": "Linkify MIS"
+  },
+   "content_scripts": [
+    {
+        "js": ["jquery-1.4.2.min.js", "linkify.js"],
+        "matches": ["https://mist.agfa.net/*", "http://mist.agfa.net/*"]
+    }
+   ],
+   "permissions": [ "tabs" ],
+   "icons": {
+       "16": "icon16.png",
+       "48": "icon48.png",
+       "128": "icon128.png"
+   }
+}

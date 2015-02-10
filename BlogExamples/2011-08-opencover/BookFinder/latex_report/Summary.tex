@@ -1,0 +1,690 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[paper=a4paper,left=20mm,right=20mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{color}
+\usepackage{colortbl}
+\definecolor{green}{rgb}{0,1,0.12}
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{gray}{rgb}{0.86,0.86,0.86}
+
+\usepackage[pdftex,
+            colorlinks=true, linkcolor=red, urlcolor=green, citecolor=red,%
+            raiselinks=true,%
+            bookmarks=true,%
+            bookmarksopenlevel=1,%
+            bookmarksopen=true,%
+            bookmarksnumbered=true,%
+            hyperindex=true,% 
+            plainpages=false,% correct hyperlinks
+            pdfpagelabels=true%,% view TeX pagenumber in PDF reader
+            %pdfborder={0 0 0.5}
+            ]{hyperref}
+
+\hypersetup{pdftitle={Coverage Report},
+            pdfauthor={ReportGenerator - 1.1.1.0}
+           }
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{ReportGenerator - 1.1.1.0}
+
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+\section{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Generated on:} & 2011-08-05-2011-08-05\\
+\textbf{Parser:} & OpenCoverParser\\
+\textbf{Assemblies:} & 1\\
+\textbf{Files:} & 5\\
+\textbf{Coverage:} & 71.6\%\\
+\textbf{Covered lines:} & 126\\
+\textbf{Coverable lines:} & 176\\
+\textbf{Total lines:} & 495\\
+\end{longtable}
+\section{Assemblies}
+\begin{longtable}[l]{ll}
+\textbf{BookFinder.Core.DLL} & \textbf{71.6\%}\\
+BookFinder.BookDepository & 85.7\%\\
+BookFinder.BookListViewModel & 50\%\\
+BookFinder.BoolProperty & 50\%\\
+BookFinder.BoundPropertyStrategy & 0\%\\
+BookFinder.ListProperty & 75\%\\
+BookFinder.Property & 100\%\\
+BookFinder.StringProperty & 100\%\\
+BookFinder.ViewModelBase & 81\%\\
+\end{longtable}
+\newpage
+\section{BookFinder.BookDepository}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.BookDepository\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{rce\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BookDepository.cs}\end{minipage} \\
+\textbf{Coverage:} & 85.7\%\\
+\textbf{Covered lines:} & 18\\
+\textbf{Coverable lines:} & 21\\
+\textbf{Total lines:} & 36\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{rce\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BookDepository.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~    public class BookDepository: IBookDepository~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~        static IDictionary details;~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~~\\
+\cellcolor{green} & 2 & \verb~10~ & \verb~        public BookDepository()~\\
+\cellcolor{green} & 2 & \verb~11~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~12~ & \verb~            details = new Hashtable();~\\
+\cellcolor{green} & 2 & \verb~13~ & \verb~            details["The Time Traveler's Wife"] = "naked in the Newberry";~\\
+\cellcolor{green} & 2 & \verb~14~ & \verb~            details["Ender's Game"] = "little kid saves the world";~\\
+\cellcolor{green} & 2 & \verb~15~ & \verb~            details["Maus"] = "why pigs?";~\\
+\cellcolor{green} & 2 & \verb~16~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~        public ICollection Find(string titleSubstring)~\\
+\cellcolor{green} & 2 & \verb~19~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~20~ & \verb~            ArrayList titles = new ArrayList();~\\
+\cellcolor{green} & 18 & \verb~21~ & \verb~            foreach ( string title in details.Keys )~\\
+\cellcolor{green} & 6 & \verb~22~ & \verb~            {~\\
+\cellcolor{green} & 6 & \verb~23~ & \verb~                if ( title.IndexOf(titleSubstring) >= 0 )~\\
+\cellcolor{green} & 1 & \verb~24~ & \verb~                {~\\
+\cellcolor{green} & 1 & \verb~25~ & \verb~                    titles.Add(title);~\\
+\cellcolor{green} & 1 & \verb~26~ & \verb~                }~\\
+\cellcolor{green} & 6 & \verb~27~ & \verb~            }~\\
+\cellcolor{green} & 2 & \verb~28~ & \verb~            return titles;~\\
+\cellcolor{green} & 2 & \verb~29~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~~\\
+\cellcolor{gray} &  & \verb~31~ & \verb~        public string Details(string title)~\\
+\cellcolor{red} & 0 & \verb~32~ & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~33~ & \verb~            return (string) details[title];~\\
+\cellcolor{red} & 0 & \verb~34~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~35~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~36~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.BookListViewModel}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.BookListViewModel\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BookListViewModel.cs}\end{minipage} \\
+\textbf{Coverage:} & 50\%\\
+\textbf{Covered lines:} & 14\\
+\textbf{Coverable lines:} & 28\\
+\textbf{Total lines:} & 56\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BookListViewModel.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~using System.Windows.Forms;~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~using BookFinder;~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~    public class BookListViewModel : ViewModelBase~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~        public StringProperty TitleText;~\\
+\cellcolor{gray} &  & \verb~11~ & \verb~        public BoolProperty FindEnabled;~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~        public ListProperty BookListItems;~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~        public ListProperty BookListSelectedItems;~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~        public StringProperty DetailsText;~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~        IBookDepository bookDepository;~\\
+\cellcolor{green} & 2 & \verb~17~ & \verb~        public BookListViewModel(Control view, IBookDepository bookDepository)~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~            :base(view)~\\
+\cellcolor{green} & 2 & \verb~19~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~20~ & \verb~            this.bookDepository = bookDepository;~\\
+\cellcolor{green} & 2 & \verb~21~ & \verb~            BindToView();~\\
+\cellcolor{green} & 2 & \verb~22~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~23~ & \verb~~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~        public void TitleTextChanged(object sender, EventArgs e)~\\
+\cellcolor{red} & 0 & \verb~25~ & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~26~ & \verb~            string newText = TitleText.Value;~\\
+\cellcolor{red} & 0 & \verb~27~ & \verb~            FindEnabled.Value = (newText != null & newText.Length > 0);~\\
+\cellcolor{red} & 0 & \verb~28~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~29~ & \verb~~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~        public void TitleKeyPress(object sender, KeyPressEventArgs e)~\\
+\cellcolor{red} & 0 & \verb~31~ & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~32~ & \verb~            if ( e.KeyChar == (char) Keys.Enter )~\\
+\cellcolor{red} & 0 & \verb~33~ & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~34~ & \verb~                FindClick(null, null);~\\
+\cellcolor{red} & 0 & \verb~35~ & \verb~            }~\\
+\cellcolor{red} & 0 & \verb~36~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & \verb~~\\
+\cellcolor{gray} &  & \verb~38~ & \verb~        public void FindClick(object sender, EventArgs e)~\\
+\cellcolor{green} & 2 & \verb~39~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~40~ & \verb~            ICollection books = bookDepository.Find(TitleText.Value);~\\
+\cellcolor{green} & 2 & \verb~41~ & \verb~            IList bookListItems = BookListItems.Value;~\\
+\cellcolor{gray} &  & \verb~42~ & \verb~~\\
+\cellcolor{green} & 2 & \verb~43~ & \verb~            bookListItems.Clear();~\\
+\cellcolor{green} & 8 & \verb~44~ & \verb~            foreach ( string book in books )~\\
+\cellcolor{green} & 1 & \verb~45~ & \verb~            {~\\
+\cellcolor{green} & 1 & \verb~46~ & \verb~                bookListItems.Add(book);~\\
+\cellcolor{green} & 1 & \verb~47~ & \verb~            }~\\
+\cellcolor{green} & 2 & \verb~48~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~49~ & \verb~~\\
+\cellcolor{gray} &  & \verb~50~ & \verb~        public void BookListSelectedIndexChanged(object sender, EventArgs e)~\\
+\cellcolor{red} & 0 & \verb~51~ & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~52~ & \verb~            string book = (string) BookListSelectedItems.Value[0];~\\
+\cellcolor{red} & 0 & \verb~53~ & \verb~            DetailsText.Value = bookDepository.Details(book);~\\
+\cellcolor{red} & 0 & \verb~54~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~55~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~56~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.BoolProperty}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.BoolProperty\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}\end{minipage} \\
+\textbf{Coverage:} & 50\%\\
+\textbf{Covered lines:} & 2\\
+\textbf{Coverable lines:} & 4\\
+\textbf{Total lines:} & 50\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~    public abstract class Property~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~        protected PropertyStorageStrategy storage;~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~        protected Property(PropertyStorageStrategy storage)~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~11~ & \verb~            this.storage = storage;~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~    public class StringProperty : Property~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~        public StringProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~19~ & \verb~~\\
+\cellcolor{gray} &  & \verb~20~ & \verb~        public string Value~\\
+\cellcolor{gray} &  & \verb~21~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~22~ & \verb~            get { return (string) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~23~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~25~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~26~ & \verb~~\\
+\cellcolor{gray} &  & \verb~27~ & \verb~    public class BoolProperty : Property~\\
+\cellcolor{gray} &  & \verb~28~ & \verb~    {~\\
+\cellcolor{green} & 2 & \verb~29~ & \verb~        public BoolProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{green} & 4 & \verb~30~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~31~ & \verb~~\\
+\cellcolor{gray} &  & \verb~32~ & \verb~        public bool Value~\\
+\cellcolor{gray} &  & \verb~33~ & \verb~        {~\\
+\cellcolor{red} & 0 & \verb~34~ & \verb~            get { return (bool) storage.Get(); }~\\
+\cellcolor{red} & 0 & \verb~35~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~36~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~38~ & \verb~~\\
+\cellcolor{gray} &  & \verb~39~ & \verb~    public class ListProperty : Property~\\
+\cellcolor{gray} &  & \verb~40~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~41~ & \verb~        public ListProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~42~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~43~ & \verb~~\\
+\cellcolor{gray} &  & \verb~44~ & \verb~        public IList Value~\\
+\cellcolor{gray} &  & \verb~45~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~46~ & \verb~            get { return (IList) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~47~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~48~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~49~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~50~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.BoundPropertyStrategy}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.BoundPropertyStrategy\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{gExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BoundPropertyStrategy.cs}\end{minipage} \\
+\textbf{Coverage:} & 0\%\\
+\textbf{Covered lines:} & 0\\
+\textbf{Coverable lines:} & 11\\
+\textbf{Total lines:} & 35\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{gExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash BoundPropertyStrategy.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Reflection;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    /// <summary>~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~   /// A property that proxies another one, referring instead to a property on~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~   /// </summary>~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~   public class BoundPropertyStrategy: PropertyStorageStrategy~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~   {~\\
+\cellcolor{gray} &  & \verb~11~ & \verb~         private object obj;~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~         private PropertyInfo propertyInfo;~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~         /// <summary>~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~         /// Create a new property that proxies a property on a host object~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~         /// </summary>~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~         /// <param name="obj">the host object</param>~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~         /// <param name="property">the property to proxy</param>~\\
+\cellcolor{red} & 0 & \verb~19~ & \verb~         public BoundPropertyStrategy(object obj, PropertyInfo property)~\\
+\cellcolor{red} & 0 & \verb~20~ & \verb~         {~\\
+\cellcolor{red} & 0 & \verb~21~ & \verb~            this.obj = obj;~\\
+\cellcolor{red} & 0 & \verb~22~ & \verb~            this.propertyInfo = property;~\\
+\cellcolor{red} & 0 & \verb~23~ & \verb~         }~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~~\\
+\cellcolor{gray} &  & \verb~25~ & \verb~         public void Set(object value)~\\
+\cellcolor{red} & 0 & \verb~26~ & \verb~         {~\\
+\cellcolor{red} & 0 & \verb~27~ & \verb~            propertyInfo.SetValue(obj, value, null);~\\
+\cellcolor{red} & 0 & \verb~28~ & \verb~         }~\\
+\cellcolor{gray} &  & \verb~29~ & \verb~~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~         public object Get()~\\
+\cellcolor{red} & 0 & \verb~31~ & \verb~         {~\\
+\cellcolor{red} & 0 & \verb~32~ & \verb~            return propertyInfo.GetValue(obj, null);~\\
+\cellcolor{red} & 0 & \verb~33~ & \verb~         }~\\
+\cellcolor{gray} &  & \verb~34~ & \verb~   }~\\
+\cellcolor{gray} &  & \verb~35~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.ListProperty}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.ListProperty\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}\end{minipage} \\
+\textbf{Coverage:} & 75\%\\
+\textbf{Covered lines:} & 3\\
+\textbf{Coverable lines:} & 4\\
+\textbf{Total lines:} & 50\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~    public abstract class Property~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~        protected PropertyStorageStrategy storage;~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~        protected Property(PropertyStorageStrategy storage)~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~11~ & \verb~            this.storage = storage;~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~    public class StringProperty : Property~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~        public StringProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~19~ & \verb~~\\
+\cellcolor{gray} &  & \verb~20~ & \verb~        public string Value~\\
+\cellcolor{gray} &  & \verb~21~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~22~ & \verb~            get { return (string) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~23~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~25~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~26~ & \verb~~\\
+\cellcolor{gray} &  & \verb~27~ & \verb~    public class BoolProperty : Property~\\
+\cellcolor{gray} &  & \verb~28~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~29~ & \verb~        public BoolProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~31~ & \verb~~\\
+\cellcolor{gray} &  & \verb~32~ & \verb~        public bool Value~\\
+\cellcolor{gray} &  & \verb~33~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~34~ & \verb~            get { return (bool) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~35~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~36~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~38~ & \verb~~\\
+\cellcolor{gray} &  & \verb~39~ & \verb~    public class ListProperty : Property~\\
+\cellcolor{gray} &  & \verb~40~ & \verb~    {~\\
+\cellcolor{green} & 4 & \verb~41~ & \verb~        public ListProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{green} & 8 & \verb~42~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~43~ & \verb~~\\
+\cellcolor{gray} &  & \verb~44~ & \verb~        public IList Value~\\
+\cellcolor{gray} &  & \verb~45~ & \verb~        {~\\
+\cellcolor{green} & 12 & \verb~46~ & \verb~            get { return (IList) storage.Get(); }~\\
+\cellcolor{red} & 0 & \verb~47~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~48~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~49~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~50~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.Property}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.Property\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}\end{minipage} \\
+\textbf{Coverage:} & 100\%\\
+\textbf{Covered lines:} & 4\\
+\textbf{Coverable lines:} & 4\\
+\textbf{Total lines:} & 50\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~    public abstract class Property~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~        protected PropertyStorageStrategy storage;~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~~\\
+\cellcolor{green} & 10 & \verb~9~ & \verb~        protected Property(PropertyStorageStrategy storage)~\\
+\cellcolor{green} & 10 & \verb~10~ & \verb~        {~\\
+\cellcolor{green} & 10 & \verb~11~ & \verb~            this.storage = storage;~\\
+\cellcolor{green} & 10 & \verb~12~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~    public class StringProperty : Property~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~        public StringProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~19~ & \verb~~\\
+\cellcolor{gray} &  & \verb~20~ & \verb~        public string Value~\\
+\cellcolor{gray} &  & \verb~21~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~22~ & \verb~            get { return (string) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~23~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~25~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~26~ & \verb~~\\
+\cellcolor{gray} &  & \verb~27~ & \verb~    public class BoolProperty : Property~\\
+\cellcolor{gray} &  & \verb~28~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~29~ & \verb~        public BoolProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~31~ & \verb~~\\
+\cellcolor{gray} &  & \verb~32~ & \verb~        public bool Value~\\
+\cellcolor{gray} &  & \verb~33~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~34~ & \verb~            get { return (bool) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~35~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~36~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~38~ & \verb~~\\
+\cellcolor{gray} &  & \verb~39~ & \verb~    public class ListProperty : Property~\\
+\cellcolor{gray} &  & \verb~40~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~41~ & \verb~        public ListProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~42~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~43~ & \verb~~\\
+\cellcolor{gray} &  & \verb~44~ & \verb~        public IList Value~\\
+\cellcolor{gray} &  & \verb~45~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~46~ & \verb~            get { return (IList) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~47~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~48~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~49~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~50~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.StringProperty}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.StringProperty\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}\end{minipage} \\
+\textbf{Coverage:} & 100\%\\
+\textbf{Covered lines:} & 4\\
+\textbf{Coverable lines:} & 4\\
+\textbf{Total lines:} & 50\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{ts\textbackslash Source\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash Property.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~    public abstract class Property~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~        protected PropertyStorageStrategy storage;~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~        protected Property(PropertyStorageStrategy storage)~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~11~ & \verb~            this.storage = storage;~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~13~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~14~ & \verb~~\\
+\cellcolor{gray} &  & \verb~15~ & \verb~    public class StringProperty : Property~\\
+\cellcolor{gray} &  & \verb~16~ & \verb~    {~\\
+\cellcolor{green} & 4 & \verb~17~ & \verb~        public StringProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{green} & 8 & \verb~18~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~19~ & \verb~~\\
+\cellcolor{gray} &  & \verb~20~ & \verb~        public string Value~\\
+\cellcolor{gray} &  & \verb~21~ & \verb~        {~\\
+\cellcolor{green} & 6 & \verb~22~ & \verb~            get { return (string) storage.Get(); }~\\
+\cellcolor{green} & 6 & \verb~23~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~24~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~25~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~26~ & \verb~~\\
+\cellcolor{gray} &  & \verb~27~ & \verb~    public class BoolProperty : Property~\\
+\cellcolor{gray} &  & \verb~28~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~29~ & \verb~        public BoolProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~30~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~31~ & \verb~~\\
+\cellcolor{gray} &  & \verb~32~ & \verb~        public bool Value~\\
+\cellcolor{gray} &  & \verb~33~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~34~ & \verb~            get { return (bool) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~35~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~36~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~37~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~38~ & \verb~~\\
+\cellcolor{gray} &  & \verb~39~ & \verb~    public class ListProperty : Property~\\
+\cellcolor{gray} &  & \verb~40~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~41~ & \verb~        public ListProperty(PropertyStorageStrategy storage) : base(storage)~\\
+\cellcolor{gray} &  & \verb~42~ & \verb~        {}~\\
+\cellcolor{gray} &  & \verb~43~ & \verb~~\\
+\cellcolor{gray} &  & \verb~44~ & \verb~        public IList Value~\\
+\cellcolor{gray} &  & \verb~45~ & \verb~        {~\\
+\cellcolor{gray} &  & \verb~46~ & \verb~            get { return (IList) storage.Get(); }~\\
+\cellcolor{gray} &  & \verb~47~ & \verb~            set { storage.Set(value); }~\\
+\cellcolor{gray} &  & \verb~48~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~49~ & \verb~    }~\\
+\cellcolor{gray} &  & \verb~50~ & \verb~}~\\
+\end{longtable}
+\newpage
+\section{BookFinder.ViewModelBase}
+\subsection{Summary}
+\begin{longtable}[l]{ll}
+\textbf{Class:} & BookFinder.ViewModelBase\\
+\textbf{Assembly:} & BookFinder.Core.DLL\\
+\textbf{File(s):} & \begin{minipage}[t]{12cm}{urce\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash ViewModelBase.cs}\end{minipage} \\
+\textbf{Coverage:} & 81\%\\
+\textbf{Covered lines:} & 81\\
+\textbf{Coverable lines:} & 100\\
+\textbf{Total lines:} & 168\\
+\end{longtable}
+\subsection{File(s)}
+\subsubsection{urce\textbackslash BlogExamples\textbackslash 2011-07-dotCover\textbackslash BookFinder\textbackslash BookFinder.Core\textbackslash ViewModelBase.cs}
+\begin{longtable}[l]{lrrl}
+\textbf{} & \textbf{\#} & \textbf{Line} & \textbf{Coverage}\\
+\cellcolor{gray} &  & \verb~1~ & \verb~using System;~\\
+\cellcolor{gray} &  & \verb~2~ & \verb~using System.Collections;~\\
+\cellcolor{gray} &  & \verb~3~ & \verb~using System.Reflection;~\\
+\cellcolor{gray} &  & \verb~4~ & \verb~using System.Windows.Forms;~\\
+\cellcolor{gray} &  & \verb~5~ & \verb~~\\
+\cellcolor{gray} &  & \verb~6~ & \verb~namespace BookFinder~\\
+\cellcolor{gray} &  & \verb~7~ & \verb~{~\\
+\cellcolor{gray} &  & \verb~8~ & \verb~    public class ViewModelBase~\\
+\cellcolor{gray} &  & \verb~9~ & \verb~    {~\\
+\cellcolor{gray} &  & \verb~10~ & \verb~        protected Control View;~\\
+\cellcolor{green} & 2 & \verb~11~ & \verb~        private BindingFlags myBindingFlags = BindingFlags.Instance | BindingF~\\
+\cellcolor{gray} &  & \verb~12~ & \verb~~\\
+\cellcolor{green} & 2 & \verb~13~ & \verb~        public ViewModelBase(Control view)~\\
+\cellcolor{green} & 2 & \verb~14~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~15~ & \verb~            View = view;~\\
+\cellcolor{green} & 2 & \verb~16~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~17~ & \verb~~\\
+\cellcolor{gray} &  & \verb~18~ & \verb~        protected void BindToView()~\\
+\cellcolor{green} & 2 & \verb~19~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~20~ & \verb~            ArrayList allControls = AllControlsDescendingFrom(View);~\\
+\cellcolor{gray} &  & \verb~21~ & \verb~~\\
+\cellcolor{green} & 22 & \verb~22~ & \verb~            foreach ( MethodInfo handler in EventHandlers() )~\\
+\cellcolor{green} & 8 & \verb~23~ & \verb~            {~\\
+\cellcolor{green} & 8 & \verb~24~ & \verb~                FindEventToListenTo(allControls, handler);~\\
+\cellcolor{green} & 8 & \verb~25~ & \verb~            }~\\
+\cellcolor{gray} &  & \verb~26~ & \verb~~\\
+\cellcolor{green} & 26 & \verb~27~ & \verb~            foreach ( FieldInfo field in PropertyFields() )~\\
+\cellcolor{green} & 10 & \verb~28~ & \verb~            {~\\
+\cellcolor{green} & 10 & \verb~29~ & \verb~                FindPropertyToBindTo(allControls, field);~\\
+\cellcolor{green} & 10 & \verb~30~ & \verb~            }~\\
+\cellcolor{green} & 2 & \verb~31~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~32~ & \verb~~\\
+\cellcolor{gray} &  & \verb~33~ & \verb~        private void FindPropertyToBindTo(ArrayList allControls, FieldInfo fie~\\
+\cellcolor{green} & 10 & \verb~34~ & \verb~        {~\\
+\cellcolor{green} & 50 & \verb~35~ & \verb~            foreach ( Control control in allControls )~\\
+\cellcolor{green} & 10 & \verb~36~ & \verb~            {~\\
+\cellcolor{green} & 10 & \verb~37~ & \verb~                if ( BindPropertyToControl(control, field) )~\\
+\cellcolor{red} & 0 & \verb~38~ & \verb~                {~\\
+\cellcolor{red} & 0 & \verb~39~ & \verb~                    return;~\\
+\cellcolor{gray} &  & \verb~40~ & \verb~                }~\\
+\cellcolor{green} & 10 & \verb~41~ & \verb~            }~\\
+\cellcolor{green} & 10 & \verb~42~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~43~ & \verb~~\\
+\cellcolor{gray} &  & \verb~44~ & \verb~        private void FindEventToListenTo(ArrayList allControls, MethodInfo han~\\
+\cellcolor{green} & 8 & \verb~45~ & \verb~        {~\\
+\cellcolor{green} & 40 & \verb~46~ & \verb~            foreach ( Control control in allControls )~\\
+\cellcolor{green} & 8 & \verb~47~ & \verb~            {~\\
+\cellcolor{green} & 8 & \verb~48~ & \verb~                if ( ListenToEvent(control, handler) )~\\
+\cellcolor{red} & 0 & \verb~49~ & \verb~                {~\\
+\cellcolor{red} & 0 & \verb~50~ & \verb~                    return;~\\
+\cellcolor{gray} &  & \verb~51~ & \verb~                }~\\
+\cellcolor{green} & 8 & \verb~52~ & \verb~            }~\\
+\cellcolor{green} & 8 & \verb~53~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~54~ & \verb~~\\
+\cellcolor{gray} &  & \verb~55~ & \verb~        public IEnumerable PropertyFields()~\\
+\cellcolor{green} & 4 & \verb~56~ & \verb~        {~\\
+\cellcolor{green} & 4 & \verb~57~ & \verb~            ArrayList fields = new ArrayList();~\\
+\cellcolor{green} & 52 & \verb~58~ & \verb~            foreach ( FieldInfo field in this.GetType().GetFields(myBindingFla~\\
+\cellcolor{green} & 20 & \verb~59~ & \verb~            {~\\
+\cellcolor{green} & 20 & \verb~60~ & \verb~                if ( typeof (Property).IsAssignableFrom(field.FieldType) )~\\
+\cellcolor{green} & 20 & \verb~61~ & \verb~                {~\\
+\cellcolor{green} & 20 & \verb~62~ & \verb~                    fields.Add(field);~\\
+\cellcolor{green} & 20 & \verb~63~ & \verb~                }~\\
+\cellcolor{green} & 20 & \verb~64~ & \verb~            }~\\
+\cellcolor{green} & 4 & \verb~65~ & \verb~            return fields;~\\
+\cellcolor{green} & 4 & \verb~66~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~67~ & \verb~~\\
+\cellcolor{gray} &  & \verb~68~ & \verb~        private IEnumerable EventHandlers()~\\
+\cellcolor{green} & 2 & \verb~69~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~70~ & \verb~            ArrayList eventHandlers = new ArrayList();~\\
+\cellcolor{green} & 42 & \verb~71~ & \verb~            foreach ( MethodInfo method in this.GetType().GetMethods(myBinding~\\
+\cellcolor{green} & 18 & \verb~72~ & \verb~            {~\\
+\cellcolor{green} & 18 & \verb~73~ & \verb~                if ( isEventHandler(method) )~\\
+\cellcolor{green} & 8 & \verb~74~ & \verb~                {~\\
+\cellcolor{green} & 8 & \verb~75~ & \verb~                    eventHandlers.Add(method);~\\
+\cellcolor{green} & 8 & \verb~76~ & \verb~                }~\\
+\cellcolor{green} & 18 & \verb~77~ & \verb~            }~\\
+\cellcolor{green} & 2 & \verb~78~ & \verb~            return eventHandlers;~\\
+\cellcolor{green} & 2 & \verb~79~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~80~ & \verb~~\\
+\cellcolor{gray} &  & \verb~81~ & \verb~        private bool isEventHandler(MethodInfo info)~\\
+\cellcolor{green} & 18 & \verb~82~ & \verb~        {~\\
+\cellcolor{green} & 18 & \verb~83~ & \verb~            ParameterInfo[] parameters = info.GetParameters();~\\
+\cellcolor{green} & 18 & \verb~84~ & \verb~            return~\\
+\cellcolor{gray} &  & \verb~85~ & \verb~                (info.ReturnType == typeof (void) &&~\\
+\cellcolor{gray} &  & \verb~86~ & \verb~                 parameters.Length == 2 &&~\\
+\cellcolor{gray} &  & \verb~87~ & \verb~                 parameters[0].ParameterType == typeof (object) &&~\\
+\cellcolor{gray} &  & \verb~88~ & \verb~                 (typeof (EventArgs)).IsAssignableFrom(parameters[1].Parameter~\\
+\cellcolor{green} & 18 & \verb~89~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~90~ & \verb~~\\
+\cellcolor{gray} &  & \verb~91~ & \verb~~\\
+\cellcolor{gray} &  & \verb~92~ & \verb~        private bool ListenToEvent(Control control, MethodInfo method)~\\
+\cellcolor{green} & 8 & \verb~93~ & \verb~        {~\\
+\cellcolor{green} & 8 & \verb~94~ & \verb~            string eventName = ControlAttributeName(control, method.Name);~\\
+\cellcolor{green} & 8 & \verb~95~ & \verb~            if ( eventName == null )~\\
+\cellcolor{red} & 0 & \verb~96~ & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~97~ & \verb~                return false;~\\
+\cellcolor{gray} &  & \verb~98~ & \verb~            }~\\
+\cellcolor{gray} &  & \verb~99~ & \verb~~\\
+\cellcolor{green} & 8 & \verb~100~ & \verb~            EventInfo eventInfo = control.GetType().GetEvent(eventName, myBind~\\
+\cellcolor{green} & 8 & \verb~101~ & \verb~            if ( eventInfo == null )~\\
+\cellcolor{green} & 8 & \verb~102~ & \verb~            {~\\
+\cellcolor{green} & 8 & \verb~103~ & \verb~                return false;~\\
+\cellcolor{gray} &  & \verb~104~ & \verb~            }~\\
+\cellcolor{gray} &  & \verb~105~ & \verb~~\\
+\cellcolor{red} & 0 & \verb~106~ & \verb~            eventInfo.GetAddMethod().Invoke(control, new object[]~\\
+\cellcolor{gray} &  & \verb~107~ & \verb~                                                         {~\\
+\cellcolor{gray} &  & \verb~108~ & \verb~                                                             Delegate.CreateDe~\\
+\cellcolor{gray} &  & \verb~109~ & \verb~                                                                              ~\\
+\cellcolor{gray} &  & \verb~110~ & \verb~                                                         });~\\
+\cellcolor{red} & 0 & \verb~111~ & \verb~            return true;~\\
+\cellcolor{green} & 8 & \verb~112~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~113~ & \verb~~\\
+\cellcolor{gray} &  & \verb~114~ & \verb~        private bool BindPropertyToControl(Control control, FieldInfo field)~\\
+\cellcolor{green} & 10 & \verb~115~ & \verb~        {~\\
+\cellcolor{green} & 10 & \verb~116~ & \verb~            string controlPropertyName = ControlAttributeName(control, field.N~\\
+\cellcolor{green} & 10 & \verb~117~ & \verb~            if ( controlPropertyName == null )~\\
+\cellcolor{red} & 0 & \verb~118~ & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~119~ & \verb~                return false;~\\
+\cellcolor{gray} &  & \verb~120~ & \verb~            }~\\
+\cellcolor{gray} &  & \verb~121~ & \verb~~\\
+\cellcolor{green} & 10 & \verb~122~ & \verb~            PropertyInfo controlProperty = control.GetType().GetProperty(contr~\\
+\cellcolor{green} & 10 & \verb~123~ & \verb~            if ( controlProperty == null )~\\
+\cellcolor{green} & 10 & \verb~124~ & \verb~            {~\\
+\cellcolor{green} & 10 & \verb~125~ & \verb~               return false;~\\
+\cellcolor{gray} &  & \verb~126~ & \verb~            }~\\
+\cellcolor{gray} &  & \verb~127~ & \verb~~\\
+\cellcolor{red} & 0 & \verb~128~ & \verb~            BoundPropertyStrategy propertyStorageStrategy = new BoundPropertyS~\\
+\cellcolor{red} & 0 & \verb~129~ & \verb~            ConstructorInfo propertyConstructor = field.FieldType.GetConstruct~\\
+\cellcolor{red} & 0 & \verb~130~ & \verb~            object propertyField = propertyConstructor.Invoke(new object[] {pr~\\
+\cellcolor{red} & 0 & \verb~131~ & \verb~            field.SetValue(this, propertyField);~\\
+\cellcolor{gray} &  & \verb~132~ & \verb~~\\
+\cellcolor{red} & 0 & \verb~133~ & \verb~            return true;~\\
+\cellcolor{green} & 10 & \verb~134~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~135~ & \verb~~\\
+\cellcolor{gray} &  & \verb~136~ & \verb~        /// <summary>~\\
+\cellcolor{gray} &  & \verb~137~ & \verb~        /// Given a control and a ViewModel member, checks to see if the contr~\\
+\cellcolor{gray} &  & \verb~138~ & \verb~        /// prefixes the viewModelMember. If so, returns the remainder of the ~\\
+\cellcolor{gray} &  & \verb~139~ & \verb~        /// Otherwise, returns <c>null</c>.~\\
+\cellcolor{gray} &  & \verb~140~ & \verb~        /// </summary>~\\
+\cellcolor{gray} &  & \verb~141~ & \verb~        /// <remarks>~\\
+\cellcolor{gray} &  & \verb~142~ & \verb~        /// Used to find controls that contain attributes that we can bind to.~\\
+\cellcolor{gray} &  & \verb~143~ & \verb~        /// given a control called "Search", and a viewModelMember called "Sea~\\
+\cellcolor{gray} &  & \verb~144~ & \verb~        /// method should return "Click", allowing us to look for the <c>contr~\\
+\cellcolor{gray} &  & \verb~145~ & \verb~        /// Given a control called "Save" and a viewModelMember called "Search~\\
+\cellcolor{gray} &  & \verb~146~ & \verb~        /// method will return <c>null</c> - there's nothing here to try to bi~\\
+\cellcolor{gray} &  & \verb~147~ & \verb~        /// </remarks>~\\
+\cellcolor{gray} &  & \verb~148~ & \verb~        private string ControlAttributeName(Control control, string viewModelM~\\
+\cellcolor{green} & 18 & \verb~149~ & \verb~        {~\\
+\cellcolor{green} & 18 & \verb~150~ & \verb~            if ( viewModelMemberName.ToLower().StartsWith(control.Name.ToLower~\\
+\cellcolor{green} & 18 & \verb~151~ & \verb~            {~\\
+\cellcolor{green} & 18 & \verb~152~ & \verb~                return viewModelMemberName.Substring(control.Name.Length);~\\
+\cellcolor{gray} &  & \verb~153~ & \verb~            }~\\
+\cellcolor{red} & 0 & \verb~154~ & \verb~            return null;~\\
+\cellcolor{green} & 18 & \verb~155~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~156~ & \verb~~\\
+\cellcolor{gray} &  & \verb~157~ & \verb~        private static ArrayList AllControlsDescendingFrom(Control baseControl~\\
+\cellcolor{green} & 2 & \verb~158~ & \verb~        {~\\
+\cellcolor{green} & 2 & \verb~159~ & \verb~            ArrayList allControls = new ArrayList();~\\
+\cellcolor{green} & 2 & \verb~160~ & \verb~            allControls.Add(baseControl);~\\
+\cellcolor{green} & 6 & \verb~161~ & \verb~            foreach ( Control control in baseControl.Controls )~\\
+\cellcolor{red} & 0 & \verb~162~ & \verb~            {~\\
+\cellcolor{red} & 0 & \verb~163~ & \verb~                allControls.AddRange(AllControlsDescendingFrom(control));~\\
+\cellcolor{red} & 0 & \verb~164~ & \verb~            }~\\
+\cellcolor{green} & 2 & \verb~165~ & \verb~            return allControls;~\\
+\cellcolor{green} & 2 & \verb~166~ & \verb~        }~\\
+\cellcolor{gray} &  & \verb~167~ & \verb~       }~\\
+\cellcolor{gray} &  & \verb~168~ & \verb~}~\\
+\end{longtable}
+\end{document}

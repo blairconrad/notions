@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head><title>BookFinder.ViewModelBase - Coverage Report</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+html {font-family: sans-serif; margin: 20px; font-size: 0.9em; background-color: #f5f5f5;}
+h1 {font-size: 1.2em; font-weight: bold; margin: 20px 0px 15px 0px; padding: 0px;}
+h2 {font-size: 1.0em; font-weight: bold; margin: 10px 0px 15px 0px;padding: 0px;}
+th {text-align: left;}
+a {color: #cc0000; text-decoration: none;}
+a:hover {color: #000000; text-decoration: none;}
+.container {margin: auto; width: 960px; border: solid 1px #a7bac5; padding: 0px 20px 20px 20px; background-color: #ffffff;}
+.overview { border: solid 1px #a7bac5; border-collapse: collapse;}
+.overview th { border: solid 1px #a7bac5; border-collapse: collapse; padding: 2px 5px 2px 5px; background-color: #d2dbe1;}
+.overview td { border: solid 1px #a7bac5; border-collapse: collapse; padding: 2px 5px 2px 5px;}
+.coverage { border: solid 1px #a7bac5; border-collapse: collapse; font-size: 5px;}
+.coverage td { padding: 0px; }
+.right {text-align: right; padding-right: 8px;}
+.light {color: #888888;}
+.leftmargin { padding-left: 5px; }
+.green {background-color: #00ff21;}
+.red {background-color: #ff0000;}
+.gray {background-color: #dcdcdc;}
+.footer {font-size: 0.7em; text-align: center; margin-top: 35px;}
+</style>
+</head><body><div class="container"><h1>Summary</h1><table class="overview">
+<tr><th>Class:</th><td>BookFinder.ViewModelBase</td></tr><tr><th>Assembly:</th><td>BookFinder.Core.DLL</td></tr><tr><th>File(s):</th><td>D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\ViewModelBase.cs</td></tr><tr><th>Coverage:</th><td>81%</td></tr><tr><th>Covered lines:</th><td>81</td></tr><tr><th>Coverable lines:</th><td>100</td></tr><tr><th>Total lines:</th><td>168</td></tr></table>
+<h1>File(s)</h1><h2>D:\bconrad\Documents\Source\BlogExamples\2011-07-dotCover\BookFinder\BookFinder.Core\ViewModelBase.cs</h2><table>
+<tr>
+<th></th><th>#</th><th>Line</th><th>Coverage</th></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>1</code></td><td class="light"><code>using&nbsp;System;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>2</code></td><td class="light"><code>using&nbsp;System.Collections;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>3</code></td><td class="light"><code>using&nbsp;System.Reflection;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>4</code></td><td class="light"><code>using&nbsp;System.Windows.Forms;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>5</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>6</code></td><td class="light"><code>namespace&nbsp;BookFinder</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>7</code></td><td class="light"><code>{</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>8</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ViewModelBase</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>9</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>10</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;Control&nbsp;View;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>11</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;BindingFlags&nbsp;myBindingFlags&nbsp;=&nbsp;BindingFlags.Instance&nbsp;|&nbsp;BindingFlags.Public;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>12</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>13</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;ViewModelBase(Control&nbsp;view)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>14</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>15</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View&nbsp;=&nbsp;view;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>16</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>17</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>18</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;BindToView()</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>19</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>20</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;allControls&nbsp;=&nbsp;AllControlsDescendingFrom(View);</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>21</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">22</td><td class="right"><code>22</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;MethodInfo&nbsp;handler&nbsp;in&nbsp;EventHandlers()&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>23</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>24</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FindEventToListenTo(allControls,&nbsp;handler);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>25</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>26</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">26</td><td class="right"><code>27</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;FieldInfo&nbsp;field&nbsp;in&nbsp;PropertyFields()&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>28</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>29</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FindPropertyToBindTo(allControls,&nbsp;field);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>30</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>31</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>32</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>33</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;FindPropertyToBindTo(ArrayList&nbsp;allControls,&nbsp;FieldInfo&nbsp;field)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>34</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">50</td><td class="right"><code>35</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;Control&nbsp;control&nbsp;in&nbsp;allControls&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>36</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>37</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;BindPropertyToControl(control,&nbsp;field)&nbsp;)</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>38</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>39</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>40</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>41</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>42</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>43</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>44</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;void&nbsp;FindEventToListenTo(ArrayList&nbsp;allControls,&nbsp;MethodInfo&nbsp;handler)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>45</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">40</td><td class="right"><code>46</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;Control&nbsp;control&nbsp;in&nbsp;allControls&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>47</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>48</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;ListenToEvent(control,&nbsp;handler)&nbsp;)</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>49</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>50</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>51</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>52</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>53</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>54</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>55</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;IEnumerable&nbsp;PropertyFields()</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">4</td><td class="right"><code>56</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">4</td><td class="right"><code>57</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;fields&nbsp;=&nbsp;new&nbsp;ArrayList();</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">52</td><td class="right"><code>58</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;FieldInfo&nbsp;field&nbsp;in&nbsp;this.GetType().GetFields(myBindingFlags)&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>59</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>60</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;typeof&nbsp;(Property).IsAssignableFrom(field.FieldType)&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>61</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>62</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields.Add(field);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>63</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">20</td><td class="right"><code>64</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">4</td><td class="right"><code>65</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;fields;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">4</td><td class="right"><code>66</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>67</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>68</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;IEnumerable&nbsp;EventHandlers()</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>69</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>70</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;eventHandlers&nbsp;=&nbsp;new&nbsp;ArrayList();</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">42</td><td class="right"><code>71</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;MethodInfo&nbsp;method&nbsp;in&nbsp;this.GetType().GetMethods(myBindingFlags)&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>72</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>73</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;isEventHandler(method)&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>74</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>75</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eventHandlers.Add(method);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>76</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>77</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>78</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;eventHandlers;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>79</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>80</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>81</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;bool&nbsp;isEventHandler(MethodInfo&nbsp;info)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>82</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>83</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ParameterInfo[]&nbsp;parameters&nbsp;=&nbsp;info.GetParameters();</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>84</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>85</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(info.ReturnType&nbsp;==&nbsp;typeof&nbsp;(void)&nbsp;&amp;&amp;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>86</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters.Length&nbsp;==&nbsp;2&nbsp;&amp;&amp;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>87</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters[0].ParameterType&nbsp;==&nbsp;typeof&nbsp;(object)&nbsp;&amp;&amp;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>88</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(typeof&nbsp;(EventArgs)).IsAssignableFrom(parameters[1].ParameterType));</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>89</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>90</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>91</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>92</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;bool&nbsp;ListenToEvent(Control&nbsp;control,&nbsp;MethodInfo&nbsp;method)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>93</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>94</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;eventName&nbsp;=&nbsp;ControlAttributeName(control,&nbsp;method.Name);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>95</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;eventName&nbsp;==&nbsp;null&nbsp;)</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>96</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>97</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>98</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>99</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>100</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EventInfo&nbsp;eventInfo&nbsp;=&nbsp;control.GetType().GetEvent(eventName,&nbsp;myBindingFlags);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>101</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;eventInfo&nbsp;==&nbsp;null&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>102</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>103</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>104</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>105</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>106</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eventInfo.GetAddMethod().Invoke(control,&nbsp;new&nbsp;object[]</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>107</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>108</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delegate.CreateDelegate(eventInfo.EventHandlerType,&nbsp;this,</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>109</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method.Name)</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>110</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>111</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">8</td><td class="right"><code>112</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>113</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>114</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;bool&nbsp;BindPropertyToControl(Control&nbsp;control,&nbsp;FieldInfo&nbsp;field)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>115</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>116</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;controlPropertyName&nbsp;=&nbsp;ControlAttributeName(control,&nbsp;field.Name);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>117</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;controlPropertyName&nbsp;==&nbsp;null&nbsp;)</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>118</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>119</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>120</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>121</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>122</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PropertyInfo&nbsp;controlProperty&nbsp;=&nbsp;control.GetType().GetProperty(controlPropertyName,&nbsp;myBindingFlags);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>123</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;controlProperty&nbsp;==&nbsp;null&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>124</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>125</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>126</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>127</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>128</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BoundPropertyStrategy&nbsp;propertyStorageStrategy&nbsp;=&nbsp;new&nbsp;BoundPropertyStrategy(control,&nbsp;controlProperty);</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>129</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ConstructorInfo&nbsp;propertyConstructor&nbsp;=&nbsp;field.FieldType.GetConstructor(new&nbsp;Type[]&nbsp;{typeof&nbsp;(PropertyStorageStra</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>130</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object&nbsp;propertyField&nbsp;=&nbsp;propertyConstructor.Invoke(new&nbsp;object[]&nbsp;{propertyStorageStrategy});</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>131</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field.SetValue(this,&nbsp;propertyField);</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>132</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>133</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">10</td><td class="right"><code>134</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>135</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>136</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;summary&gt;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>137</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;Given&nbsp;a&nbsp;control&nbsp;and&nbsp;a&nbsp;ViewModel&nbsp;member,&nbsp;checks&nbsp;to&nbsp;see&nbsp;if&nbsp;the&nbsp;control&nbsp;name</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>138</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;prefixes&nbsp;the&nbsp;viewModelMember.&nbsp;If&nbsp;so,&nbsp;returns&nbsp;the&nbsp;remainder&nbsp;of&nbsp;the&nbsp;member&nbsp;name.</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>139</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;Otherwise,&nbsp;returns&nbsp;&lt;c&gt;null&lt;/c&gt;.</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>140</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;/summary&gt;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>141</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;remarks&gt;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>142</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;Used&nbsp;to&nbsp;find&nbsp;controls&nbsp;that&nbsp;contain&nbsp;attributes&nbsp;that&nbsp;we&nbsp;can&nbsp;bind&nbsp;to.&nbsp;For&nbsp;example,</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>143</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;given&nbsp;a&nbsp;control&nbsp;called&nbsp;&quot;Search&quot;,&nbsp;and&nbsp;a&nbsp;viewModelMember&nbsp;called&nbsp;&quot;SearchClick&quot;,&nbsp;this</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>144</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;method&nbsp;should&nbsp;return&nbsp;&quot;Click&quot;,&nbsp;allowing&nbsp;us&nbsp;to&nbsp;look&nbsp;for&nbsp;the&nbsp;&lt;c&gt;control.Click&lt;/c&gt;&nbsp;member.</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>145</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;Given&nbsp;a&nbsp;control&nbsp;called&nbsp;&quot;Save&quot;&nbsp;and&nbsp;a&nbsp;viewModelMember&nbsp;called&nbsp;&quot;SearchClick&quot;,&nbsp;the</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>146</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;method&nbsp;will&nbsp;return&nbsp;&lt;c&gt;null&lt;/c&gt;&nbsp;-&nbsp;there&#39;s&nbsp;nothing&nbsp;here&nbsp;to&nbsp;try&nbsp;to&nbsp;bind&nbsp;to.</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>147</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;&lt;/remarks&gt;</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>148</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;string&nbsp;ControlAttributeName(Control&nbsp;control,&nbsp;string&nbsp;viewModelMemberName)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>149</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>150</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;viewModelMemberName.ToLower().StartsWith(control.Name.ToLower())&nbsp;)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>151</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>152</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;viewModelMemberName.Substring(control.Name.Length);</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>153</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>154</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">18</td><td class="right"><code>155</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>156</code></td><td class="light"><code></code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>157</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;ArrayList&nbsp;AllControlsDescendingFrom(Control&nbsp;baseControl)</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>158</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>159</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;allControls&nbsp;=&nbsp;new&nbsp;ArrayList();</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>160</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allControls.Add(baseControl);</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">6</td><td class="right"><code>161</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;Control&nbsp;control&nbsp;in&nbsp;baseControl.Controls&nbsp;)</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>162</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>163</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allControls.AddRange(AllControlsDescendingFrom(control));</code></td></tr>
+<tr>
+<td class="red">&nbsp;</td><td class="leftmargin right">0</td><td class="right"><code>164</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>165</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;allControls;</code></td></tr>
+<tr>
+<td class="green">&nbsp;</td><td class="leftmargin right">2</td><td class="right"><code>166</code></td><td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>167</code></td><td class="light"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr>
+<td class="gray">&nbsp;</td><td class="leftmargin right"></td><td class="right"><code>168</code></td><td class="light"><code>}</code></td></tr>
+</table>
+<div class="footer">Generated by: ReportGenerator 1.1.1.0<br />2011-08-05 - 12:04:40<br /><a href="http://www.palmmedia.de">www.palmmedia.de</a><br /><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<div>
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" style="border: 0px;" alt="Donate" />
+<img alt="" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----" />
+</div>
+</form></div></div></body></html>

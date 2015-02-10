@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/coverreport.js">
+
+		</script><script type="text/javascript">
+			RANGES_2 = [
+  ];
+		</script><link rel="stylesheet" type="text/css" href="../css/coverreport.css" />
+	</head><body>
+		<code id="src2" class="dotCoverSource"><pre>using System;
+using System.Reflection;
+using System.Collections;
+
+namespace BookFinder.Tests
+{
+   public class ValuePropertyBinder
+   {
+         public static void Bind(ViewModelBase viewModel)
+         {
+             foreach ( FieldInfo field in viewModel.PropertyFields() )
+             {
+                 ValuePropertyStrategy propertyStorageStrategy = new ValuePropertyStrategy(MakeStartingValue(field.FieldType));
+
+                 ConstructorInfo propertyConstructor = field.FieldType.GetConstructor(new Type[] {typeof (PropertyStorageStrategy)});
+                 object propertyField = propertyConstructor.Invoke(new object[] {propertyStorageStrategy});
+                 field.SetValue(viewModel, propertyField);
+             }
+         }
+
+         private static object MakeStartingValue(Type fieldType)
+         {
+            Type propertyType = fieldType.GetProperty(&quot;Value&quot;).PropertyType;
+            
+            if ( propertyType == typeof(IList) ) { return new ArrayList(); }
+            if ( propertyType == typeof(string) ) { return &quot;&quot;; }
+            if ( propertyType == typeof(bool) ) { return false; }
+            else { return null; }
+         }
+   }
+}
+</pre></code><script type="text/javascript">
+			applyranges('src2', RANGES_2)
+		</script>
+	</body>
+</html>
