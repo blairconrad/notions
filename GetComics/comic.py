@@ -87,7 +87,7 @@ def comicToSite(comic):
 
 def siteToRegexp(site):
     if site == 'www.dilbert.com':
-        return re.compile('src="([^"]+)"\s+width="900"')
+        return re.compile('data-image="([^"]+)"')
     else:
         return re.compile('class="strip" src="([^"]+)" />')
     

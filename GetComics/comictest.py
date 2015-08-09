@@ -18,7 +18,7 @@ class ComicTest(unittest.TestCase):
         comic_name = 'dilbert'
 
         imagePaths = comic.FindImages({comic_name:file(comic_name +'.html').read()})
-        self.assertEqual(('dilbert', 'http://assets.amuniversal.com/ae6d983070e40132b90b005056a9545d'),
+        self.assertEqual(('dilbert', 'http://assets.amuniversal.com/1d879b20ec6e0132e8b6005056a9545d'),
                          imagePaths['dilbert'])
 
     def testFind9ChickWeedLaneImages(self):
