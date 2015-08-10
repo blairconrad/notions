@@ -65,7 +65,7 @@ class MailSender:
         msg.epilogue = ''
         
         for source, url in images: 
-            data = urllib2.urlopen(url).read()
+            data = load_url(url)
             img = MIMEImage(data)
             msg.attach(img)
 
@@ -117,6 +117,12 @@ class UrlMapper:
     def getUrl(self, comic):
         return self.urls.get(comic, 'http://' + comicToSite(comic) + '/' + comic)
 
+def load_url(url):
+    log('opening ' + url)
+    request = urllib2.Request(url)
+    request.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36')
+    return urllib2.urlopen(request).read()
+
 def main(args=None):
     if args == None:
         args = sys.argv[1:]
@@ -142,8 +148,8 @@ def main(args=None):
     um = UrlMapper()
 
     for comic in comics:
-        log(um.getUrl(comic))
-        sources[comic] = urllib2.urlopen(um.getUrl(comic)).read()
+        url = um.getUrl(comic)
+        sources[comic] = load_url(url)
         log(sources[comic])
     images = FindImages(sources).values()
 
