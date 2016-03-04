@@ -212,7 +212,7 @@ def changeLogonBackground(image, screenSize):
         if possibleRatio == desiredRatio:
             image = fitImage(image, [possibleScreenSize])
             logonBackgroundDir = \
-                r'%(windir)s\sysnative\oobe\info\backgrounds' % os.environ
+                r'%(windir)s\system32\oobe\info\backgrounds' % os.environ
 
             if not os.path.exists(logonBackgroundDir):
                 os.makedirs(logonBackgroundDir)
@@ -238,7 +238,7 @@ def main(args=None):
     filters = [GrayscaleFilter()]
     
     try:
-        source_dir = r'%(HOME)s\..\Documents\Pictures\wallpapers' % os.environ 
+        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ 
     except:
         source_dir = os.getcwd()
         output('No HOME environment variable defined. Will use ',
