@@ -17,7 +17,7 @@ except:
         from PIL import Image
     except:
         raise Exception("Can't import PIL or PILLOW. Install one.")
-        
+
 verbose = False
 
 
@@ -29,7 +29,7 @@ def output(*args):
     global verbose
     if verbose:
         print ' '.join(map(str, args))
-    
+
 
 class MyFilter:
     def filter(self, i):
@@ -62,7 +62,7 @@ def findNewSize(imageSize, screenSizes):
     else:
         # screen is fat, so fit to height
         return ((int(image_aspect * bestScreen[1]), bestScreen[1]), bestScreen)
-        
+
 
 def getScreenSizes():
     SM_CMONITORS = 80
@@ -94,7 +94,7 @@ def areColorsAllSame(im, startPosition, increment, numPixels):
             startPosition[1] + y * increment[1]))
 
         if isinstance(pix, tuple):
-             diff = (
+            diff = (
                 abs(pix[0] - firstpixel[0]) +
                 abs(pix[1] - firstpixel[1]) +
                 abs(pix[2] - firstpixel[2]))
@@ -110,7 +110,7 @@ def areColorsAllSame(im, startPosition, increment, numPixels):
 def fitImage(im, screenSizes):
     (new_size, screensize) = findNewSize(im.size, screenSizes)
     output('new_size =', str(new_size))
-    
+
     resized_image = im.resize(new_size, Image.BICUBIC)
 
     new_position = ((0, 0))
@@ -171,10 +171,10 @@ def getFile(dir):
 
     if 'current.bmp' in files:
         files.remove('current.bmp')
-        
+
     if 'current.txt' in files:
         files.remove('current.txt')
-        
+
     if 'Thumbs.db' in files:
         files.remove('Thumbs.db')
 
@@ -189,17 +189,17 @@ def getFile(dir):
 
 logonScreenDimensions = [
     (1360, 768),
-    (1280, 768), 
-    (1920, 1200), 
-    (1440, 900), 
-    (1600, 1200), 
-    (1280, 960), 
-    (1024, 768), 
-    (1280, 1024), 
-    (1024, 1280), 
-    (960, 1280), 
-    (900, 1440), 
-    (768, 1280), 
+    (1280, 768),
+    (1920, 1200),
+    (1440, 900),
+    (1600, 1200),
+    (1280, 960),
+    (1024, 768),
+    (1280, 1024),
+    (1024, 1280),
+    (960, 1280),
+    (900, 1440),
+    (768, 1280),
 ]
 
 
@@ -224,7 +224,7 @@ def changeLogonBackground(image, screenSize):
 
             if not os.path.exists(logonBackgroundDir):
                 os.makedirs(logonBackgroundDir)
-            
+
             logonBackgroundPath = os.path.join(logonBackgroundDir,
                                                'background%dx%d.jpg'
                                                % possibleScreenSize)
@@ -239,19 +239,19 @@ def changeLogonBackground(image, screenSize):
                     break
                 quality -= 5
             return
-        
+
 
 def main(args=None):
     filter_chance = 0.10
     filters = [GrayscaleFilter()]
-    
+
     try:
-        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ 
+        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
     except:
         source_dir = os.getcwd()
         output('No HOME environment variable defined. Will use ',
                source_dir, ' for generated files.')
-        
+
     if not os.path.exists(source_dir):
         os.makedirs(source_dir)
 
@@ -269,7 +269,7 @@ def main(args=None):
 
     global verbose
     verbose = options.verbose
-    
+
     if len(args) > 0:
         locationArg = args[0]
         if os.path.isdir(locationArg):
@@ -294,7 +294,7 @@ def main(args=None):
     while filter_it < filter_chance:
         filter = random.choice(filters)
         scaledImage = filter.filter(scaledImage)
-        
+
         filter_it = random.random()
 
     scaledImage.save(destination)
@@ -311,6 +311,6 @@ def main(args=None):
     file(audit, 'w').write(theFile)
 
     changeLogonBackground(i, screenSizes[-1])
-    
+
 if __name__ == '__main__':
     sys.exit(main())
