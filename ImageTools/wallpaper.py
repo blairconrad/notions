@@ -87,12 +87,20 @@ def areColorsAllSame(im, startPosition, increment, numPixels):
     max_color_diff = 20
 
     firstpixel = im.getpixel(startPosition)
+    output('firstpixel = ' + str(firstpixel))
     for y in range(1, numPixels):
-        pix = im.getpixel((startPosition[0] + y * increment[0],
-                          startPosition[1] + y * increment[1]))
-        diff = (abs(pix[0] - firstpixel[0]) +
+        pix = im.getpixel((
+            startPosition[0] + y * increment[0],
+            startPosition[1] + y * increment[1]))
+
+        if isinstance(pix, tuple):
+             diff = (
+                abs(pix[0] - firstpixel[0]) +
                 abs(pix[1] - firstpixel[1]) +
                 abs(pix[2] - firstpixel[2]))
+        else:
+            diff = abs(pix - firstpixel)
+
         if diff > max_color_diff:
             output('colour diff: ', diff)
             return False
@@ -142,12 +150,12 @@ def fitImage(im, screenSizes):
             if bottom_all_same:
                 background_colour = im.getpixel((0, im.size[1] - 1))
 
-    new_image = Image.new('RGB', screensize, background_colour)
+    new_image = Image.new(im.mode, screensize, background_colour)
 
-    new_image.paste(resized_image, (new_position[0], new_position[1],
-                                    new_position[0] + new_size[0],
-                                    new_position[1] + new_size[1]))
-    return new_image
+    new_image.paste(resized_image,
+                    (new_position[0], new_position[1],
+                     new_position[0] + new_size[0], new_position[1] + new_size[1]))
+    return new_image.convert('RGB')
 
 
 def getFile(dir):
