@@ -39,7 +39,6 @@ def process_line(line):
         # expecting an attribute
         if line.endswith(':: \n'):
             state = 'multi_line'
-            multi_line_buffer = []
 
         write(line)
 
@@ -49,6 +48,7 @@ def process_line(line):
         else:
             write(base64.b64decode(''.join(multi_line_buffer)), '\n')
             state = None
+            multi_line_buffer = []
             process_line(line)
 
 if __name__ == '__main__':
