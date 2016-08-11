@@ -9,24 +9,29 @@ found test suites into one big test suite and run them all at once.
 """
 
 import unittest
+import sys
+import os
+import re
 
-import sys, os, re, unittest
 
-def regressionTest():
+def filename_to_module_name(filename):
+    return os.path.splitext(filename)[0]
+
+
+def regression_test():
     path = os.path.split(sys.argv[0])[0] or os.getcwd()
     files = os.listdir(path)
     test = re.compile("test.py$", re.IGNORECASE)
     files = filter(test.search, files)
-    filenameToModuleName = lambda f: os.path.splitext(f)[0]
-    moduleNames = map(filenameToModuleName, files)
-    modules = map(__import__, moduleNames)
+
+    module_names = map(filename_to_module_name, files)
+    modules = map(__import__, module_names)
     load = unittest.defaultTestLoader.loadTestsFromModule
     return unittest.TestSuite(map(load, modules))
 
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        unittest.main(defaultTest="regressionTest")
+        unittest.main(defaultTest="regression_test")
     else:
         unittest.main(module=None)
-
-
