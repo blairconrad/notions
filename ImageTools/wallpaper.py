@@ -302,6 +302,12 @@ def main(args=None):
     original_region = region = [0, 0] + list(i.size)
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
+    else:
+        json_file= theFile + '.json'
+        if os.path.isfile(json_file):
+            import json
+            json_config = json.load(file(json_file))
+            region = json_config["regions"][0]
 
     if region != original_region:
         output('cropping to', region)
