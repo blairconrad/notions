@@ -20,6 +20,13 @@ except:
 
 verbose = False
 
+SPI_SETDESKWALLPAPER = 20
+SPIF_UPDATEINIFILE = 1
+SPIF_SENDWININICHANGE = 2
+
+SM_CMONITORS = 80
+SM_CXSCREEN = 0
+SM_CYSCREEN = 1
 
 direction_down = (0, 1)
 direction_right = (1, 0)
@@ -41,40 +48,37 @@ class GrayscaleFilter(MyFilter):
         return i.convert('L')
 
 
-def findNewSize(imageSize, screenSizes):
-    image_aspect = 1.0 * imageSize[0] / imageSize[1]
+def find_new_size(image_size, screen_sizes):
+    image_aspect = 1.0 * image_size[0] / image_size[1]
 
-    bestScreen = screenSizes[0]
-    bestAspect = 1.0 * bestScreen[0] / bestScreen[1]
-    screen_aspect = bestAspect
+    best_screen = screen_sizes[0]
+    best_aspect = 1.0 * best_screen[0] / best_screen[1]
+    screen_aspect = best_aspect
     output(
         'image_aspect:', image_aspect,
-        'bestAspect so far:', bestAspect,
+        'best_aspect so far:', best_aspect,
         'screen_aspect:', screen_aspect)
 
-    for screensize in screenSizes[1:]:
+    for screensize in screen_sizes[1:]:
         screen_aspect = 1.0 * screensize[0] / screensize[1]
         output(
             'image_aspect:', image_aspect,
-            'bestAspect so far:', bestAspect,
+            'best_aspect so far:', best_aspect,
             'screen_aspect:', screen_aspect)
-        if abs(bestAspect - image_aspect) > abs(screen_aspect - image_aspect):
-            bestAspect = screen_aspect
-            bestScreen = screensize
+        if abs(best_aspect - image_aspect) > abs(screen_aspect - image_aspect):
+            best_aspect = screen_aspect
+            best_screen = screensize
 
-    output('final bestAspect', bestAspect)
-    if bestAspect < image_aspect:
+    output('final best_aspect', best_aspect)
+    if best_aspect < image_aspect:
         # screen is skinny, so fit to width
-        return ((bestScreen[0], int(bestScreen[0] / image_aspect)), bestScreen)
+        return ((best_screen[0], int(best_screen[0] / image_aspect)), best_screen)
     else:
         # screen is fat, so fit to height
-        return ((int(image_aspect * bestScreen[1]), bestScreen[1]), bestScreen)
+        return ((int(image_aspect * best_screen[1]), best_screen[1]), best_screen)
 
 
-def getScreenSizes():
-    SM_CMONITORS = 80
-    SM_CXSCREEN = 0
-    SM_CYSCREEN = 1
+def get_screen_sizes():
     number_of_monitors = ctypes.windll.user32.GetSystemMetrics(SM_CMONITORS)
     width = ctypes.windll.user32.GetSystemMetrics(SM_CXSCREEN)
     height = ctypes.windll.user32.GetSystemMetrics(SM_CYSCREEN)
@@ -90,15 +94,15 @@ def getScreenSizes():
     return sizes
 
 
-def areColorsAllSame(im, startPosition, increment, numPixels):
+def are_colors_all_same(im, start_position, increment, num_pixels):
     max_color_diff = 20
 
-    firstpixel = im.getpixel(startPosition)
+    firstpixel = im.getpixel(start_position)
     output('firstpixel = ' + str(firstpixel))
-    for y in range(1, numPixels):
+    for y in range(1, num_pixels):
         pix = im.getpixel((
-            startPosition[0] + y * increment[0],
-            startPosition[1] + y * increment[1]))
+            start_position[0] + y * increment[0],
+            start_position[1] + y * increment[1]))
 
         if isinstance(pix, tuple):
             diff = (
@@ -114,8 +118,8 @@ def areColorsAllSame(im, startPosition, increment, numPixels):
     return True
 
 
-def fitImage(im, screenSizes):
-    (new_size, screensize) = findNewSize(im.size, screenSizes)
+def fit_image(im, screen_sizes):
+    (new_size, screensize) = find_new_size(im.size, screen_sizes)
     output('new_size =', str(new_size))
 
     resized_image = im.resize(new_size, Image.BICUBIC)
@@ -126,10 +130,10 @@ def fitImage(im, screenSizes):
     if screensize[0] > new_size[0]:
         # there's a band on the left, and probably right
 
-        left_all_same = areColorsAllSame(im, (0, 0),
-                                         direction_down, im.size[1])
-        right_all_same = areColorsAllSame(im, (im.size[0] - 1, 0),
-                                          direction_down, im.size[1])
+        left_all_same = are_colors_all_same(im, (0, 0),
+                                            direction_down, im.size[1])
+        right_all_same = are_colors_all_same(im, (im.size[0] - 1, 0),
+                                             direction_down, im.size[1])
 
         if right_all_same and not left_all_same:
             output('float left')
@@ -143,10 +147,10 @@ def fitImage(im, screenSizes):
     elif screensize[1] > new_size[1]:
         # there's a band at the top, and probably bottom
 
-        bottom_all_same = areColorsAllSame(im, (0, im.size[1] - 1),
+        bottom_all_same = are_colors_all_same(im, (0, im.size[1] - 1),
+                                              direction_right, im.size[0])
+        top_all_same = are_colors_all_same(im, (0, 0),
                                            direction_right, im.size[0])
-        top_all_same = areColorsAllSame(im, (0, 0),
-                                        direction_right, im.size[0])
 
         if top_all_same and not bottom_all_same:
             output('float down')
@@ -165,7 +169,7 @@ def fitImage(im, screenSizes):
     return new_image.convert('RGB')
 
 
-def getFile(dir):
+def get_file(dir):
     files = os.listdir(dir)
 
     month_number = '%02d' % (datetime.date.today().month)
@@ -174,7 +178,7 @@ def getFile(dir):
         output('found month', month_number)
         if random.random() < 0.25:
             output('using files from month', month_number)
-            return getFile(os.path.join(dir, 'month' + month_number))
+            return get_file(os.path.join(dir, 'month' + month_number))
 
     if 'current.bmp' in files:
         files.remove('current.bmp')
@@ -196,7 +200,7 @@ def getFile(dir):
     return os.path.join(dir, random.choice(files))
 
 
-logonScreenDimensions = [
+logon_screen_dimensions = [
     (1360, 768),
     (1280, 768),
     (1920, 1200),
@@ -212,39 +216,39 @@ logonScreenDimensions = [
 ]
 
 
-def changeLogonBackground(image, screenSize):
+def change_logon_background(image, screen_size):
     # change the logon UI background if on Windows 7. From learning at
     # http://www.withinwindows.com/2009/03/15/windows-7-to-officially-support-logon-ui-background-customization/
-    windowsVersion = sys.getwindowsversion()
-    if windowsVersion.major != 6 or \
-       windowsVersion.minor != 1:  # Windows 7
+    windows_version = sys.getwindowsversion()
+    if windows_version.major != 6 or \
+       windows_version.minor != 1:  # Windows 7
         return
 
-    desiredRatio = float(screenSize[0]) / screenSize[1]
-    output('Changing logon background. desiredRatio=', desiredRatio)
+    desired_ratio = float(screen_size[0]) / screen_size[1]
+    output('Changing logon background. desired_ratio=', desired_ratio)
 
-    for possibleScreenSize in logonScreenDimensions:
-        possibleRatio = float(possibleScreenSize[0]) / possibleScreenSize[1]
+    for possible_screen_size in logon_screen_dimensions:
+        possible_ratio = float(possible_screen_size[0]) / possible_screen_size[1]
 
-        if possibleRatio == desiredRatio:
-            image = fitImage(image, [possibleScreenSize])
-            logonBackgroundDir = \
+        if possible_ratio == desired_ratio:
+            image = fit_image(image, [possible_screen_size])
+            logon_background_dir = \
                 r'%(windir)s\system32\oobe\info\backgrounds' % os.environ
 
-            if not os.path.exists(logonBackgroundDir):
-                os.makedirs(logonBackgroundDir)
+            if not os.path.exists(logon_background_dir):
+                os.makedirs(logon_background_dir)
 
-            logonBackgroundPath = os.path.join(logonBackgroundDir,
-                                               'background%dx%d.jpg'
-                                               % possibleScreenSize)
-            output('path for logon screen background =', logonBackgroundPath)
+            logon_background_path = os.path.join(logon_background_dir,
+                                                 'background%dx%d.jpg'
+                                                 % possible_screen_size)
+            output('path for logon screen background =', logon_background_path)
             quality = 80
             while quality >= 50:
                 output('saving logon picture at quality', quality)
-                image.save(logonBackgroundPath, 'JPEG', quality=quality)
-                fileSize = os.path.getsize(logonBackgroundPath)
-                output('file size is', fileSize)
-                if fileSize < 256 * 1024:
+                image.save(logon_background_path, 'JPEG', quality=quality)
+                file_size = os.path.getsize(logon_background_path)
+                output('file size is', file_size)
+                if file_size < 256 * 1024:
                     break
                 quality -= 5
             return
@@ -270,11 +274,11 @@ def main(args=None):
     if args is None:
         args = sys.argv[1:]
 
-    parser = optparse.OptionParser()
+    parser = optparse.Option_parser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
     parser.add_option('--region',
-                       action='store', dest='region', default=None)
+                      action='store', dest='region', default=None)
 
     (options, args) = parser.parse_args(args)
 
@@ -282,28 +286,28 @@ def main(args=None):
     verbose = options.verbose
 
     if len(args) > 0:
-        locationArg = args[0]
-        if os.path.isdir(locationArg):
-            theFile = getFile(locationArg)
-        elif os.path.isfile(locationArg):
-            theFile = locationArg
+        location_arg = args[0]
+        if os.path.isdir(location_arg):
+            the_file = get_file(location_arg)
+        elif os.path.isfile(location_arg):
+            the_file = location_arg
         else:
-            file_choices = glob.glob(locationArg)
+            file_choices = glob.glob(location_arg)
             output('available files', file_choices)
-            theFile = random.choice(file_choices)
+            the_file = random.choice(file_choices)
     else:
-        theFile = getFile(source_dir)
+        the_file = get_file(source_dir)
 
-    output('chose', theFile)
+    output('chose', the_file)
 
-    i = Image.open(theFile)
+    i = Image.open(the_file)
     output('image size is', i.size)
 
     original_region = region = [0, 0] + list(i.size)
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
     else:
-        json_file= theFile + '.json'
+        json_file = the_file + '.json'
         if os.path.isfile(json_file):
             import json
             json_config = json.load(file(json_file))
@@ -313,30 +317,26 @@ def main(args=None):
         output('cropping to', region)
         i = i.crop(region)
 
-    screenSizes = getScreenSizes()
-    scaledImage = fitImage(i, screenSizes)
+    screen_sizes = get_screen_sizes()
+    scaled_image = fit_image(i, screen_sizes)
 
     filter_it = random.random()
     while filter_it < filter_chance:
         filter = random.choice(filters)
-        scaledImage = filter.filter(scaledImage)
+        scaled_image = filter.filter(scaled_image)
 
         filter_it = random.random()
 
-    scaledImage.save(destination)
-
-    SPI_SETDESKWALLPAPER = 20
-    SPIF_UPDATEINIFILE = 1
-    SPIF_SENDWININICHANGE = 2
+    scaled_image.save(destination)
 
     result = ctypes.windll.user32.SystemParametersInfoA(
         SPI_SETDESKWALLPAPER, 0, destination,
         SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE)
     output('change wallpaper return code:', result)
 
-    file(audit, 'w').write(theFile)
+    file(audit, 'w').write(the_file)
 
-    changeLogonBackground(i, screenSizes[-1])
+    change_logon_background(i, screen_sizes[-1])
 
 if __name__ == '__main__':
     sys.exit(main())
