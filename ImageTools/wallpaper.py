@@ -46,16 +46,23 @@ def findNewSize(imageSize, screenSizes):
 
     bestScreen = screenSizes[0]
     bestAspect = 1.0 * bestScreen[0] / bestScreen[1]
+    screen_aspect = bestAspect
+    output(
+        'image_aspect:', image_aspect,
+        'bestAspect so far:', bestAspect,
+        'screen_aspect:', screen_aspect)
 
     for screensize in screenSizes[1:]:
         screen_aspect = 1.0 * screensize[0] / screensize[1]
-        output('image_aspect:', image_aspect,
-               'bestAspect:', bestAspect,
-               'screen_aspect:', screen_aspect)
+        output(
+            'image_aspect:', image_aspect,
+            'bestAspect so far:', bestAspect,
+            'screen_aspect:', screen_aspect)
         if abs(bestAspect - image_aspect) > abs(screen_aspect - image_aspect):
             bestAspect = screen_aspect
             bestScreen = screensize
 
+    output('final bestAspect', bestAspect)
     if bestAspect < image_aspect:
         # screen is skinny, so fit to width
         return ((bestScreen[0], int(bestScreen[0] / image_aspect)), bestScreen)
@@ -178,6 +185,8 @@ def getFile(dir):
     if 'Thumbs.db' in files:
         files.remove('Thumbs.db')
 
+    files = [f for f in files if not f.endswith('.json')]
+
     output('files length:', len(files))
 
     # chop out the month dirs, by assuming everything else will have a .
@@ -264,6 +273,8 @@ def main(args=None):
     parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
+    parser.add_option('--region',
+                       action='store', dest='region', default=None)
 
     (options, args) = parser.parse_args(args)
 
@@ -286,6 +297,15 @@ def main(args=None):
     output('chose', theFile)
 
     i = Image.open(theFile)
+    output('image size is', i.size)
+
+    original_region = region = [0, 0] + list(i.size)
+    if options.region:
+        region = [int(part, 10) for part in options.region.split(',')]
+
+    if region != original_region:
+        output('cropping to', region)
+        i = i.crop(region)
 
     screenSizes = getScreenSizes()
     scaledImage = fitImage(i, screenSizes)
