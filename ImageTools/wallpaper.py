@@ -274,7 +274,7 @@ def main(args=None):
     if args is None:
         args = sys.argv[1:]
 
-    parser = optparse.Option_parser()
+    parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
     parser.add_option('--region',
