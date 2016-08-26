@@ -254,6 +254,24 @@ def change_logon_background(image, screen_size):
             return
 
 
+def choose_wallpaper_file(source_dir, args):
+    if len(args) > 0:
+        location_arg = args[0]
+        if os.path.isdir(location_arg):
+            the_file = get_file(location_arg)
+        elif os.path.isfile(location_arg):
+            the_file = location_arg
+        else:
+            file_choices = glob.glob(location_arg)
+            output('available files', file_choices)
+            the_file = random.choice(file_choices)
+    else:
+        the_file = get_file(source_dir)
+
+    output('chose', the_file)
+    return the_file
+
+
 def main(args=None):
     filter_chance = 0.10
     filters = [GrayscaleFilter()]
@@ -287,20 +305,7 @@ def main(args=None):
     global verbose
     verbose = options.verbose
 
-    if len(args) > 0:
-        location_arg = args[0]
-        if os.path.isdir(location_arg):
-            the_file = get_file(location_arg)
-        elif os.path.isfile(location_arg):
-            the_file = location_arg
-        else:
-            file_choices = glob.glob(location_arg)
-            output('available files', file_choices)
-            the_file = random.choice(file_choices)
-    else:
-        the_file = get_file(source_dir)
-
-    output('chose', the_file)
+    the_file = choose_wallpaper_file(source_dir, args)
 
     i = Image.open(the_file)
     output('image size is', i.size)
