@@ -82,14 +82,10 @@ def get_screen_sizes():
     number_of_monitors = ctypes.windll.user32.GetSystemMetrics(SM_CMONITORS)
     width = ctypes.windll.user32.GetSystemMetrics(SM_CXSCREEN)
     height = ctypes.windll.user32.GetSystemMetrics(SM_CYSCREEN)
-    sizes = []
 
     # assume monitors are all same size
     # assume monitors are laid out horizontally
-    sizes = []
-    for i in range(number_of_monitors, 0, -1):
-        if number_of_monitors % i == 0:
-            sizes.append((i * width, height))
+    sizes = [(i * width, height) for i in range(number_of_monitors, 0, -1) if number_of_monitors % i == 0]
     output('candidate screen sizes:', sizes)
     return sizes
 
