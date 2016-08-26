@@ -271,6 +271,12 @@ def choose_wallpaper_file(source_dir, args):
     output('chose', the_file)
     return the_file
 
+def change_wallpaper(new_wallpaper):
+    result = ctypes.windll.user32.SystemParametersInfoA(
+        SPI_SETDESKWALLPAPER, 0, new_wallpaper,
+        SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE)
+    output('change wallpaper return code:', result)
+
 
 def main(args=None):
     filter_chance = 0.10
@@ -349,10 +355,7 @@ def main(args=None):
 
     scaled_image.save(destination)
 
-    result = ctypes.windll.user32.SystemParametersInfoA(
-        SPI_SETDESKWALLPAPER, 0, destination,
-        SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE)
-    output('change wallpaper return code:', result)
+    change_wallpaper(destination)
 
     file(audit, 'w').write(the_file)
 
