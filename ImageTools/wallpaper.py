@@ -279,6 +279,8 @@ def main(args=None):
                       action='store_true', dest='verbose', default=False)
     parser.add_option('--region',
                       action='store', dest='region', default=None)
+    parser.add_option('--create-config',
+                      action='store_true', dest='create_config', default=None)
 
     (options, args) = parser.parse_args(args)
 
@@ -304,14 +306,27 @@ def main(args=None):
     output('image size is', i.size)
 
     original_region = region = [0, 0] + list(i.size)
+
+    config_file = the_file + '.json'
+    if options.create_config:
+        if os.path.exists(config_file):
+            print 'File', config_file, 'already exists'
+        else:
+            sample_config = {
+                'regions': [original_region]
+                }
+            import json
+            json.dump(sample_config, file(config_file, 'wb'), sort_keys=True, indent=4)
+            print 'Created config file', config_file
+        return
+
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
     else:
-        json_file = the_file + '.json'
-        if os.path.isfile(json_file):
+        if os.path.isfile(config_file):
             import json
-            json_config = json.load(file(json_file))
-            region = json_config["regions"][0]
+            config = json.load(file(config_file))
+            region = config["regions"][0]
 
     if region != original_region:
         output('cropping to', region)
