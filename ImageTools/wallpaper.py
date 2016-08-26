@@ -48,34 +48,34 @@ class GrayscaleFilter(MyFilter):
         return i.convert('L')
 
 
-def find_new_size(image_size, screen_sizes):
+def find_new_size(image_size, candidate_sizes):
     image_aspect = 1.0 * image_size[0] / image_size[1]
 
-    best_screen = screen_sizes[0]
-    best_aspect = 1.0 * best_screen[0] / best_screen[1]
-    screen_aspect = best_aspect
+    best_candidate = candidate_sizes[0]
+    best_aspect = 1.0 * best_candidate[0] / best_candidate[1]
+    candidate_aspect = best_aspect
     output(
         'image_aspect:', image_aspect,
         'best_aspect so far:', best_aspect,
-        'screen_aspect:', screen_aspect)
+        'candidate_aspect:', candidate_aspect)
 
-    for screensize in screen_sizes[1:]:
-        screen_aspect = 1.0 * screensize[0] / screensize[1]
+    for candidate_size in candidate_sizes[1:]:
+        candidate_aspect = 1.0 * candidate_size[0] / candidate_size[1]
         output(
             'image_aspect:', image_aspect,
             'best_aspect so far:', best_aspect,
-            'screen_aspect:', screen_aspect)
-        if abs(best_aspect - image_aspect) > abs(screen_aspect - image_aspect):
-            best_aspect = screen_aspect
-            best_screen = screensize
+            'candidate_aspect:', candidate_aspect)
+        if abs(best_aspect - image_aspect) > abs(candidate_aspect - image_aspect):
+            best_aspect = candidate_aspect
+            best_candidate = candidate_size
 
     output('final best_aspect', best_aspect)
     if best_aspect < image_aspect:
-        # screen is skinny, so fit to width
-        return ((best_screen[0], int(best_screen[0] / image_aspect)), best_screen)
+        # candidate is skinny, so fit to width
+        return ((best_candidate[0], int(best_candidate[0] / image_aspect)), best_candidate)
     else:
-        # screen is fat, so fit to height
-        return ((int(image_aspect * best_screen[1]), best_screen[1]), best_screen)
+        # candidate is fat, so fit to height
+        return ((int(image_aspect * best_candidate[1]), best_candidate[1]), best_candidate)
 
 
 def get_screen_sizes():
