@@ -9,7 +9,6 @@ import glob
 import datetime
 import optparse
 
-
 try:
     import Image
 except:
@@ -19,14 +18,6 @@ except:
         raise Exception("Can't import PIL or PILLOW. Install one.")
 
 verbose = False
-
-SPI_SETDESKWALLPAPER = 20
-SPIF_UPDATEINIFILE = 1
-SPIF_SENDWININICHANGE = 2
-
-SM_CMONITORS = 80
-SM_CXSCREEN = 0
-SM_CYSCREEN = 1
 
 direction_down = (0, 1)
 direction_right = (1, 0)
@@ -46,6 +37,38 @@ class MyFilter:
 class GrayscaleFilter(MyFilter):
     def filter(self, i):
         return i.convert('L')
+
+
+class Windows:
+    SPI_SETDESKWALLPAPER = 20
+    SPIF_UPDATEINIFILE = 1
+    SPIF_SENDWININICHANGE = 2
+
+    SM_CMONITORS = 80
+    SM_CXSCREEN = 0
+    SM_CYSCREEN = 1
+
+    @classmethod
+    def change_wallpaper(cls, new_wallpaper):
+        result = ctypes.windll.user32.SystemParametersInfoA(
+            Windows.SPI_SETDESKWALLPAPER, 0, new_wallpaper,
+            Windows.SPIF_SENDWININICHANGE | Windows.SPIF_UPDATEINIFILE)
+        output('change wallpaper return code:', result)
+
+    @classmethod
+    def get_screen_size(cls):
+        width = ctypes.windll.user32.GetSystemMetrics(Windows.SM_CXSCREEN)
+        height = ctypes.windll.user32.GetSystemMetrics(Windows.SM_CYSCREEN)
+        return (width, height)
+
+    @classmethod
+    def get_number_of_screens(cls):
+        return ctypes.windll.user32.GetSystemMetrics(Windows.SM_CMONITORS)
+
+    @classmethod
+    def is_windows_7(cls):
+        windows_version = sys.getwindowsversion()
+        return windows_version.major == 6 and windows_version.minor == 1
 
 
 def find_new_size(image_size, candidate_sizes):
@@ -79,13 +102,13 @@ def find_new_size(image_size, candidate_sizes):
 
 
 def get_screen_sizes():
-    number_of_monitors = ctypes.windll.user32.GetSystemMetrics(SM_CMONITORS)
-    width = ctypes.windll.user32.GetSystemMetrics(SM_CXSCREEN)
-    height = ctypes.windll.user32.GetSystemMetrics(SM_CYSCREEN)
+    number_of_screens = Windows.get_number_of_screens()
+    one_screen_size = Windows.get_screen_size()
 
     # assume monitors are all same size
     # assume monitors are laid out horizontally
-    sizes = [(i * width, height) for i in range(number_of_monitors, 0, -1) if number_of_monitors % i == 0]
+    sizes = [(i * one_screen_size[0], one_screen_size[1])
+             for i in range(number_of_screens, 0, -1) if number_of_screens % i == 0]
     output('candidate screen sizes:', sizes)
     return sizes
 
@@ -215,9 +238,7 @@ logon_screen_dimensions = [
 def change_logon_background(image, screen_size):
     # change the logon UI background if on Windows 7. From learning at
     # http://www.withinwindows.com/2009/03/15/windows-7-to-officially-support-logon-ui-background-customization/
-    windows_version = sys.getwindowsversion()
-    if windows_version.major != 6 or \
-       windows_version.minor != 1:  # Windows 7
+    if not Windows.is_windows_7():
         return
 
     desired_ratio = float(screen_size[0]) / screen_size[1]
@@ -266,12 +287,6 @@ def choose_wallpaper_file(source_dir, args):
 
     output('chose', the_file)
     return the_file
-
-def change_wallpaper(new_wallpaper):
-    result = ctypes.windll.user32.SystemParametersInfoA(
-        SPI_SETDESKWALLPAPER, 0, new_wallpaper,
-        SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE)
-    output('change wallpaper return code:', result)
 
 
 def main(args=None):
@@ -351,7 +366,7 @@ def main(args=None):
 
     scaled_image.save(destination)
 
-    change_wallpaper(destination)
+    Windows.change_wallpaper(destination)
 
     file(audit, 'w').write(the_file)
 
