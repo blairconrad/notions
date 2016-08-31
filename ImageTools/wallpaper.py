@@ -29,16 +29,6 @@ def output(*args):
         print ' '.join(map(str, args))
 
 
-class MyFilter:
-    def filter(self, i):
-        pass
-
-
-class GrayscaleFilter(MyFilter):
-    def filter(self, i):
-        return i.convert('L')
-
-
 class Windows:
     SPI_SETDESKWALLPAPER = 20
     SPIF_UPDATEINIFILE = 1
@@ -188,6 +178,24 @@ def fit_image(im, screen_sizes):
     return new_image.convert('RGB')
 
 
+def filter_image(image):
+
+    def make_grayscale(i):
+        return i.convert('L')
+
+    filter_chance = 0.1
+    filters = [make_grayscale]
+
+    filter_it = random.random()
+    while filter_it < filter_chance:
+        filter = random.choice(filters)
+        image = filter(image)
+
+        filter_it = random.random()
+
+    return image
+
+
 def get_file(dir):
     files = os.listdir(dir)
 
@@ -290,9 +298,6 @@ def choose_wallpaper_file(source_dir, args):
 
 
 def main(args=None):
-    filter_chance = 0.10
-    filters = [GrayscaleFilter()]
-
     try:
         source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
     except:
@@ -356,14 +361,7 @@ def main(args=None):
 
     screen_sizes = get_screen_sizes()
     scaled_image = fit_image(i, screen_sizes)
-
-    filter_it = random.random()
-    while filter_it < filter_chance:
-        filter = random.choice(filters)
-        scaled_image = filter.filter(scaled_image)
-
-        filter_it = random.random()
-
+    scaled_image = filter_image(scaled_image)
     scaled_image.save(destination)
 
     Windows.change_wallpaper(destination)
