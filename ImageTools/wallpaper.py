@@ -297,10 +297,7 @@ def choose_wallpaper_file(source_dir, args):
     return the_file
 
 
-def main(args=None):
-    if args is None:
-        args = sys.argv[1:]
-
+def main(args):
     parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
@@ -371,4 +368,4 @@ def main(args=None):
     change_logon_background(i, screen_sizes[-1])
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
