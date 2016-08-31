@@ -309,12 +309,7 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
-def main(args):
-    (options, args) = parse_args(args)
-
-    global verbose
-    verbose = options.verbose
-
+def find_source_dir():
     try:
         source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
     except:
@@ -325,6 +320,16 @@ def main(args):
     if not os.path.exists(source_dir):
         os.makedirs(source_dir)
 
+    return source_dir
+
+
+def main(args):
+    (options, args) = parse_args(args)
+
+    global verbose
+    verbose = options.verbose
+
+    source_dir = find_source_dir()
     the_file = choose_wallpaper_file(source_dir, args)
 
     i = Image.open(the_file)
