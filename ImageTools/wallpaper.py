@@ -297,7 +297,7 @@ def choose_wallpaper_file(source_dir, args):
     return the_file
 
 
-def main(args):
+def parse_args(args):
     parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
@@ -306,7 +306,11 @@ def main(args):
     parser.add_option('--create-config',
                       action='store_true', dest='create_config', default=None)
 
-    (options, args) = parser.parse_args(args)
+    return parser.parse_args(args)
+
+
+def main(args):
+    (options, args) = parse_args(args)
 
     global verbose
     verbose = options.verbose
