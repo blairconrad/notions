@@ -335,7 +335,7 @@ def main(args):
     i = Image.open(the_file)
     output('image size is', i.size)
 
-    original_region = region = [0, 0] + list(i.size)
+    image_bounds = [0, 0] + list(i.size)
 
     config_file = the_file + '.json'
     if options.create_config:
@@ -343,7 +343,7 @@ def main(args):
             print 'File', config_file, 'already exists'
         else:
             sample_config = {
-                'regions': [original_region]
+                'regions': [image_bounds]
                 }
             import json
             json.dump(sample_config, file(config_file, 'wb'), sort_keys=True, indent=4)
@@ -352,13 +352,14 @@ def main(args):
 
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
+    elif os.path.isfile(config_file):
+        import json
+        config = json.load(file(config_file))
+        region = config['regions'][0]
     else:
-        if os.path.isfile(config_file):
-            import json
-            config = json.load(file(config_file))
-            region = config["regions"][0]
+        region = image_bounds
 
-    if region != original_region:
+    if region != image_bounds:
         output('cropping to', region)
         i = i.crop(region)
 
