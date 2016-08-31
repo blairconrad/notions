@@ -8,6 +8,7 @@ import sys
 import glob
 import datetime
 import optparse
+import json
 
 try:
     import Image
@@ -345,16 +346,18 @@ def main(args):
             sample_config = {
                 'regions': [image_bounds]
                 }
-            import json
             json.dump(sample_config, file(config_file, 'wb'), sort_keys=True, indent=4)
             print 'Created config file', config_file
         return
 
+    if os.path.isfile(config_file):
+        config = json.load(file(config_file))
+    else:
+        config = None
+
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
-    elif os.path.isfile(config_file):
-        import json
-        config = json.load(file(config_file))
+    elif config is not None:
         region = config['regions'][0]
     else:
         region = image_bounds
