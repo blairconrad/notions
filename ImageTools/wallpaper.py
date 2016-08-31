@@ -298,19 +298,6 @@ def choose_wallpaper_file(source_dir, args):
 
 
 def main(args=None):
-    try:
-        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
-    except:
-        source_dir = os.getcwd()
-        output('No HOME environment variable defined. Will use ',
-               source_dir, ' for generated files.')
-
-    if not os.path.exists(source_dir):
-        os.makedirs(source_dir)
-
-    destination = os.path.join(source_dir, 'current.bmp')
-    audit = os.path.join(source_dir, 'current.txt')
-
     if args is None:
         args = sys.argv[1:]
 
@@ -326,6 +313,16 @@ def main(args=None):
 
     global verbose
     verbose = options.verbose
+
+    try:
+        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
+    except:
+        source_dir = os.getcwd()
+        output('No HOME environment variable defined. Will use ',
+               source_dir, ' for generated files.')
+
+    if not os.path.exists(source_dir):
+        os.makedirs(source_dir)
 
     the_file = choose_wallpaper_file(source_dir, args)
 
@@ -362,11 +359,14 @@ def main(args=None):
     screen_sizes = get_screen_sizes()
     scaled_image = fit_image(i, screen_sizes)
     scaled_image = filter_image(scaled_image)
+
+    destination = os.path.join(source_dir, 'current.bmp')
     scaled_image.save(destination)
 
     Windows.change_wallpaper(destination)
 
-    file(audit, 'w').write(the_file)
+    audit_file = os.path.join(source_dir, 'current.txt')
+    file(audit_file, 'w').write(the_file)
 
     change_logon_background(i, screen_sizes[-1])
 
