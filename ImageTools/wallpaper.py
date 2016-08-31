@@ -324,6 +324,33 @@ def find_source_dir():
     return source_dir
 
 
+def load_config(image_file_path):
+    config_file_path = image_file_path + '.json'
+
+    if os.path.isfile(config_file_path):
+        with open(config_file_path) as config_file:
+            return json.load(config_file)
+    else:
+        return None
+
+
+def create_config(image, image_file_path, ):
+    config_file_path = image_file_path + '.json'
+    if os.path.exists(config_file_path):
+        print 'File', config_file_path, 'already exists'
+    else:
+        sample_config = {
+            'regions': [get_bounds(image)]
+            }
+        with open(config_file_path, 'wb') as config_file:
+            json.dump(sample_config, config_file, sort_keys=True, indent=4)
+        print 'Created config file', config_file_path
+
+
+def get_bounds(image):
+    return [0, 0] + list(image.size)
+
+
 def main(args):
     (options, args) = parse_args(args)
 
@@ -336,25 +363,13 @@ def main(args):
     i = Image.open(the_file)
     output('image size is', i.size)
 
-    image_bounds = [0, 0] + list(i.size)
-
-    config_file = the_file + '.json'
     if options.create_config:
-        if os.path.exists(config_file):
-            print 'File', config_file, 'already exists'
-        else:
-            sample_config = {
-                'regions': [image_bounds]
-                }
-            json.dump(sample_config, file(config_file, 'wb'), sort_keys=True, indent=4)
-            print 'Created config file', config_file
+        create_config(i, the_file)
         return
 
-    if os.path.isfile(config_file):
-        config = json.load(file(config_file))
-    else:
-        config = None
+    image_bounds = get_bounds(i)
 
+    config = load_config(the_file)
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
     elif config is not None:
