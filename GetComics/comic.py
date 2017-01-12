@@ -71,6 +71,8 @@ class MailSender:
 def comic_to_site(comic):
     if comic == 'dilbert':
         return 'www.dilbert.com'
+    if comic in ['blondie', 'rhymes-with-orange']:
+        return 'comicskingdom.com'
     else:
         return 'www.gocomics.com'
 
@@ -79,7 +81,7 @@ def site_to_regexp(site):
     if site == 'www.dilbert.com':
         return re.compile('data-image="([^"]+)"')
     else:
-        return re.compile('class="strip" src="([^"]+)" />')
+        return re.compile('item-comic-image.*?src="([^"]+)" />')
 
 
 def find_image(source_name, source_text):

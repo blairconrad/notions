@@ -13,7 +13,7 @@ class ComicTest(unittest.TestCase):
 
         image_paths = comic.find_images({comic_name: file(comic_name + '.html').read()})
         self.assertEqual(
-            (comic_name, 'http://assets.amuniversal.com/6beb10d0abb201314782005056a9545d'),
+            (comic_name, 'http://assets.amuniversal.com/38a43b60ae7b01341f3c005056a9545d'),
             image_paths[comic_name])
 
     def test_find_dilbert_images(self):
@@ -27,7 +27,7 @@ class ComicTest(unittest.TestCase):
         comic_name = '9chickweedlane'
 
         image_paths = comic.find_images({comic_name: file(comic_name + '.html').read()})
-        self.assertEqual(('9chickweedlane', 'http://assets.amuniversal.com/e020edf0c27901315a25005056a9545d'),
+        self.assertEqual(('9chickweedlane', 'http://assets.amuniversal.com/be626b20b01101342221005056a9545d'),
                          image_paths['9chickweedlane'])
 
     def test_cannot_find_image(self):
