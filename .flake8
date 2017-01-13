@@ -1,0 +1,4 @@
+[flake8]
+exclude = greasemonkey,AutofacPlay,Backup,BlogExamples,Bookmarklets,ChromeExtensions,CruiseTray,CvsTools,Emacs,Euler,GoogleAppEngine,Growl,PyRay,RecGrep,Reminder,Utilities
+max_line_length = 120
+
