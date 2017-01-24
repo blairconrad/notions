@@ -248,7 +248,7 @@ def change_logon_background(image, screen_size):
                 image.save(logon_background_path, 'JPEG', quality=quality)
                 file_size = os.path.getsize(logon_background_path)
                 output('file size is', file_size)
-                if file_size < 256 * 1024:
+                if file_size < 256 * 1000:
                     break
                 quality -= 5
             return
