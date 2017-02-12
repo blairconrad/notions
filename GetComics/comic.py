@@ -81,7 +81,7 @@ def site_to_regexp(site):
     if site == 'www.dilbert.com':
         return re.compile('data-image="([^"]+)"')
     else:
-        return re.compile('item-comic-image.*?src="([^"]+)" />')
+        return re.compile('data-image="([^"]+)"')
 
 
 def find_image(source_name, source_text):
