@@ -125,6 +125,11 @@ def load_url(url):
     return urllib2.urlopen(request).read()
 
 
+def save_comic(path, comic, source):
+    with open(path + '/' + comic + '.html', 'wb') as f:
+        f.write(source)
+
+
 def main(args=None):
     if args is None:
         args = sys.argv[1:]
@@ -139,6 +144,8 @@ def main(args=None):
                       help="inline images, rather than sending IMG SRCs")
     parser.add_option("--verbose", action="store_true", dest="verbose", default=False,
                       help="log verbosely")
+    parser.add_option("--save", dest="save_path", default=None,
+                      help="save comics' web pages to PATH", metavar="PATH")
     (options, args) = parser.parse_args(args)
 
     verbose = options.verbose
@@ -152,6 +159,8 @@ def main(args=None):
     for comic in comics:
         url = um.get_url(comic)
         sources[comic] = load_url(url)
+        if options.save_path:
+            save_comic(options.save_path, comic, sources[comic])
         log(sources[comic])
     images = find_images(sources).values()
 
