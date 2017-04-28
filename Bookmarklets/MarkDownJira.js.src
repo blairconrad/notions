@@ -1,0 +1,10 @@
+javascript:(function() {
+var issueLinkNode = document.getElementById('key-val');
+var titleNode = document.getElementById('summary-val');
+var issueNumber = issueLinkNode.textContent;
+var title = titleNode.textContent;
+title = title.replace('CLONE - ', '');
+
+var markDown = '[' + issueNumber + ' - ' + title + '](' +window.location.href + ')';
+window.prompt("Copy to clipboard: Ctrl+C, Enter", markDown);
+})();
