@@ -1,0 +1,21 @@
+{
+  "manifest_version" : 2,
+
+  "name" : "JIRA Easy Copy",
+  "description" : "Adds buttons to share JIRA issues' titles and URLs. Contact Blair Conrad for support - blair.conrad@agfa.com",
+
+  "version" : "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["*://jiraprod.agfahealthcare.com/*"],
+      "js": ["jira_easy_copy.user.js"]
+    }
+  ],
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
