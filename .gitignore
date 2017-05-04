@@ -1,5 +1,7 @@
 *.pyc
 *.csproj.user
+*.crx
+*.pem
 bin
 obj
 /Bookmarklets/*.js
