@@ -12,7 +12,10 @@ chrome.runtime.onInstalled.addListener(function() {
         // That fires when a page's URL has the right host
         conditions: [
           new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostEquals: 'jiraprod.agfahealthcare.com' },
+            pageUrl: {
+              hostEquals: 'jiraprod.agfahealthcare.com',
+              pathPrefix: '/browse/IEI-'
+            },
           })
         ],
         // And shows the extension's page action.
