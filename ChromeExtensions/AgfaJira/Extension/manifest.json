@@ -1,7 +1,7 @@
 {
   "manifest_version" : 2,
   "name" : "Agfa JIRA",
-  "version" : "0.1.0",
+  "version" : "0.2.0",
 
   "description" : "Adds custom actions to JIRA issue pages",
 
@@ -17,13 +17,6 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-
-  "content_scripts": [
-    {
-      "matches": ["*://jiraprod.agfahealthcare.com/browse/IEI-*"],
-      "js": ["content_script.js"]
-    }
-  ],
 
   "page_action": {
     "default_icon": {
