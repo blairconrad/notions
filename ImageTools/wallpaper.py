@@ -306,8 +306,6 @@ def parse_args(args):
                       action='store_true', dest='verbose', default=False)
     parser.add_option('--region',
                       action='store', dest='region', default=None)
-    parser.add_option('--create-config',
-                      action='store_true', dest='create_config', default=None)
 
     return parser.parse_args(args)
 
@@ -338,15 +336,13 @@ def load_config(image_file_path):
 
 def create_config(image, image_file_path, ):
     config_file_path = image_file_path + '.json'
-    if os.path.exists(config_file_path):
-        print 'File', config_file_path, 'already exists'
-    else:
-        sample_config = {
-            'regions': [get_bounds(image)]
-        }
-        with open(config_file_path, 'wb') as config_file:
-            json.dump(sample_config, config_file, sort_keys=True, indent=4)
-        print 'Created config file', config_file_path
+    sample_config = {
+        'regions': [get_bounds(image)]
+    }
+    with open(config_file_path, 'wb') as config_file:
+        json.dump(sample_config, config_file, sort_keys=True, indent=4)
+    output('Created config file', config_file_path)
+    return sample_config
 
 
 def get_bounds(image):
@@ -372,13 +368,9 @@ def main(args):
     i = Image.open(the_file)
     output('image size is', i.size)
 
-    if options.create_config:
-        create_config(i, the_file)
-        return
-
     image_bounds = get_bounds(i)
 
-    config = load_config(the_file)
+    config = load_config(the_file) or create_config(i, the_file)
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
     elif config is not None:
