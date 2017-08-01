@@ -8,6 +8,7 @@ import sys
 import glob
 import datetime
 import optparse
+import tempfile
 import json
 
 try:
@@ -254,7 +255,8 @@ def change_logon_background(image, screen_size):
     output('Changing logon background. desired_ratio=', desired_ratio)
 
     for possible_screen_size in logon_screen_dimensions:
-        possible_ratio = float(possible_screen_size[0]) / possible_screen_size[1]
+        possible_ratio = float(
+            possible_screen_size[0]) / possible_screen_size[1]
 
         if possible_ratio == desired_ratio:
             image = fit_image(image, [possible_screen_size])
@@ -341,7 +343,7 @@ def create_config(image, image_file_path, ):
     else:
         sample_config = {
             'regions': [get_bounds(image)]
-            }
+        }
         with open(config_file_path, 'wb') as config_file:
             json.dump(sample_config, config_file, sort_keys=True, indent=4)
         print 'Created config file', config_file_path
@@ -349,6 +351,13 @@ def create_config(image, image_file_path, ):
 
 def get_bounds(image):
     return [0, 0] + list(image.size)
+
+
+def get_destination_directory():
+    dir_name = os.path.join(tempfile.gettempdir(), 'Wallpaper')
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+    return dir_name
 
 
 def main(args):
@@ -385,12 +394,13 @@ def main(args):
     scaled_image = fit_image(i, screen_sizes)
     scaled_image = filter_image(scaled_image)
 
-    destination = os.path.join(source_dir, 'current.bmp')
+    destination_dir = get_destination_directory()
+    destination = os.path.join(destination_dir, 'current.bmp')
     scaled_image.save(destination)
 
     Windows.change_wallpaper(destination)
 
-    audit_file = os.path.join(source_dir, 'current.txt')
+    audit_file = os.path.join(destination_dir, 'current.txt')
     file(audit_file, 'w').write(the_file)
 
     change_logon_background(i, screen_sizes[-1])
