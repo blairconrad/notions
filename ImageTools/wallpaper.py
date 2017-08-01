@@ -254,7 +254,8 @@ def change_logon_background(image, screen_size):
     output('Changing logon background. desired_ratio=', desired_ratio)
 
     for possible_screen_size in logon_screen_dimensions:
-        possible_ratio = float(possible_screen_size[0]) / possible_screen_size[1]
+        possible_ratio = float(
+            possible_screen_size[0]) / possible_screen_size[1]
 
         if possible_ratio == desired_ratio:
             image = fit_image(image, [possible_screen_size])
@@ -341,7 +342,7 @@ def create_config(image, image_file_path, ):
     else:
         sample_config = {
             'regions': [get_bounds(image)]
-            }
+        }
         with open(config_file_path, 'wb') as config_file:
             json.dump(sample_config, config_file, sort_keys=True, indent=4)
         print 'Created config file', config_file_path
