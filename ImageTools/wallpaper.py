@@ -8,7 +8,7 @@ import sys
 import glob
 import datetime
 import optparse
-
+import json
 
 try:
     import Image
@@ -20,14 +20,6 @@ except:
 
 verbose = False
 
-SPI_SETDESKWALLPAPER = 20
-SPIF_UPDATEINIFILE = 1
-SPIF_SENDWININICHANGE = 2
-
-SM_CMONITORS = 80
-SM_CXSCREEN = 0
-SM_CYSCREEN = 1
-
 direction_down = (0, 1)
 direction_right = (1, 0)
 
@@ -38,58 +30,76 @@ def output(*args):
         print ' '.join(map(str, args))
 
 
-class MyFilter:
-    def filter(self, i):
-        pass
+class Windows:
+    SPI_SETDESKWALLPAPER = 20
+    SPIF_UPDATEINIFILE = 1
+    SPIF_SENDWININICHANGE = 2
+
+    SM_CMONITORS = 80
+    SM_CXSCREEN = 0
+    SM_CYSCREEN = 1
+
+    @classmethod
+    def change_wallpaper(cls, new_wallpaper):
+        result = ctypes.windll.user32.SystemParametersInfoA(
+            Windows.SPI_SETDESKWALLPAPER, 0, new_wallpaper,
+            Windows.SPIF_SENDWININICHANGE | Windows.SPIF_UPDATEINIFILE)
+        output('change wallpaper return code:', result)
+
+    @classmethod
+    def get_screen_size(cls):
+        width = ctypes.windll.user32.GetSystemMetrics(Windows.SM_CXSCREEN)
+        height = ctypes.windll.user32.GetSystemMetrics(Windows.SM_CYSCREEN)
+        return (width, height)
+
+    @classmethod
+    def get_number_of_screens(cls):
+        return ctypes.windll.user32.GetSystemMetrics(Windows.SM_CMONITORS)
+
+    @classmethod
+    def is_windows_7(cls):
+        windows_version = sys.getwindowsversion()
+        return windows_version.major == 6 and windows_version.minor == 1
 
 
-class GrayscaleFilter(MyFilter):
-    def filter(self, i):
-        return i.convert('L')
-
-
-def find_new_size(image_size, screen_sizes):
+def find_new_size(image_size, candidate_sizes):
     image_aspect = 1.0 * image_size[0] / image_size[1]
 
-    best_screen = screen_sizes[0]
-    best_aspect = 1.0 * best_screen[0] / best_screen[1]
-    screen_aspect = best_aspect
+    best_candidate = candidate_sizes[0]
+    best_aspect = 1.0 * best_candidate[0] / best_candidate[1]
+    candidate_aspect = best_aspect
     output(
         'image_aspect:', image_aspect,
         'best_aspect so far:', best_aspect,
-        'screen_aspect:', screen_aspect)
+        'candidate_aspect:', candidate_aspect)
 
-    for screensize in screen_sizes[1:]:
-        screen_aspect = 1.0 * screensize[0] / screensize[1]
+    for candidate_size in candidate_sizes[1:]:
+        candidate_aspect = 1.0 * candidate_size[0] / candidate_size[1]
         output(
             'image_aspect:', image_aspect,
             'best_aspect so far:', best_aspect,
-            'screen_aspect:', screen_aspect)
-        if abs(best_aspect - image_aspect) > abs(screen_aspect - image_aspect):
-            best_aspect = screen_aspect
-            best_screen = screensize
+            'candidate_aspect:', candidate_aspect)
+        if abs(best_aspect - image_aspect) > abs(candidate_aspect - image_aspect):
+            best_aspect = candidate_aspect
+            best_candidate = candidate_size
 
     output('final best_aspect', best_aspect)
     if best_aspect < image_aspect:
-        # screen is skinny, so fit to width
-        return ((best_screen[0], int(best_screen[0] / image_aspect)), best_screen)
+        # candidate is skinny, so fit to width
+        return ((best_candidate[0], int(best_candidate[0] / image_aspect)), best_candidate)
     else:
-        # screen is fat, so fit to height
-        return ((int(image_aspect * best_screen[1]), best_screen[1]), best_screen)
+        # candidate is fat, so fit to height
+        return ((int(image_aspect * best_candidate[1]), best_candidate[1]), best_candidate)
 
 
 def get_screen_sizes():
-    number_of_monitors = ctypes.windll.user32.GetSystemMetrics(SM_CMONITORS)
-    width = ctypes.windll.user32.GetSystemMetrics(SM_CXSCREEN)
-    height = ctypes.windll.user32.GetSystemMetrics(SM_CYSCREEN)
-    sizes = []
+    number_of_screens = Windows.get_number_of_screens()
+    one_screen_size = Windows.get_screen_size()
 
     # assume monitors are all same size
     # assume monitors are laid out horizontally
-    sizes = []
-    for i in range(number_of_monitors, 0, -1):
-        if number_of_monitors % i == 0:
-            sizes.append((i * width, height))
+    sizes = [(i * one_screen_size[0], one_screen_size[1])
+             for i in range(number_of_screens, 0, -1) if number_of_screens % i == 0]
     output('candidate screen sizes:', sizes)
     return sizes
 
@@ -169,6 +179,24 @@ def fit_image(im, screen_sizes):
     return new_image.convert('RGB')
 
 
+def filter_image(image):
+
+    def make_grayscale(i):
+        return i.convert('L')
+
+    filter_chance = 0.1
+    filters = [make_grayscale]
+
+    filter_it = random.random()
+    while filter_it < filter_chance:
+        filter = random.choice(filters)
+        image = filter(image)
+
+        filter_it = random.random()
+
+    return image
+
+
 def get_file(dir):
     files = os.listdir(dir)
 
@@ -219,9 +247,7 @@ logon_screen_dimensions = [
 def change_logon_background(image, screen_size):
     # change the logon UI background if on Windows 7. From learning at
     # http://www.withinwindows.com/2009/03/15/windows-7-to-officially-support-logon-ui-background-customization/
-    windows_version = sys.getwindowsversion()
-    if windows_version.major != 6 or \
-       windows_version.minor != 1:  # Windows 7
+    if not Windows.is_windows_7():
         return
 
     desired_ratio = float(screen_size[0]) / screen_size[1]
@@ -254,39 +280,7 @@ def change_logon_background(image, screen_size):
             return
 
 
-def main(args=None):
-    filter_chance = 0.10
-    filters = [GrayscaleFilter()]
-
-    try:
-        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
-    except:
-        source_dir = os.getcwd()
-        output('No HOME environment variable defined. Will use ',
-               source_dir, ' for generated files.')
-
-    if not os.path.exists(source_dir):
-        os.makedirs(source_dir)
-
-    destination = os.path.join(source_dir, 'current.bmp')
-    audit = os.path.join(source_dir, 'current.txt')
-
-    if args is None:
-        args = sys.argv[1:]
-
-    parser = optparse.OptionParser()
-    parser.add_option('-v', '--verbose',
-                      action='store_true', dest='verbose', default=False)
-    parser.add_option('--region',
-                      action='store', dest='region', default=None)
-    parser.add_option('--create-config',
-                      action='store_true', dest='create_config', default=None)
-
-    (options, args) = parser.parse_args(args)
-
-    global verbose
-    verbose = options.verbose
-
+def choose_wallpaper_file(source_dir, args):
     if len(args) > 0:
         location_arg = args[0]
         if os.path.isdir(location_arg):
@@ -301,57 +295,106 @@ def main(args=None):
         the_file = get_file(source_dir)
 
     output('chose', the_file)
+    return the_file
+
+
+def parse_args(args):
+    parser = optparse.OptionParser()
+    parser.add_option('-v', '--verbose',
+                      action='store_true', dest='verbose', default=False)
+    parser.add_option('--region',
+                      action='store', dest='region', default=None)
+    parser.add_option('--create-config',
+                      action='store_true', dest='create_config', default=None)
+
+    return parser.parse_args(args)
+
+
+def find_source_dir():
+    try:
+        source_dir = r'%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers' % os.environ
+    except:
+        source_dir = os.getcwd()
+        output('No HOME environment variable defined. Will use ',
+               source_dir, ' for generated files.')
+
+    if not os.path.exists(source_dir):
+        os.makedirs(source_dir)
+
+    return source_dir
+
+
+def load_config(image_file_path):
+    config_file_path = image_file_path + '.json'
+
+    if os.path.isfile(config_file_path):
+        with open(config_file_path) as config_file:
+            return json.load(config_file)
+    else:
+        return None
+
+
+def create_config(image, image_file_path, ):
+    config_file_path = image_file_path + '.json'
+    if os.path.exists(config_file_path):
+        print 'File', config_file_path, 'already exists'
+    else:
+        sample_config = {
+            'regions': [get_bounds(image)]
+            }
+        with open(config_file_path, 'wb') as config_file:
+            json.dump(sample_config, config_file, sort_keys=True, indent=4)
+        print 'Created config file', config_file_path
+
+
+def get_bounds(image):
+    return [0, 0] + list(image.size)
+
+
+def main(args):
+    (options, args) = parse_args(args)
+
+    global verbose
+    verbose = options.verbose
+
+    source_dir = find_source_dir()
+    the_file = choose_wallpaper_file(source_dir, args)
 
     i = Image.open(the_file)
     output('image size is', i.size)
 
-    original_region = region = [0, 0] + list(i.size)
-
-    config_file = the_file + '.json'
     if options.create_config:
-        if os.path.exists(config_file):
-            print 'File', config_file, 'already exists'
-        else:
-            sample_config = {
-                'regions': [original_region]
-                }
-            import json
-            json.dump(sample_config, file(config_file, 'wb'), sort_keys=True, indent=4)
-            print 'Created config file', config_file
+        create_config(i, the_file)
         return
 
+    image_bounds = get_bounds(i)
+
+    config = load_config(the_file)
     if options.region:
         region = [int(part, 10) for part in options.region.split(',')]
+    elif config is not None:
+        region = config['regions'][0]
     else:
-        if os.path.isfile(config_file):
-            import json
-            config = json.load(file(config_file))
-            region = config["regions"][0]
+        region = image_bounds
 
-    if region != original_region:
+    if region != image_bounds:
         output('cropping to', region)
         i = i.crop(region)
 
     screen_sizes = get_screen_sizes()
     scaled_image = fit_image(i, screen_sizes)
+    scaled_image = filter_image(scaled_image)
 
-    filter_it = random.random()
-    while filter_it < filter_chance:
-        filter = random.choice(filters)
-        scaled_image = filter.filter(scaled_image)
-
-        filter_it = random.random()
-
+    destination = os.path.join(source_dir, 'current.bmp')
     scaled_image.save(destination)
 
-    result = ctypes.windll.user32.SystemParametersInfoA(
-        SPI_SETDESKWALLPAPER, 0, destination,
-        SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE)
-    output('change wallpaper return code:', result)
+    Windows.change_wallpaper(destination)
 
-    file(audit, 'w').write(the_file)
+    audit_file = os.path.join(source_dir, 'current.txt')
+    file(audit_file, 'w').write(the_file)
 
     change_logon_background(i, screen_sizes[-1])
 
+
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
