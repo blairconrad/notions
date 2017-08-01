@@ -395,5 +395,6 @@ def main(args):
 
     change_logon_background(i, screen_sizes[-1])
 
+
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
