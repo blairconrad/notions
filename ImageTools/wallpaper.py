@@ -307,8 +307,6 @@ def parse_args(args):
     parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
-    parser.add_option('--region',
-                      action='store', dest='region', default=None)
 
     return parser.parse_args(args)
 
@@ -375,12 +373,7 @@ def main(args):
     image_bounds = get_bounds(i)
 
     config = load_config(the_file) or create_config(i, the_file)
-    if options.region:
-        region = [int(part, 10) for part in options.region.split(',')]
-    elif config is not None:
-        region = config['regions'][0]
-    else:
-        region = image_bounds
+    region = config['regions'][0]
 
     if region != image_bounds:
         output('cropping to', region)
