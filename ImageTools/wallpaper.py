@@ -129,14 +129,17 @@ def are_colors_all_same(im, start_position, increment, num_pixels):
     return True
 
 
-def fit_image(im, screen_sizes):
+def fit_image(im, screen_sizes, config):
     (new_size, screensize) = find_new_size(im.size, screen_sizes)
     output('new_size =', str(new_size))
 
     resized_image = im.resize(new_size, Image.BICUBIC)
 
     new_position = ((0, 0))
-    background_colour = (0, 0, 0)
+    background_colour_string = config.get('background-colour', '000000')
+    background_colour = (int(background_colour_string[0:2], 16),
+                         int(background_colour_string[2:4], 16),
+                         int(background_colour_string[4:6], 16))
 
     if screensize[0] > new_size[0]:
         # there's a band on the left, and probably right
@@ -245,7 +248,7 @@ logon_screen_dimensions = [
 ]
 
 
-def change_logon_background(image, screen_size):
+def change_logon_background(image, screen_size, config):
     # change the logon UI background if on Windows 7. From learning at
     # http://www.withinwindows.com/2009/03/15/windows-7-to-officially-support-logon-ui-background-customization/
     if not Windows.is_windows_7():
@@ -259,7 +262,7 @@ def change_logon_background(image, screen_size):
             possible_screen_size[0]) / possible_screen_size[1]
 
         if possible_ratio == desired_ratio:
-            image = fit_image(image, [possible_screen_size])
+            image = fit_image(image, [possible_screen_size], config)
             logon_background_dir = \
                 r'%(windir)s\system32\oobe\info\backgrounds' % os.environ
 
@@ -304,8 +307,6 @@ def parse_args(args):
     parser = optparse.OptionParser()
     parser.add_option('-v', '--verbose',
                       action='store_true', dest='verbose', default=False)
-    parser.add_option('--region',
-                      action='store', dest='region', default=None)
 
     return parser.parse_args(args)
 
@@ -337,7 +338,8 @@ def load_config(image_file_path):
 def create_config(image, image_file_path, ):
     config_file_path = image_file_path + '.json'
     sample_config = {
-        'regions': [get_bounds(image)]
+        'regions':           [get_bounds(image)],
+        'background-colour': '000000'
     }
     with open(config_file_path, 'wb') as config_file:
         json.dump(sample_config, config_file, sort_keys=True, indent=4)
@@ -371,31 +373,25 @@ def main(args):
     image_bounds = get_bounds(i)
 
     config = load_config(the_file) or create_config(i, the_file)
-    if options.region:
-        region = [int(part, 10) for part in options.region.split(',')]
-    elif config is not None:
-        region = config['regions'][0]
-    else:
-        region = image_bounds
+    region = config['regions'][0]
 
     if region != image_bounds:
         output('cropping to', region)
         i = i.crop(region)
 
     screen_sizes = get_screen_sizes()
-    scaled_image = fit_image(i, screen_sizes)
+    scaled_image = fit_image(i, screen_sizes, config)
     scaled_image = filter_image(scaled_image)
 
     destination_dir = get_destination_directory()
     destination = os.path.join(destination_dir, 'current.bmp')
     scaled_image.save(destination)
 
-    Windows.change_wallpaper(destination)
-
     audit_file = os.path.join(destination_dir, 'current.txt')
     file(audit_file, 'w').write(the_file)
 
-    change_logon_background(i, screen_sizes[-1])
+    change_logon_background(i, screen_sizes[-1], config)
+    Windows.change_wallpaper(destination)
 
 
 if __name__ == '__main__':
