@@ -86,10 +86,14 @@ def find_new_size(image_size, candidate_sizes):
 
     output('final best_aspect', best_aspect)
     if best_aspect < image_aspect:
-        # candidate is skinny, so fit to width
+        # candidate is fat, so fit to width
+        output('for perfect fit, crop width to',
+               int(image_size[1] * best_aspect))
         return ((best_candidate[0], int(best_candidate[0] / image_aspect)), best_candidate)
     else:
-        # candidate is fat, so fit to height
+        # candidate is skinny, so fit to height
+        output('for perfect fit, crop height to',
+               int(image_size[0] / best_aspect))
         return ((int(image_aspect * best_candidate[1]), best_candidate[1]), best_candidate)
 
 
@@ -263,8 +267,7 @@ def change_logon_background(image, screen_size, config):
 
         if possible_ratio == desired_ratio:
             image = fit_image(image, [possible_screen_size], config)
-            logon_background_dir = \
-                r'%(windir)s\system32\oobe\info\backgrounds' % os.environ
+            logon_background_dir = r'%(windir)s\system32\oobe\info\backgrounds' % os.environ
 
             if not os.path.exists(logon_background_dir):
                 os.makedirs(logon_background_dir)
