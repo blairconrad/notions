@@ -379,8 +379,8 @@ def main(args):
     region = config['regions'][0]
 
     if region != image_bounds:
-        output('cropping to', region)
         i = i.crop(region)
+        output('cropped to', region, i.size)
 
     screen_sizes = get_screen_sizes()
     scaled_image = fit_image(i, screen_sizes, config)
