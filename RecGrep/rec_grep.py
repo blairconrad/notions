@@ -10,27 +10,37 @@ import fnmatch
 '''A module that performs recursive searches for strings'''
 
 
+def open_file(filename):
+    if filename == '-':
+        return sys.stdin
+    else:
+        return file(filename)
+
+
 def checkFile(regexp, filename):
     try:
-        f = file(filename)
+        f = open_file(filename)
     except IOError, detail:
-        sys.stderr.write('error: unable to open ' + filename + ' for reading: ' + detail.strerror + '\n')
+        sys.stderr.write('error: unable to open ' + filename +
+                         ' for reading: ' + detail.strerror + '\n')
         return
-    
+
     for line in f.readlines():
         if regexp.search(line) is not None:
             print filename
             f.close()
             return
-    
+
+
 def printLines(regexp, filename):
     global options
     try:
-        f = file(filename)
+        f = open_file(filename)
     except IOError, detail:
-        sys.stderr.write('error: unable to open ' + filename + ' for reading: ' + detail.strerror + '\n')
+        sys.stderr.write('error: unable to open ' + filename +
+                         ' for reading: ' + detail.strerror + '\n')
         return
-    
+
     i = 0
     for line in f.readlines():
         i += 1
@@ -40,13 +50,15 @@ def printLines(regexp, filename):
             else:
                 print '%s:%d:%s' % (filename, i, line.rstrip())
     f.close()
-    
+
+
 def addFiles(fringe, dirname, names):
     global options
     for name in names:
         fullname = os.path.join(dirname, name)
         if not os.path.isdir(fullname):
             fringe.append(os.path.normpath(fullname))
+
 
 def main(args=None):
     if args is None:
@@ -63,11 +75,11 @@ def main(args=None):
                          help='only examine files whose names match PATTERN')
     optParser.add_option('-e', '--emacs',  action='store_true', dest='emacsLineNumbers', default=False,
                          help='render line numbers for opening in emacs')
-    
+
     (options, args) = optParser.parse_args(args)
 
     regexpFlags = 0
-    
+
     if options.ignoreCase:
         regexpFlags |= re.IGNORECASE
 
@@ -80,7 +92,7 @@ def main(args=None):
 
     pattern = args[0]
     regexp = re.compile(pattern, regexpFlags)
-    
+
     fringe = []
 
     # Suck in all the files and directories to check
@@ -90,15 +102,17 @@ def main(args=None):
     for filespec in args[1:]:
         globbedRoots = glob.glob(filespec)
         if len(globbedRoots) == 0:
-            print "No files match argument '%s'. Quitting." % (filespec,) 
-            return 1
-        
+            if filespec == '-':
+                globbedRoots = ['-']
+            else:
+                print "No files match argument '%s'. Quitting." % (filespec,)
+                return 1
+
         for root in globbedRoots:
             if os.path.isdir(root):
                 os.path.walk(root, addFiles, fringe)
             else:
                 fringe.append(root)
-
 
     # Process the directories
     for filepath in fringe:

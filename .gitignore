@@ -5,3 +5,4 @@
 bin
 obj
 /Bookmarklets/*.js
+.pytest_cache
