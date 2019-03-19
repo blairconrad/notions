@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import os
 import os.path
 import random
@@ -28,7 +30,7 @@ direction_right = (1, 0)
 def output(*args):
     global verbose
     if verbose:
-        print ' '.join(map(str, args))
+        print(' '.join(map(str, args)))
 
 
 class Windows:
@@ -42,7 +44,7 @@ class Windows:
 
     @classmethod
     def change_wallpaper(cls, new_wallpaper):
-        result = ctypes.windll.user32.SystemParametersInfoA(
+        result = ctypes.windll.user32.SystemParametersInfoW(
             Windows.SPI_SETDESKWALLPAPER, 0, new_wallpaper,
             Windows.SPIF_SENDWININICHANGE | Windows.SPIF_UPDATEINIFILE)
         output('change wallpaper return code:', result)
@@ -256,6 +258,7 @@ def change_logon_background(image, screen_size, config):
     # change the logon UI background if on Windows 7. From learning at
     # http://www.withinwindows.com/2009/03/15/windows-7-to-officially-support-logon-ui-background-customization/
     if not Windows.is_windows_7():
+        output('not windows 7')
         return
 
     desired_ratio = float(screen_size[0]) / screen_size[1]
@@ -387,11 +390,11 @@ def main(args):
     scaled_image = filter_image(scaled_image)
 
     destination_dir = get_destination_directory()
-    destination = os.path.join(destination_dir, 'current.bmp')
+    destination = os.path.join(destination_dir, u'current.bmp')
     scaled_image.save(destination)
 
-    audit_file = os.path.join(destination_dir, 'current.txt')
-    file(audit_file, 'w').write(the_file)
+    audit_file = os.path.join(destination_dir, u'current.txt')
+    open(audit_file, 'w').write(the_file)
 
     change_logon_background(i, screen_sizes[-1], config)
     Windows.change_wallpaper(destination)
