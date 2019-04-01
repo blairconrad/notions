@@ -8,11 +8,11 @@ import re
 import optparse
 import fnmatch
 
-'''A module that performs recursive searches for strings'''
+"""A module that performs recursive searches for strings"""
 
 
 def open_file(filename):
-    if filename == '-':
+    if filename == "-":
         return sys.stdin
     else:
         return open(filename)
@@ -22,8 +22,7 @@ def checkFile(regexp, filename):
     try:
         f = open_file(filename)
     except IOError as detail:
-        sys.stderr.write('error: unable to open ' + filename +
-                         ' for reading: ' + detail.strerror + '\n')
+        sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
 
     for line in f.readlines():
@@ -38,8 +37,7 @@ def printLines(regexp, filename):
     try:
         f = open_file(filename)
     except IOError as detail:
-        sys.stderr.write('error: unable to open ' + filename +
-                         ' for reading: ' + detail.strerror + '\n')
+        sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
 
     i = 0
@@ -47,9 +45,9 @@ def printLines(regexp, filename):
         i += 1
         if regexp.search(line) is not None:
             if options.emacsLineNumbers:
-                print('+%d %s %s' % (i, filename, line.rstrip()))
+                print("+%d %s %s" % (i, filename, line.rstrip()))
             else:
-                print('%s:%d:%s' % (filename, i, line.rstrip()))
+                print("%s:%d:%s" % (filename, i, line.rstrip()))
     f.close()
 
 
@@ -66,16 +64,39 @@ def main(args=None):
         args = sys.argv[1:]
     global options
 
-    usage = '%prog [options] <regexp> <path>+'
+    usage = "%prog [options] <regexp> <path>+"
     optParser = optparse.OptionParser(usage)
-    optParser.add_option('-i', '--ignore-case', action='store_true', dest='ignoreCase', default=False,
-                         help='ignore case when matching patterns')
-    optParser.add_option('-l', '--list-files', action='store_true', dest='listFiles', default=False,
-                         help='print only name of files with matching lines')
-    optParser.add_option('--include-files', metavar='PATTERN', action='store', dest='includeFiles',
-                         help='only examine files whose names match PATTERN')
-    optParser.add_option('-e', '--emacs',  action='store_true', dest='emacsLineNumbers', default=False,
-                         help='render line numbers for opening in emacs')
+    optParser.add_option(
+        "-i",
+        "--ignore-case",
+        action="store_true",
+        dest="ignoreCase",
+        default=False,
+        help="ignore case when matching patterns",
+    )
+    optParser.add_option(
+        "-l",
+        "--list-files",
+        action="store_true",
+        dest="listFiles",
+        default=False,
+        help="print only name of files with matching lines",
+    )
+    optParser.add_option(
+        "--include-files",
+        metavar="PATTERN",
+        action="store",
+        dest="includeFiles",
+        help="only examine files whose names match PATTERN",
+    )
+    optParser.add_option(
+        "-e",
+        "--emacs",
+        action="store_true",
+        dest="emacsLineNumbers",
+        default=False,
+        help="render line numbers for opening in emacs",
+    )
 
     (options, args) = optParser.parse_args(args)
 
@@ -98,13 +119,13 @@ def main(args=None):
 
     # Suck in all the files and directories to check
     if len(args) < 2:
-        args.append('.')
+        args.append(".")
 
     for filespec in args[1:]:
         globbedRoots = glob.glob(filespec)
         if len(globbedRoots) == 0:
-            if filespec == '-':
-                globbedRoots = ['-']
+            if filespec == "-":
+                globbedRoots = ["-"]
             else:
                 print("No files match argument '%s'. Quitting." % (filespec,))
                 return 1
@@ -125,5 +146,5 @@ def main(args=None):
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())
