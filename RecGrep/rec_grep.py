@@ -18,7 +18,7 @@ def open_file(filename):
         return open(filename)
 
 
-def checkFile(regexp, filename):
+def check_file(regexp, filename):
     try:
         f = open_file(filename)
     except IOError as detail:
@@ -32,7 +32,7 @@ def checkFile(regexp, filename):
             return
 
 
-def printLines(regexp, filename):
+def print_lines(regexp, filename):
     global options
     try:
         f = open_file(filename)
@@ -51,7 +51,7 @@ def printLines(regexp, filename):
     f.close()
 
 
-def addFiles(fringe, dirname, names):
+def add_files(fringe, dirname, names):
     global options
     for name in names:
         fullname = os.path.join(dirname, name)
@@ -65,8 +65,8 @@ def main(args=None):
     global options
 
     usage = "%prog [options] <regexp> <path>+"
-    optParser = optparse.OptionParser(usage)
-    optParser.add_option(
+    option_parser = optparse.OptionParser(usage)
+    option_parser.add_option(
         "-i",
         "--ignore-case",
         action="store_true",
@@ -74,7 +74,7 @@ def main(args=None):
         default=False,
         help="ignore case when matching patterns",
     )
-    optParser.add_option(
+    option_parser.add_option(
         "-l",
         "--list-files",
         action="store_true",
@@ -82,14 +82,14 @@ def main(args=None):
         default=False,
         help="print only name of files with matching lines",
     )
-    optParser.add_option(
+    option_parser.add_option(
         "--include-files",
         metavar="PATTERN",
         action="store",
         dest="includeFiles",
         help="only examine files whose names match PATTERN",
     )
-    optParser.add_option(
+    option_parser.add_option(
         "-e",
         "--emacs",
         action="store_true",
@@ -98,22 +98,22 @@ def main(args=None):
         help="render line numbers for opening in emacs",
     )
 
-    (options, args) = optParser.parse_args(args)
+    (options, args) = option_parser.parse_args(args)
 
-    regexpFlags = 0
+    regexp_flags = 0
 
     if options.ignoreCase:
-        regexpFlags |= re.IGNORECASE
+        regexp_flags |= re.IGNORECASE
 
     if options.listFiles:
-        fileChecker = checkFile
+        file_checker = check_file
     else:
-        fileChecker = printLines
+        file_checker = print_lines
 
     regexp = None
 
     pattern = args[0]
-    regexp = re.compile(pattern, regexpFlags)
+    regexp = re.compile(pattern, regexp_flags)
 
     fringe = []
 
@@ -122,18 +122,18 @@ def main(args=None):
         args.append(".")
 
     for filespec in args[1:]:
-        globbedRoots = glob.glob(filespec)
-        if len(globbedRoots) == 0:
+        globbed_roots = glob.glob(filespec)
+        if len(globbed_roots) == 0:
             if filespec == "-":
-                globbedRoots = ["-"]
+                globbed_roots = ["-"]
             else:
                 print("No files match argument '%s'. Quitting." % (filespec,))
                 return 1
 
-        for root in globbedRoots:
+        for root in globbed_roots:
             if os.path.isdir(root):
                 for (dirpath, dirnames, filenames) in os.walk(root):
-                    addFiles(fringe, dirpath, filenames)
+                    add_files(fringe, dirpath, filenames)
             else:
                 fringe.append(root)
 
@@ -141,7 +141,7 @@ def main(args=None):
     for filepath in fringe:
         filename = os.path.split(filepath)[1]
         if not options.includeFiles or fnmatch.fnmatch(filename, options.includeFiles):
-            fileChecker(regexp, filepath)
+            file_checker(regexp, filepath)
 
     return 0
 
