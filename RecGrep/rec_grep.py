@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import glob
 import os.path
@@ -14,20 +15,20 @@ def open_file(filename):
     if filename == '-':
         return sys.stdin
     else:
-        return file(filename)
+        return open(filename)
 
 
 def checkFile(regexp, filename):
     try:
         f = open_file(filename)
-    except IOError, detail:
+    except IOError as detail:
         sys.stderr.write('error: unable to open ' + filename +
                          ' for reading: ' + detail.strerror + '\n')
         return
 
     for line in f.readlines():
         if regexp.search(line) is not None:
-            print filename
+            print(filename)
             f.close()
             return
 
@@ -36,7 +37,7 @@ def printLines(regexp, filename):
     global options
     try:
         f = open_file(filename)
-    except IOError, detail:
+    except IOError as detail:
         sys.stderr.write('error: unable to open ' + filename +
                          ' for reading: ' + detail.strerror + '\n')
         return
@@ -46,9 +47,9 @@ def printLines(regexp, filename):
         i += 1
         if regexp.search(line) is not None:
             if options.emacsLineNumbers:
-                print '+%d %s %s' % (i, filename, line.rstrip())
+                print('+%d %s %s' % (i, filename, line.rstrip()))
             else:
-                print '%s:%d:%s' % (filename, i, line.rstrip())
+                print('%s:%d:%s' % (filename, i, line.rstrip()))
     f.close()
 
 
@@ -105,12 +106,13 @@ def main(args=None):
             if filespec == '-':
                 globbedRoots = ['-']
             else:
-                print "No files match argument '%s'. Quitting." % (filespec,)
+                print("No files match argument '%s'. Quitting." % (filespec,))
                 return 1
 
         for root in globbedRoots:
             if os.path.isdir(root):
-                os.path.walk(root, addFiles, fringe)
+                for (dirpath, dirnames, filenames) in os.walk(root):
+                    addFiles(fringe, dirpath, filenames)
             else:
                 fringe.append(root)
 
