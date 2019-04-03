@@ -15,39 +15,44 @@ def open_file(filename):
     if filename == "-":
         return sys.stdin
     else:
-        return open(filename)
+        return open(filename, encoding="utf8")
 
 
 def check_file(regexp, filename):
     try:
+        print("opening", filename)
         f = open_file(filename)
     except IOError as detail:
         sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
 
-    for line in f.readlines():
-        if regexp.search(line) is not None:
-            print(filename)
-            f.close()
-            return
+    try:
+        for line in f.readlines():
+            if regexp.search(line) is not None:
+                print(filename)
+                f.close()
+                return
+    except UnicodeDecodeError:
+        pass
 
 
 def print_lines(regexp, filename):
     global options
     try:
         f = open_file(filename)
+        i = 0
+        for line in f.readlines():
+            i += 1
+            if regexp.search(line) is not None:
+                if options.emacsLineNumbers:
+                    print("+%d %s %s" % (i, filename, line.rstrip()))
+                else:
+                    print("%s:%d:%s" % (filename, i, line.rstrip()))
     except IOError as detail:
         sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
-
-    i = 0
-    for line in f.readlines():
-        i += 1
-        if regexp.search(line) is not None:
-            if options.emacsLineNumbers:
-                print("+%d %s %s" % (i, filename, line.rstrip()))
-            else:
-                print("%s:%d:%s" % (filename, i, line.rstrip()))
+    except UnicodeDecodeError:
+        pass
     f.close()
 
 
