@@ -47,13 +47,13 @@ def main(arguments):
                 accession_number = dataset.AccessionNumber
 
                 if args.include_filenames:
-                    filename = os.path.relpath(os.path.join(dirpath, filename), ".")
+                    filename = os.path.relpath(os.path.join(dirpath, filename), args.path)
                     results.add((patient_id, accession_number, str(patient_name), filename))
                 else:
                     results.add((patient_id, accession_number, str(patient_name)))
 
     print(format % headers)
-    for result in results:
+    for result in sorted(results):
         print(format % result)
 
 
