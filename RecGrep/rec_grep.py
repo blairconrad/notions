@@ -20,7 +20,6 @@ def open_file(filename):
 
 def check_file(regexp, filename):
     try:
-        print("opening", filename)
         f = open_file(filename)
     except IOError as detail:
         sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
@@ -138,6 +137,7 @@ def main(args=None):
         for root in globbed_roots:
             if os.path.isdir(root):
                 for (dirpath, dirnames, filenames) in os.walk(root):
+                    dirnames[:] = [d for d in dirnames if not d.startswith(".")]
                     add_files(fringe, dirpath, filenames)
             else:
                 fringe.append(root)
