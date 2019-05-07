@@ -19,10 +19,9 @@ def main(arguments):
 
     args = parser.parse_args(arguments)
 
-    if args.level == "PATIENT":
-        attributes_to_update = ["PatientID"]
-    elif args.level == "STUDY":
-        attributes_to_update = ["PatientID", "StudyID", "StudyInstanceUID", "AccessionNumber"]
+    attributes_to_update = ["PatientID", "PatientName"]
+    if args.level == "STUDY":
+        attributes_to_update += ["StudyID", "StudyInstanceUID", "AccessionNumber"]
 
     with pydicom.dcmread(args.adopter, force=True) as adopter:
         for adoptee in args.adoptee:
