@@ -8,6 +8,7 @@ import os
 import sys
 import argparse
 import pydicom
+import glob
 
 
 def main(arguments):
@@ -25,10 +26,11 @@ def main(arguments):
 
     with pydicom.dcmread(args.adopter, force=True) as adopter:
         for adoptee in args.adoptee:
-            with pydicom.dcmread(adoptee, force=True) as ds:
-                for attribute_to_update in attributes_to_update:
-                    setattr(ds, attribute_to_update, getattr(adopter, attribute_to_update))
-                ds.save_as(adoptee)
+            for filename in glob.glob(adoptee):
+                with pydicom.dcmread(filename, force=True) as ds:
+                    for attribute_to_update in attributes_to_update:
+                        setattr(ds, attribute_to_update, getattr(adopter, attribute_to_update))
+                    ds.save_as(filename)
 
 
 if __name__ == "__main__":
