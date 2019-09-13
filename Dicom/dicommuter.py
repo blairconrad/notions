@@ -109,6 +109,18 @@ class Dicommuter(object):
         dataset = self.top()
         setattr(dataset, keyword, value)
 
+    def do_unset(self):
+        """\
+        usage: unset <string:keyword> [<string:keyword>…] <dataset:ds>
+
+        Unset the value of an element or elements. Each item at the top of the stack
+        will considered an element name to be unset.
+        """
+        element_names = self.pop_until_dataset()
+        dataset = self.top()
+        for name in element_names:
+            delattr(dataset, name)
+
     def do_save(self):
         """usage: save <dataset:ds>
 
