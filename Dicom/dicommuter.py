@@ -111,15 +111,22 @@ class Dicommuter(object):
 
     def do_unset(self):
         """\
-        usage: unset <string:keyword> [<string:keyword>…] <dataset:ds>
+        usage: unset {<string:keyword>|<integer:key>} [{<string:keyword>|<integer:key>}…] <dataset:ds>
 
         Unset the value of an element or elements. Each item at the top of the stack
         will considered an element name to be unset.
+        Examples:
+            unset 0x00211011
+            unset PatientState
         """
         element_names = self.pop_until_dataset()
         dataset = self.top()
         for name in element_names:
-            delattr(dataset, name)
+            if name and name[0].isdigit():
+                key = int(name, 16)
+                del dataset[key]
+            else:
+                del dataset[name]
 
     def do_save(self):
         """usage: save <dataset:ds>
