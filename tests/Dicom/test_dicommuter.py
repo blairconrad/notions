@@ -69,7 +69,7 @@ def test_show_with_one_key_should_show_element(capsys):
     dicommuter.main(["open", filename, "show", "RegionOfResidence"])
 
     captured = capsys.readouterr()
-    assert captured.out.strip() == "BROAD COVE"
+    assert captured.out.strip() == "(0010, 2152) Region of Residence                 LO: 'BROAD COVE'"
 
 
 def test_show_with_multiple_keys_should_show_all_elements(capsys):
@@ -78,7 +78,21 @@ def test_show_with_multiple_keys_should_show_all_elements(capsys):
     dicommuter.main(["open", filename, "show", "RegionOfResidence", "SOPInstanceUID"])
 
     captured = capsys.readouterr()
-    assert captured.out.strip() == "BROAD COVE\n1.3.6.1.4.1.5962.1.1.4.1.1.20040826185059.5457"
+    assert captured.out.strip() == "\n".join(
+        [
+            "(0010, 2152) Region of Residence                 LO: 'BROAD COVE'",
+            "(0008, 0018) SOP Instance UID                    UI: 1.3.6.1.4.1.5962.1.1.4.1.1.20040826185059.5457",
+        ]
+    )
+
+
+def test_show_with_numeric_key_should_show_element(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    dicommuter.main(["open", filename, "show", "0x00101040"])
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "(0010, 1040) Patient's Address                   LO: '10 REAL STREET'"
 
 
 def test_set_should_set_value(capsys):
@@ -87,7 +101,7 @@ def test_set_should_set_value(capsys):
     dicommuter.main(["open", filename, "set", "RegionOfResidence", "Island of Nin", "show", "RegionOfResidence"])
 
     captured = capsys.readouterr()
-    assert captured.out.strip() == "Island of Nin"
+    assert captured.out.strip() == "(0010, 2152) Region of Residence                 LO: 'Island of Nin'"
 
 
 def test_save_should_save_file(capsys):
@@ -103,7 +117,7 @@ def test_save_should_save_file(capsys):
     os.removedirs(tempdir)
 
     captured = capsys.readouterr()
-    assert captured.out.strip() == "Island of Nin"
+    assert captured.out.strip() == "(0010, 2152) Region of Residence                 LO: 'Island of Nin'"
 
 
 def test_unset_should_remove_element(capsys):

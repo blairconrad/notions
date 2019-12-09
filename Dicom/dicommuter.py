@@ -100,10 +100,12 @@ class Dicommuter(object):
         With supplied keywords, only shows those keywords (from the
         top-level elements).
         """
-        keywords = self.pop_until_command(tokens)
-        if keywords:
-            for keyword in keywords:
-                print(getattr(self.top(), keyword))
+        keys = self.pop_until_command(tokens)
+        if keys:
+            for key in keys:
+                if key and key[0].isdigit():
+                    key = int(key, 16)
+                print(self.top()[key])
         else:
             print(self.top())
         return tokens
