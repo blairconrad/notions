@@ -20,7 +20,7 @@ def main(arguments):
 
     args = parser.parse_args(arguments)
 
-    attributes_to_update = ["PatientID", "PatientName"]
+    attributes_to_update = ["PatientID", "PatientName", "PatientBirthDate"]
     if args.level == "STUDY":
         attributes_to_update += ["StudyID", "StudyInstanceUID", "AccessionNumber"]
 
