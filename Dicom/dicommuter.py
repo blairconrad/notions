@@ -54,6 +54,11 @@ class Dicommuter(object):
             values.append(tokens.pop(0))
         return values
 
+    def interpret_key(self, key):
+        if key and key[0].isdigit():
+            return int(key, 16)
+        return key
+
     # def pop_until_dataset(self):
     #     """Remove and return all elements until we hit a dataset"""
     #     values = []
@@ -103,9 +108,7 @@ class Dicommuter(object):
         keys = self.pop_until_command(tokens)
         if keys:
             for key in keys:
-                if key and key[0].isdigit():
-                    key = int(key, 16)
-                print(self.top()[key])
+                print(self.top()[self.interpret_key(key)])
         else:
             print(self.top())
         return tokens
@@ -116,10 +119,17 @@ class Dicommuter(object):
 
         Set the value of an element in the top dataset of the stack.
         """
-        keyword = tokens.pop(0)
+        key = self.interpret_key(tokens.pop(0))
         value = tokens.pop(0)
         dataset = self.top()
-        setattr(dataset, keyword, value)
+
+        if key in dataset:
+            dataset[key].value = value
+        else:
+            if isinstance(key, int):
+                key = pydicom.datadict.keyword_for_tag(key)
+
+            setattr(dataset, key, value)
         return tokens
 
     def do_unset(self, tokens):

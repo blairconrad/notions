@@ -95,10 +95,37 @@ def test_show_with_numeric_key_should_show_element(capsys):
     assert captured.out.strip() == "(0010, 1040) Patient's Address                   LO: '10 REAL STREET'"
 
 
-def test_set_should_set_value(capsys):
+def test_set_missing_attribute_with_named_key_should_add_value(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    dicommuter.main(["open", filename, "set", "EthnicGroup", "Human", "show", "EthnicGroup"])
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "(0010, 2160) Ethnic Group                        SH: 'Human'"
+
+
+def test_set_existing_attribute_with_named_key_should_change_value(capsys):
     filename = os.path.join(data_dir, "original.dcm")
 
     dicommuter.main(["open", filename, "set", "RegionOfResidence", "Island of Nin", "show", "RegionOfResidence"])
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "(0010, 2152) Region of Residence                 LO: 'Island of Nin'"
+
+
+def test_set_missing_attribute_with_numeric_key_should_add_value(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    dicommuter.main(["open", filename, "set", "0x00102160", "Human", "show", "EthnicGroup"])
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "(0010, 2160) Ethnic Group                        SH: 'Human'"
+
+
+def test_set_existing_attribute_with_numeric_key_should_change_value(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    dicommuter.main(["open", filename, "set", "0x00102152", "Island of Nin", "show", "RegionOfResidence"])
 
     captured = capsys.readouterr()
     assert captured.out.strip() == "(0010, 2152) Region of Residence                 LO: 'Island of Nin'"
