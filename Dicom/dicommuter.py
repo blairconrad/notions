@@ -27,6 +27,7 @@ will set the PatientName attribute in the top object, leaving it on the stack.
 
 from __future__ import print_function
 
+import sys
 import pydicom
 
 
@@ -58,6 +59,10 @@ class Dicommuter(object):
         if key and key[0].isdigit():
             return int(key, 16)
         return key
+
+    def error(self, message):
+        print(message)
+        sys.exit(1)
 
     # def pop_until_dataset(self):
     #     """Remove and return all elements until we hit a dataset"""
@@ -119,16 +124,21 @@ class Dicommuter(object):
 
         Set the value of an element in the top dataset of the stack.
         """
-        key = self.interpret_key(tokens.pop(0))
+        token = tokens.pop(0)
         value = tokens.pop(0)
         dataset = self.top()
 
-        if key in dataset:
-            dataset[key].value = value
-        else:
-            if isinstance(key, int):
-                key = pydicom.datadict.keyword_for_tag(key)
+        try:
+            tag = pydicom.tag.Tag(token)
+        except ValueError:
+            return self.error(f"Cannot set unknown key '{token}'")
 
+        if tag in dataset:
+            dataset[tag].value = value
+        else:
+            key = pydicom.datadict.keyword_for_tag(tag)
+            if not key:
+                self.error(f"Cannot set unknown key '{token}'")
             setattr(dataset, key, value)
         return tokens
 

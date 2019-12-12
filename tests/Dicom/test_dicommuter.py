@@ -2,6 +2,7 @@ import os
 import shutil
 import tempfile
 
+import pytest
 import dicommuter
 
 data_dir = None
@@ -120,6 +121,30 @@ def test_set_missing_attribute_with_numeric_key_should_add_value(capsys):
 
     captured = capsys.readouterr()
     assert captured.out.strip() == "(0010, 2160) Ethnic Group                        SH: 'Human'"
+
+
+def test_set_missing_attribute_with_unknown_named_key_should_error_out(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        dicommuter.main(["open", filename, "set", "PatientAstrologicalSign", "Aquarius", "show"])
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 1
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "Cannot set unknown key 'PatientAstrologicalSign'"
+
+
+def test_set_missing_attribute_with_unknown_numeric_key_should_error_out(capsys):
+    filename = os.path.join(data_dir, "original.dcm")
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        dicommuter.main(["open", filename, "set", "0x10112160", "Aquarius"])
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 1
+
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "Cannot set unknown key '0x10112160'"
 
 
 def test_set_existing_attribute_with_numeric_key_should_change_value(capsys):
