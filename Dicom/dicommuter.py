@@ -55,10 +55,11 @@ class Dicommuter(object):
             values.append(tokens.pop(0))
         return values
 
-    def interpret_key(self, key):
-        if key and key[0].isdigit():
-            return int(key, 16)
-        return key
+    def get_tag(self, token):
+        try:
+            return pydicom.tag.Tag(token)
+        except Exception:
+            return None
 
     def error(self, message):
         print(message)
@@ -113,7 +114,7 @@ class Dicommuter(object):
         keys = self.pop_until_command(tokens)
         if keys:
             for key in keys:
-                print(self.top()[self.interpret_key(key)])
+                print(self.top()[self.get_tag(key)])
         else:
             print(self.top())
         return tokens
@@ -128,9 +129,8 @@ class Dicommuter(object):
         value = tokens.pop(0)
         dataset = self.top()
 
-        try:
-            tag = pydicom.tag.Tag(token)
-        except ValueError:
+        tag = self.get_tag(token)
+        if not tag:
             return self.error(f"Cannot set unknown key '{token}'")
 
         if tag in dataset:
@@ -232,6 +232,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    import sys
-
     main(sys.argv[1:])
