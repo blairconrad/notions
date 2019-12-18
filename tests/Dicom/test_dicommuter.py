@@ -24,9 +24,9 @@ def test_help_should_list_topics(capsys):
 help [topic]
 open <string:filename>
 save
-set <string:keyword> <string:value>
-show [<string:keyword> …]
-unset <string:keyword>
+set <tag:attribute> <string:value>
+show [<tag:attribute> …]
+unset <tag:attribute>
 """.lstrip()
         == captured.out
     )

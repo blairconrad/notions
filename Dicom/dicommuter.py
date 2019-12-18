@@ -104,11 +104,11 @@ class Dicommuter(object):
 
     def do_show(self, tokens):
         """\
-        usage: show [<string:keyword> …]
+        usage: show [<tag:attribute> …]
 
         Show the DICOM dataset at the top of the stack. Leaves the item
         on the stack.
-        With supplied keywords, only shows those keywords (from the
+        With supplied tags, only shows those keywords (from the
         top-level elements).
         """
         keys = self.pop_until_command(tokens)
@@ -121,9 +121,12 @@ class Dicommuter(object):
 
     def do_set(self, tokens):
         """\
-        usage: set <string:keyword> <string:value>
+        usage: set <tag:attribute> <string:value>
 
         Set the value of an element in the top dataset of the stack.
+        Examples:
+            set PatientName Cher
+            set 0x00100010 Doomslug
         """
         token = tokens.pop(0)
         value = tokens.pop(0)
@@ -144,11 +147,12 @@ class Dicommuter(object):
 
     def do_unset(self, tokens):
         """\
-        usage: unset <string:keyword>
+        usage: unset <tag:attribute>
 
         Unset the value of an element
         Examples:
             unset PatientState
+            unset 0x00100010
         """
         keyword = tokens.pop(0)
         dataset = self.top()
