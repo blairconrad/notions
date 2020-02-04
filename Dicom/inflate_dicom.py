@@ -5,7 +5,6 @@ Inflate a dicom file whose transfer syntax is Deflated Explicit VR Little Endian
 (1.2.840.10008.1.2.1.99). Writes to out.dcm.
 """
 
-from __future__ import print_function
 import sys
 import argparse
 import zlib
@@ -34,9 +33,14 @@ def skip(infile, length):
     infile.seek(length, CURRENT_POSITION)  # skip the VR
 
 
-def skip_vr(infile):
-    skip(infile, 2)
-
+def read_vr_and_length(infile):
+    vr = infile.read(2)
+    if vr in [b"OB", b"OW", b"OF", b"SQ", b"UT", b"UN"]:
+        infile.read(2)
+        length = read_int(infile, 4)
+    else:
+        length = read_int(infile, 2)
+    return (vr, length)
 
 def main(arguments):
 
@@ -58,26 +62,31 @@ def main(arguments):
         print("First tag is", file_meta_information_group_length_tag, "not File Meta Information Group Length")
         return
 
-    skip_vr(infile)
-    file_meta_information_group_length_length = read_int(infile, 2)
-    skip(infile, file_meta_information_group_length_length)
+    (vr, file_meta_information_group_length_length) = read_vr_and_length(infile)
+    file_meta_information_group_length = read_int(infile, file_meta_information_group_length_length)
 
-    transfer_syntax_uid_tag = read_tag(infile)
-    if transfer_syntax_uid_tag != 0x0002_0010:
-        print("Tag", transfer_syntax_uid_tag, "is not Transfer Syntax UID")
-        return
+    start_of_data_offset = infile.tell() + file_meta_information_group_length
 
-    skip_vr(infile)
-    transfer_syntax_uid_length = read_int(infile, 2)
+    while True:
+        transfer_syntax_uid_tag = read_tag(infile)
+        if transfer_syntax_uid_tag == 0x0002_0010:
+            break
+
+        # print("Tag", hex(transfer_syntax_uid_tag), "is not Transfer Syntax UID at " + str(infile.tell()))
+        (vr, length) = read_vr_and_length(infile)
+        infile.read(length)
+
+    (vr, transfer_syntax_uid_length) = read_vr_and_length(infile)
     transfer_syntax_uid = infile.read(transfer_syntax_uid_length)
 
     if transfer_syntax_uid != b"1.2.840.10008.1.2.1.99":
         print("Transfer syntax UID is", transfer_syntax_uid, "not Deflated Explicit VR Little Endian")
         return
 
+    infile.seek(start_of_data_offset)
     compressed_rest = infile.read()
     decompressed_rest = zlib.decompress(compressed_rest, -zlib.MAX_WBITS)
-    infile.seek(0)
+
     header = (
         b"\x00" * 128
         + b"DICM"
