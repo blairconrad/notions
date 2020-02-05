@@ -64,6 +64,20 @@ class Windows:
         windows_version = sys.getwindowsversion()
         return windows_version.major == 6 and windows_version.minor == 1
 
+    class disable_file_system_redirection:
+        _disable = ctypes.windll.kernel32.Wow64DisableWow64FsRedirection
+        _revert = ctypes.windll.kernel32.Wow64RevertWow64FsRedirection
+
+        @classmethod
+        def __enter__(self):
+            self.old_value = ctypes.c_long()
+            self.success = self._disable(ctypes.byref(self.old_value))
+
+        @classmethod
+        def __exit__(self, type, value, traceback):
+            if self.success:
+                self._revert(self.old_value)
+
 
 def find_new_size(image_size, candidate_sizes):
     image_aspect = 1.0 * image_size[0] / image_size[1]
@@ -254,25 +268,26 @@ def change_logon_background(image, screen_size, config):
     for possible_screen_size in logon_screen_dimensions:
         possible_ratio = float(possible_screen_size[0]) / possible_screen_size[1]
 
-        if possible_ratio == desired_ratio:
-            image = fit_image(image, [possible_screen_size], config)
-            logon_background_dir = r"%(windir)s\system32\oobe\info\backgrounds" % os.environ
+        with Windows.disable_file_system_redirection():
+            if possible_ratio == desired_ratio:
+                image = fit_image(image, [possible_screen_size], config)
+                logon_background_dir = r"%(windir)s\system32\oobe\info\backgrounds" % os.environ
 
-            if not os.path.exists(logon_background_dir):
-                os.makedirs(logon_background_dir)
+                if not os.path.exists(logon_background_dir):
+                    os.makedirs(logon_background_dir)
 
-            logon_background_path = os.path.join(logon_background_dir, "background%dx%d.jpg" % possible_screen_size)
-            output("path for logon screen background =", logon_background_path)
-            quality = 80
-            while quality >= 50:
-                output("saving logon picture at quality", quality)
-                image.save(logon_background_path, "JPEG", quality=quality)
-                file_size = os.path.getsize(logon_background_path)
-                output("file size is", file_size)
-                if file_size < 256 * 1000:
-                    break
-                quality -= 5
-            return
+                logon_background_path = os.path.join(logon_background_dir, "background%dx%d.jpg" % possible_screen_size)
+                output("path for logon screen background =", logon_background_path)
+                quality = 80
+                while quality >= 50:
+                    output("saving logon picture at quality", quality)
+                    image.save(logon_background_path, "JPEG", quality=quality)
+                    file_size = os.path.getsize(logon_background_path)
+                    output("file size is", file_size)
+                    if file_size < 256 * 1000:
+                        break
+                    quality -= 5
+                return
 
 
 def choose_wallpaper_file(source_dir, args):
