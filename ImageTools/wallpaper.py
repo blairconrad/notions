@@ -57,7 +57,8 @@ class Windows:
 
     @classmethod
     def get_number_of_screens(cls):
-        return ctypes.windll.user32.GetSystemMetrics(Windows.SM_CMONITORS)
+        # return ctypes.windll.user32.GetSystemMetrics(Windows.SM_CMONITORS)
+        return 1
 
     @classmethod
     def is_windows_7(cls):
@@ -140,8 +141,7 @@ def fit_image(im, screen_sizes, config):
     )
 
     if screensize[0] > new_size[0]:
-        # there's a band on the left, and probably right
-
+        # image is skinny
         left_all_same = are_colors_all_same(im, (0, 0), direction_down, im.size[1])
         right_all_same = are_colors_all_same(im, (im.size[0] - 1, 0), direction_down, im.size[1])
 
@@ -155,20 +155,21 @@ def fit_image(im, screen_sizes, config):
                 background_colour = im.getpixel((0, 0))
 
     elif screensize[1] > new_size[1]:
-        # there's a band at the top, and probably bottom
-
+        # image is short
         bottom_all_same = are_colors_all_same(im, (0, im.size[1] - 1), direction_right, im.size[0])
-        top_all_same = are_colors_all_same(im, (0, 0), direction_right, im.size[0])
-
-        if top_all_same and not bottom_all_same:
-            output("float down")
-            background_colour = im.getpixel((0, 0))
-            new_position = (0, screensize[1] - resized_image.size[1])
+        if bottom_all_same:
+            output("float up because bottom is uniform")
+            background_colour = im.getpixel((0, im.size[1] - 1))
         else:
-            output("float up")
-            if bottom_all_same:
-                background_colour = im.getpixel((0, im.size[1] - 1))
+            top_all_same = are_colors_all_same(im, (0, 0), direction_right, im.size[0])
+            if top_all_same:
+                output("float down because top is uniform")
+                background_colour = im.getpixel((0, 0))
+                new_position = (0, screensize[1] - resized_image.size[1])
+            else:
+                output("float up")
 
+    output("new_position", new_position)
     new_image = Image.new(im.mode, screensize, background_colour)
 
     new_image.paste(
