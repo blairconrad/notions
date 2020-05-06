@@ -32,17 +32,23 @@ def main(arguments):
 
     logging.basicConfig(format="", level={1: logging.INFO, 2: logging.DEBUG}.get(args.verbose, logging.WARN))
 
+    def validate_attributes(attributes_string):
+        attributes = attributes_string.split(",")
+        for attribute in attributes:
+            if not pydicom.datadict.tag_for_keyword(attribute):
+                raise Exception("[" + attribute + "] is not a valid tag name")
+        return attributes
+
     attributes = ["PatientID", "PatientName", "AccessionNumber"]
     if args.without:
         for attribute_to_skip in args.without.split(","):
             attributes.remove(attribute_to_skip)
 
     if args.with_attributes:
-        for attribute_to_add in args.with_attributes.split(","):
-            attributes.append(attribute_to_add)
+        attributes.extend(validate_attributes(args.with_attributes))
 
     if args.exactly:
-        attributes = args.exactly.split(",")
+        attributes = attributes.extend(validate_attributes(args.exactly))
 
     specific_tags = attributes + ["SOPClassUID"]
     if "filename" in specific_tags:
@@ -64,13 +70,16 @@ def main(arguments):
 
     for path in get_files_from_source(args.path):
         logging.debug("Checking %s", path)
-        with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
-            dataset.filename = path
-            if dataset.get("SOPClassUID") is None:
-                logging.info("Skipping %s, as it appears not to be a DICOM file", path)
-                continue
-            this_result = [str(dataset.get(attribute, "")) for attribute in attributes]
-            results.add(tuple(this_result))
+        try:
+            with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
+                dataset.filename = path
+                if dataset.get("SOPClassUID") is None:
+                    logging.info("Skipping %s, as it appears not to be a DICOM file", path)
+                    continue
+                this_result = [str(dataset.get(attribute, "")) for attribute in attributes]
+                results.add(tuple(this_result))
+        except (Exception):
+            logging.error("Skipping %s, as it could not be read", path, exc_info=True)
 
     results = sorted(results)
     print_table(attributes, results)
