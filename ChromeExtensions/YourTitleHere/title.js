@@ -1,5 +1,4 @@
-chrome.extension.sendRequest(request={msg: 'update_title'}, callback=function (response)
-                             {
-                                 document.title = response.title;
-                             }
+chrome.runtime.sendMessage({ command: "update_title" }, function (response) {
+    document.title = response.title;
+}
 );
