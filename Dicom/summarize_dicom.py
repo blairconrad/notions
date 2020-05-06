@@ -32,17 +32,23 @@ def main(arguments):
 
     logging.basicConfig(format="", level={1: logging.INFO, 2: logging.DEBUG}.get(args.verbose, logging.WARN))
 
+    def validate_attributes(attributes_string):
+        attributes = attributes_string.split(",")
+        for attribute in attributes:
+            if not pydicom.datadict.tag_for_keyword(attribute):
+                raise Exception("[" + attribute + "] is not a valid tag name")
+        return attributes
+
     attributes = ["PatientID", "PatientName", "AccessionNumber"]
     if args.without:
         for attribute_to_skip in args.without.split(","):
             attributes.remove(attribute_to_skip)
 
     if args.with_attributes:
-        for attribute_to_add in args.with_attributes.split(","):
-            attributes.append(attribute_to_add)
+        attributes.extend(validate_attributes(args.with_attributes))
 
     if args.exactly:
-        attributes = args.exactly.split(",")
+        attributes = attributes.extend(validate_attributes(args.exactly))
 
     specific_tags = attributes + ["SOPClassUID"]
     if "filename" in specific_tags:
