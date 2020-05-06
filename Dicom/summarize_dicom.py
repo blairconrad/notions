@@ -70,13 +70,16 @@ def main(arguments):
 
     for path in get_files_from_source(args.path):
         logging.debug("Checking %s", path)
-        with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
-            dataset.filename = path
-            if dataset.get("SOPClassUID") is None:
-                logging.info("Skipping %s, as it appears not to be a DICOM file", path)
-                continue
-            this_result = [str(dataset.get(attribute, "")) for attribute in attributes]
-            results.add(tuple(this_result))
+        try:
+            with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
+                dataset.filename = path
+                if dataset.get("SOPClassUID") is None:
+                    logging.info("Skipping %s, as it appears not to be a DICOM file", path)
+                    continue
+                this_result = [str(dataset.get(attribute, "")) for attribute in attributes]
+                results.add(tuple(this_result))
+        except (Exception):
+            logging.error("Skipping %s, as it could not be read", path, exc_info=True)
 
     results = sorted(results)
     print_table(attributes, results)
