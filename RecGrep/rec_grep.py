@@ -43,7 +43,9 @@ def print_lines(regexp, filename):
         for line in f.readlines():
             i += 1
             if regexp.search(line) is not None:
-                if options.emacsLineNumbers:
+                if options.omit_location:
+                    print(line.rstrip())
+                elif options.emacsLineNumbers:
                     print("+%d %s %s" % (i, filename, line.rstrip()))
                 else:
                     print("%s:%d:%s" % (filename, i, line.rstrip()))
@@ -100,6 +102,9 @@ def main(args=None):
         dest="emacsLineNumbers",
         default=False,
         help="render line numbers for opening in emacs",
+    )
+    option_parser.add_option(
+        "--omit-location", action="store_true", default=False, help="omit match location in report",
     )
 
     (options, args) = option_parser.parse_args(args)
