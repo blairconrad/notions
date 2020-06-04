@@ -19,36 +19,31 @@ def main(arguments):
     parser.add_argument("path", default=".", help="path", nargs="?", type=str)
     parser.add_argument("--verbose", action="count", default=0)
     parser.add_argument(
-        "--with",
-        dest="with_attributes",
-        metavar="WITH",
-        default="",
-        help="Add these (comma-separated) additional attributes",
+        "--with", dest="with_attributes", action="append", metavar="WITH", help="Add these additional attributes",
     )
-    parser.add_argument("--without", default="", help="Omit these (comma-separated) attributes")
-    parser.add_argument("--exactly", default="", help="Show exactly these (comma-separated) attributes")
+    parser.add_argument("--without", action="append", help="Omit these attributes")
+    parser.add_argument("--exactly", action="append", help="Show exactly these attributes")
 
     args = parser.parse_args(arguments)
 
     logging.basicConfig(format="", level={1: logging.INFO, 2: logging.DEBUG}.get(args.verbose, logging.WARN))
 
-    def validate_attributes(attributes_string):
-        attributes = attributes_string.split(",")
+    def validate_attributes(attributes):
         for attribute in attributes:
-            if not pydicom.datadict.tag_for_keyword(attribute):
+            if attribute != "filename" and not pydicom.datadict.tag_for_keyword(attribute):
                 raise Exception("[" + attribute + "] is not a valid tag name")
         return attributes
 
     attributes = ["PatientID", "PatientName", "AccessionNumber"]
     if args.without:
-        for attribute_to_skip in args.without.split(","):
+        for attribute_to_skip in args.without:
             attributes.remove(attribute_to_skip)
 
     if args.with_attributes:
         attributes.extend(validate_attributes(args.with_attributes))
 
     if args.exactly:
-        attributes = attributes.extend(validate_attributes(args.exactly))
+        attributes = validate_attributes(args.exactly)
 
     specific_tags = attributes + ["SOPClassUID"]
     if "filename" in specific_tags:
