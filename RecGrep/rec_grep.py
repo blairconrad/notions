@@ -11,16 +11,16 @@ import fnmatch
 """A module that performs recursive searches for strings"""
 
 
-def open_file(filename):
+def open_file(filename, encoding):
     if filename == "-":
         return sys.stdin
     else:
-        return open(filename, encoding="utf8")
+        return open(filename, encoding=encoding)
 
 
-def check_file(regexp, filename):
+def check_file(regexp, filename, encoding):
     try:
-        f = open_file(filename)
+        f = open_file(filename, encoding)
     except IOError as detail:
         sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
@@ -35,10 +35,10 @@ def check_file(regexp, filename):
         pass
 
 
-def print_lines(regexp, filename):
+def print_lines(regexp, filename, encoding):
     global options
     try:
-        f = open_file(filename)
+        f = open_file(filename, encoding)
         i = 0
         for line in f.readlines():
             i += 1
@@ -52,8 +52,8 @@ def print_lines(regexp, filename):
     except IOError as detail:
         sys.stderr.write("error: unable to open " + filename + " for reading: " + detail.strerror + "\n")
         return
-    except UnicodeDecodeError:
-        pass
+    except UnicodeDecodeError as detail:
+        sys.stderr.write("error: unicode decode error in " + filename + ": " + str(detail) + "\n")
     f.close()
 
 
@@ -106,6 +106,9 @@ def main(args=None):
     option_parser.add_option(
         "--omit-location", action="store_true", default=False, help="omit match location in report",
     )
+    option_parser.add_option(
+        "--encoding", action="store", default="utf-8", help="open files using indicated encoding",
+    )
 
     (options, args) = option_parser.parse_args(args)
 
@@ -151,7 +154,7 @@ def main(args=None):
     for filepath in fringe:
         filename = os.path.split(filepath)[1]
         if not options.includeFiles or fnmatch.fnmatch(filename, options.includeFiles):
-            file_checker(regexp, filepath)
+            file_checker(regexp, filepath, options.encoding)
 
     return 0
 
