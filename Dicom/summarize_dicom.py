@@ -16,7 +16,7 @@ import logging
 def main(arguments):
 
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("path", default=".", help="path", nargs="?", type=str)
+    parser.add_argument("path", default=".", help="path", nargs="*", type=str)
     parser.add_argument("--verbose", action="count", default=0)
     parser.add_argument(
         "--with", dest="with_attributes", action="append", metavar="WITH", help="Add these additional attributes",
@@ -51,17 +51,18 @@ def main(arguments):
 
     results = set()
 
-    def get_files_from_source(source):
-        if os.path.isfile(source):
-            yield source
-        elif os.path.isdir(source):
-            for (dirpath, dirnames, filenames) in os.walk(source):
-                for filename in filenames:
-                    yield os.path.join(dirpath, filename)
-        else:
-            for expanded_source in glob.glob(source):
-                for file in get_files_from_source(expanded_source):
-                    yield file
+    def get_files_from_source(sources):
+        for source in sources:
+            if os.path.isfile(source):
+                yield source
+            elif os.path.isdir(source):
+                for (dirpath, dirnames, filenames) in os.walk(source):
+                    for filename in filenames:
+                        yield os.path.join(dirpath, filename)
+            else:
+                for expanded_source in glob.glob(source):
+                    for file in get_files_from_source(expanded_source):
+                        yield file
 
     for path in get_files_from_source(args.path):
         logging.debug("Checking %s", path)
