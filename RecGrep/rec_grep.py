@@ -107,7 +107,7 @@ def main(args=None):
         "--omit-location", action="store_true", default=False, help="omit match location in report",
     )
     option_parser.add_option(
-        "--encoding", action="store", default="utf-8", help="open files using indicated encoding",
+        "--encoding", action="store", default="latin1", help="open files using indicated encoding",
     )
 
     (options, args) = option_parser.parse_args(args)
