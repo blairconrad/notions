@@ -4,7 +4,6 @@
 Summarize DICOM files, printing very basic identifying information.
 """
 
-from __future__ import print_function
 import os
 import sys
 import argparse
@@ -60,9 +59,8 @@ def main(arguments):
                     for filename in filenames:
                         yield os.path.join(dirpath, filename)
             else:
-                for expanded_source in glob.glob(source):
-                    for file in get_files_from_source(expanded_source):
-                        yield file
+                for file in get_files_from_source(glob.glob(source)):
+                    yield file
 
     for path in get_files_from_source(args.path):
         logging.debug("Checking %s", path)
