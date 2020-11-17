@@ -14,14 +14,43 @@ import logging
 
 def main(arguments):
 
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("path", default=".", help="path", nargs="*", type=str)
-    parser.add_argument("--verbose", action="count", default=0)
-    parser.add_argument(
-        "--with", dest="with_attributes", action="append", metavar="WITH", help="Add these additional attributes",
+    epilog = """examples:
+  %(prog)s directory_full_of_dicom_files
+  %(prog)s --with StudyInstanceUID --with filename directory_full_of_dicom_files
+  %(prog)s --with StudyInstanceUID --without AccessionNumber directory_full_of_dicom_files"""
+
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter, epilog=epilog
     )
-    parser.add_argument("--without", action="append", help="Omit these attributes")
-    parser.add_argument("--exactly", action="append", help="Show exactly these attributes")
+    parser.add_argument("path", default=".", help="path", nargs="*", type=str)
+    parser.add_argument(
+        "--verbose",
+        action="count",
+        default=0,
+        help="Output additional progress and state information."
+        " May be specified more than once to increase the amount of information output.",
+    )
+    parser.add_argument(
+        "--with",
+        dest="with_attributes",
+        action="append",
+        metavar="ATTRIBUTE",
+        help="Add this additional DICOM attribute (use Pascal Case, e.g. StudyInstanceUID). "
+        " May be specified more than once to add multiple attributes."
+        " The special attribute 'filename' may also be used.",
+    )
+    parser.add_argument(
+        "--without",
+        metavar="ATTRIBUTE",
+        action="append",
+        help="Omit this attribute from the report. May be specified more than once to omit multiple attributes.",
+    )
+    parser.add_argument(
+        "--exactly",
+        metavar="ATTRIBUTE",
+        action="append",
+        help="Show exactly this attribute. May be specified more than once to show multiple attributes.",
+    )
 
     args = parser.parse_args(arguments)
 
