@@ -99,13 +99,18 @@ def main(arguments):
                 if dataset.get("SOPClassUID") is None:
                     logging.info("Skipping %s, as it appears not to be a DICOM file", path)
                     continue
-                this_result = [str(dataset.get(attribute, "")) for attribute in attributes]
+                this_result = [get_attribute(dataset, attribute) for attribute in attributes]
                 results.add(tuple(this_result))
         except (Exception):
             logging.error("Skipping %s, as it could not be read", path, exc_info=True)
 
     results = sorted(results)
     print_table(attributes, results)
+
+
+def get_attribute(dataset, attribute_name):
+    value = attribute_name in dataset and dataset.get(attribute_name) or dataset.file_meta.get(attribute_name, "")
+    return str(value)
 
 
 def print_table(headers, body_rows):
