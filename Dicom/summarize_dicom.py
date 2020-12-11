@@ -109,7 +109,9 @@ def main(arguments):
 
 
 def get_attribute(dataset, attribute_name):
-    value = attribute_name in dataset and dataset.get(attribute_name) or dataset.file_meta.get(attribute_name, "")
+    value = (
+        hasattr(dataset, attribute_name) and dataset.get(attribute_name) or dataset.file_meta.get(attribute_name, "")
+    )
     return str(value)
 
 
