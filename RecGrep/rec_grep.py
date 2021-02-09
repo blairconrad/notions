@@ -33,6 +33,8 @@ def check_file(regexp, filename, encoding):
                 return
     except UnicodeDecodeError:
         pass
+    except Exception:
+        sys.stderr.write(f"error: failed to search through {filename}\n")
 
 
 def print_lines(regexp, filename, encoding):
