@@ -8,6 +8,7 @@ from __future__ import print_function
 import os
 import sys
 import argparse
+import glob
 import pydicom
 import logging
 import fnmatch
@@ -21,9 +22,9 @@ def main(arguments):
     parser.add_argument(
         "path",
         default=".",
-        nargs="?",
+        nargs="*",
         type=str,
-        help="Directory to look for DICOM files. Defaults to the current directory.",
+        help="Files to look at or directories to look in for DICOM files. Defaults to the current directory.",
     )
     parser.add_argument("--verbose", action="count", default=0)
 
@@ -33,15 +34,28 @@ def main(arguments):
 
     (attribute, value) = args.matcher.split("=")
 
-    for (dirpath, dirnames, filenames) in os.walk(args.path):
-        for filename in filenames:
-            filename = os.path.join(dirpath, filename)
-            try:
-                with pydicom.dcmread(filename, specific_tags=[attribute]) as dataset:
-                    if fnmatch.fnmatch(dataset.get(attribute), value):
-                        print(os.path.relpath(filename))
-            except pydicom.errors.InvalidDicomError:
-                logging.info("Skipping %s, as it appears not to be a DICOM file", filename)
+    for filename in get_files_from_source(args.path):
+        try:
+            with pydicom.dcmread(filename, specific_tags=[attribute]) as dataset:
+                if fnmatch.fnmatch(dataset.get(attribute), value):
+                    print(os.path.relpath(filename))
+        except pydicom.errors.InvalidDicomError:
+            logging.info("Skipping %s, as it appears not to be a DICOM file", filename)
+
+
+def get_files_from_source(sources):
+    print(sources)
+    for source in sources:
+        if os.path.isfile(source):
+            print("yielding", source)
+            yield source
+        elif os.path.isdir(source):
+            for (dirpath, dirnames, filenames) in os.walk(source):
+                for filename in filenames:
+                    yield os.path.join(dirpath, filename)
+        else:
+            for file in get_files_from_source(glob.glob(source)):
+                yield file
 
 
 if __name__ == "__main__":
