@@ -44,10 +44,8 @@ def main(arguments):
 
 
 def get_files_from_source(sources):
-    print(sources)
     for source in sources:
         if os.path.isfile(source):
-            print("yielding", source)
             yield source
         elif os.path.isdir(source):
             for (dirpath, dirnames, filenames) in os.walk(source):
