@@ -276,7 +276,7 @@ def change_logon_background(image, screen_size, config):
             return
 
 
-def choose_wallpaper_file(source_dir, args):
+def choose_wallpaper_file(args):
     if len(args) > 0:
         location_arg = args[0]
         if os.path.isdir(location_arg):
@@ -288,7 +288,7 @@ def choose_wallpaper_file(source_dir, args):
             output("available files", file_choices)
             the_file = random.choice(file_choices)
     else:
-        the_file = get_file(source_dir)
+        the_file = get_file(find_source_dir())
 
     output("chose", the_file)
     return the_file
@@ -303,7 +303,7 @@ def parse_args(args):
 
 def find_source_dir():
     try:
-        source_dir = r"%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers" % os.environ
+        source_dir = r"G:\My Drive\Dropbox from Torii\Pictures\wallpapers" % os.environ
     except:
         source_dir = os.getcwd()
         output("No HOME environment variable defined. Will use ", source_dir, " for generated files.")
@@ -350,8 +350,7 @@ def main(args):
     global verbose
     verbose = options.verbose
 
-    source_dir = find_source_dir()
-    the_file = choose_wallpaper_file(source_dir, args)
+    the_file = choose_wallpaper_file(args)
 
     i = Image.open(the_file)
     output("image size is", i.size)
