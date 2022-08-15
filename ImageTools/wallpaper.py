@@ -303,7 +303,7 @@ def parse_args(args):
 
 def find_source_dir():
     try:
-        source_dir = r"%(HOME)s\..\Documents\Dropbox\Pictures\wallpapers" % os.environ
+        source_dir = r"G:\My Drive\Dropbox from Torii\Pictures\wallpapers" % os.environ
     except:
         source_dir = os.getcwd()
         output("No HOME environment variable defined. Will use ", source_dir, " for generated files.")
