@@ -283,7 +283,7 @@ def choose_wallpaper_file(args):
     elif os.path.isfile(location_arg):
         the_file = location_arg
     else:
-        file_choices = glob.glob(location_arg)
+        file_choices = [f for f in glob.glob(location_arg) if not f.endswith(".json")]
         output("available files", file_choices)
         the_file = random.choice(file_choices)
 
