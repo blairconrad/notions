@@ -130,7 +130,7 @@ def fit_image(im, screen_sizes, config):
     (new_size, screensize) = find_new_size(im.size, screen_sizes)
     output("new_size =", str(new_size))
 
-    resized_image = im.resize(new_size, Image.BICUBIC)
+    resized_image = im.resize(new_size, Image.Resampling.BICUBIC)
 
     new_position = (0, 0)
     background_colour_string = config.get("background-colour", "000000")
