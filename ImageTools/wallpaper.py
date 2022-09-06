@@ -277,18 +277,15 @@ def change_logon_background(image, screen_size, config):
 
 
 def choose_wallpaper_file(args):
-    if len(args) > 0:
-        location_arg = args[0]
-        if os.path.isdir(location_arg):
-            the_file = get_file(location_arg)
-        elif os.path.isfile(location_arg):
-            the_file = location_arg
-        else:
-            file_choices = glob.glob(location_arg)
-            output("available files", file_choices)
-            the_file = random.choice(file_choices)
+    location_arg = len(args) and args[0] or find_source_dir()
+    if os.path.isdir(location_arg):
+        the_file = get_file(location_arg)
+    elif os.path.isfile(location_arg):
+        the_file = location_arg
     else:
-        the_file = get_file(find_source_dir())
+        file_choices = [f for f in glob.glob(location_arg) if not f.endswith(".json")]
+        output("available files", file_choices)
+        the_file = random.choice(file_choices)
 
     output("chose", the_file)
     return the_file
