@@ -12,7 +12,6 @@ import glob
 
 
 def main(arguments):
-
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("adopter", help="File that represents the family to adopt the targets into.")
     parser.add_argument("level", help="The level at which to adopt the object.", choices=["PATIENT", "STUDY"])
@@ -29,7 +28,11 @@ def main(arguments):
             for filename in glob.glob(adoptee):
                 with pydicom.dcmread(filename, force=True) as ds:
                     for attribute_to_update in attributes_to_update:
-                        setattr(ds, attribute_to_update, getattr(adopter, attribute_to_update))
+                        element = adopter.get(attribute_to_update)
+                        if type(element) is pydicom.DataElement:
+                            ds[attribute_to_update] = element
+                        elif attribute_to_update in ds:
+                            del ds[attribute_to_update]
                     ds.save_as(filename)
 
 
