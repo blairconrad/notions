@@ -19,7 +19,7 @@ def main(arguments):
 
     args = parser.parse_args(arguments)
 
-    attributes_to_update = ["PatientID", "PatientName", "PatientBirthDate"]
+    attributes_to_update = ["PatientID", "PatientName", "PatientBirthDate", "D"]
     if args.level == "STUDY":
         attributes_to_update += ["StudyID", "StudyInstanceUID", "AccessionNumber"]
 
@@ -28,8 +28,9 @@ def main(arguments):
             for filename in glob.glob(adoptee):
                 with pydicom.dcmread(filename, force=True) as ds:
                     for attribute_to_update in attributes_to_update:
-                        element = adopter.get(attribute_to_update)
-                        if type(element) is pydicom.DataElement:
+                        element = adopter.get_item(attribute_to_update)
+                        print(type(element))
+                        if element:
                             ds[attribute_to_update] = element
                         elif attribute_to_update in ds:
                             del ds[attribute_to_update]

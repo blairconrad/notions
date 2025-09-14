@@ -134,11 +134,21 @@ def fit_image(im, screen_sizes, config):
 
     new_position = (0, 0)
     background_colour_string = config.get("background-colour", "000000")
-    background_colour = (
-        int(background_colour_string[0:2], 16),
-        int(background_colour_string[2:4], 16),
-        int(background_colour_string[4:6], 16),
-    )
+    if resized_image.mode == "RGBA":
+        background_colour = (
+            int(background_colour_string[0:2], 16),
+            int(background_colour_string[2:4], 16),
+            int(background_colour_string[4:6], 16),
+            int(background_colour_string[6:8], 16),
+        )
+    elif resized_image.mode == "RGB":
+        background_colour = (
+            int(background_colour_string[0:2], 16),
+            int(background_colour_string[2:4], 16),
+            int(background_colour_string[4:6], 16),
+        )
+    else:
+        background_colour = int(background_colour_string[:2], 16)
 
     if screensize[0] > new_size[0]:
         # image is skinny
@@ -169,11 +179,12 @@ def fit_image(im, screen_sizes, config):
             else:
                 output("float up")
 
+    output("background colour", background_colour)
     output("new_position", new_position)
     new_image = Image.new(im.mode, screensize, background_colour)
 
     new_image.paste(
-        resized_image, (new_position[0], new_position[1], new_position[0] + new_size[0], new_position[1] + new_size[1])
+        resized_image, (new_position[0], new_position[1], new_position[0] + new_size[0], new_position[1] + new_size[1]),
     )
     return new_image.convert("RGB")
 
@@ -351,6 +362,7 @@ def main(args):
 
     i = Image.open(the_file)
     output("image size is", i.size)
+    output("image mode is", i.mode)
 
     image_bounds = get_bounds(i)
 
