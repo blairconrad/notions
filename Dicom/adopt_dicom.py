@@ -29,10 +29,10 @@ def main(arguments):
                 with pydicom.dcmread(filename, force=True) as ds:
                     for attribute_to_update in attributes_to_update:
                         element = adopter.get(attribute_to_update)
-                        if type(element) is pydicom.DataElement:
-                            ds[attribute_to_update] = element
+                        if element is not None:
+                            setattr(ds, attribute_to_update, element)
                         elif attribute_to_update in ds:
-                            del ds[attribute_to_update]
+                            delattr(ds, attribute_to_update)
                     ds.save_as(filename)
 
 
