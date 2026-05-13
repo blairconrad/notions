@@ -42,7 +42,7 @@ def main(arguments):
         metavar="ATTRIBUTE",
         help="Add this additional DICOM attribute (use Pascal Case, e.g. StudyInstanceUID). "
         " May be specified more than once to add multiple attributes."
-        " The special attribute 'filename' may also be used.",
+        " The special attributes 'filename' and 'folder' may also be used.",
     )
     parser.add_argument(
         "--without",
@@ -63,7 +63,7 @@ def main(arguments):
 
     def validate_attributes(attributes):
         for attribute in attributes:
-            if attribute != "filename" and not pydicom.datadict.tag_for_keyword(attribute):
+            if attribute not in ("filename", "folder") and not pydicom.datadict.tag_for_keyword(attribute):
                 raise Exception("[" + attribute + "] is not a valid tag name")
         return attributes
 
@@ -81,6 +81,8 @@ def main(arguments):
     specific_tags = attributes + ["SOPClassUID"]
     if "filename" in specific_tags:
         specific_tags.remove("filename")
+    if "folder" in specific_tags:
+        specific_tags.remove("folder")
 
     results = set()
 
@@ -101,6 +103,7 @@ def main(arguments):
         try:
             with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
                 dataset.filename = path
+                dataset.folder = os.path.dirname(path)
                 if dataset.get("SOPClassUID") is None:
                     logging.info("Skipping %s, as it appears not to be a DICOM file", path)
                     continue
