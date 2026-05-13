@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 # -*- coding: utf8 -*-
 """dicommuter, a DICOM manuplator that uses pydicom
 

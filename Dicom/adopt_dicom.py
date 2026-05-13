@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 
 """'Adopt' one or more DICOM files into an existing patient or study
 """

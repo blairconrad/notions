@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 
 """\
 Summarize DICOM files, printing very basic identifying information.

@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 
 import sys
 import glob

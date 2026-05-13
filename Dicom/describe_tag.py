@@ -1,3 +1,8 @@
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 import argparse
 import re
 import sys
