@@ -43,5 +43,9 @@ def describe(numeric_tag):
     print(f"\npossibly helpful link: https://duckduckgo.com/?q=!ducky+site:dicom.innolitics.com+{numeric_tag:08X}")
 
 
+def cli():
+    import sys
+    return main(sys.argv[1:])
+
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    sys.exit(cli())

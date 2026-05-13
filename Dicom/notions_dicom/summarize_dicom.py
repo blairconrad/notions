@@ -137,5 +137,9 @@ def print_table(headers, body_rows):
         print("  ".join([result[i] + (widths[i] - len(result[i])) * " " for i in column_indices]))
 
 
+def cli():
+    import sys
+    return main(sys.argv[1:])
+
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(cli())

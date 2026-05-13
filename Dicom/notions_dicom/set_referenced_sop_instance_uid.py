@@ -34,5 +34,9 @@ def set_sop_instance_uid_for_data_set(ds, new_uid):
                 data_element.value = new_uid
 
 
+def cli():
+    import sys
+    return main(sys.argv[1:])
+
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(cli())
