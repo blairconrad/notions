@@ -5,26 +5,44 @@
 # ]
 # ///
 
-"""'Adopt' one or more DICOM files into an existing patient or study
-"""
+"""'Adopt' one or more DICOM files into an existing patient or study"""
 
 from __future__ import print_function
-import os
-import sys
+
 import argparse
-import pydicom
 import glob
+import sys
+
+import pydicom
 
 
 def main(arguments):
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("adopter", help="File that represents the family to adopt the targets into.")
-    parser.add_argument("level", help="The level at which to adopt the object.", choices=["PATIENT", "STUDY"])
-    parser.add_argument("adoptee", nargs="+", help="DICOM file to enroll into the 'family'. Will be edited in place.")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "adopter", help="File that represents the family to adopt the targets into."
+    )
+    parser.add_argument(
+        "level",
+        help="The level at which to adopt the object.",
+        choices=["PATIENT", "STUDY"],
+    )
+    parser.add_argument(
+        "adoptee",
+        nargs="+",
+        help="DICOM file to enroll into the 'family'. Will be edited in place.",
+    )
 
     args = parser.parse_args(arguments)
 
-    attributes_to_update = ["PatientID", "PatientName", "PatientBirthDate"]
+    attributes_to_update = [
+        "IssuerOfPatientID",
+        "PatientBirthDate",
+        "PatientID",
+        "PatientName",
+        "PatientSex",
+    ]
     if args.level == "STUDY":
         attributes_to_update += ["StudyID", "StudyInstanceUID", "AccessionNumber"]
 
@@ -43,7 +61,9 @@ def main(arguments):
 
 def cli():
     import sys
+
     return main(sys.argv[1:])
+
 
 if __name__ == "__main__":
     sys.exit(cli())
