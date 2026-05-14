@@ -9,12 +9,14 @@
 Summarize DICOM files, printing very basic identifying information.
 """
 
-import os
-import sys
 import argparse
 import glob
-import pydicom
+import json
 import logging
+import os
+import sys
+
+import pydicom
 
 
 def main(arguments):
@@ -25,7 +27,9 @@ def main(arguments):
   %(prog)s --with StudyInstanceUID --without AccessionNumber directory_full_of_dicom_files"""
 
     parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter, epilog=epilog
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=epilog,
     )
     parser.add_argument("path", default=".", help="path", nargs="*", type=str)
     parser.add_argument(
@@ -56,14 +60,27 @@ def main(arguments):
         action="append",
         help="Show exactly this attribute. May be specified more than once to show multiple attributes.",
     )
+    parser.add_argument(
+        "--json",
+        dest="output_json",
+        action="store_true",
+        default=False,
+        help="Output results as JSON instead of a table.",
+    )
 
     args = parser.parse_args(arguments)
 
-    logging.basicConfig(format="", level={1: logging.INFO, 2: logging.DEBUG}.get(args.verbose, logging.WARN))
+    logging.basicConfig(
+        format="",
+        level={1: logging.INFO, 2: logging.DEBUG}.get(args.verbose, logging.WARN),
+    )
 
     def validate_attributes(attributes):
         for attribute in attributes:
-            if attribute not in ("filename", "folder") and not pydicom.datadict.tag_for_keyword(attribute):
+            if attribute not in (
+                "filename",
+                "folder",
+            ) and not pydicom.datadict.tag_for_keyword(attribute):
                 raise Exception("[" + attribute + "] is not a valid tag name")
         return attributes
 
@@ -91,7 +108,7 @@ def main(arguments):
             if os.path.isfile(source):
                 yield source
             elif os.path.isdir(source):
-                for (dirpath, dirnames, filenames) in os.walk(source):
+                for dirpath, dirnames, filenames in os.walk(source):
                     for filename in filenames:
                         yield os.path.join(dirpath, filename)
             else:
@@ -101,26 +118,41 @@ def main(arguments):
     for path in get_files_from_source(args.path):
         logging.debug("Checking %s", path)
         try:
-            with pydicom.dcmread(path, force=True, specific_tags=specific_tags) as dataset:
+            with pydicom.dcmread(
+                path, force=True, specific_tags=specific_tags
+            ) as dataset:
                 dataset.filename = path
                 dataset.folder = os.path.dirname(path)
                 if dataset.get("SOPClassUID") is None:
-                    logging.info("Skipping %s, as it appears not to be a DICOM file", path)
+                    logging.info(
+                        "Skipping %s, as it appears not to be a DICOM file", path
+                    )
                     continue
-                this_result = [get_attribute(dataset, attribute) for attribute in attributes]
+                this_result = [
+                    get_attribute(dataset, attribute) for attribute in attributes
+                ]
                 results.add(tuple(this_result))
-        except (Exception):
+        except Exception:
             logging.error("Skipping %s, as it could not be read", path, exc_info=True)
 
     results = sorted(results)
-    print_table(attributes, results)
+    if args.output_json:
+        print_json(attributes, results)
+    else:
+        print_table(attributes, results)
 
 
 def get_attribute(dataset, attribute_name):
     value = (
-        hasattr(dataset, attribute_name) and dataset.get(attribute_name) or dataset.file_meta.get(attribute_name, "")
+        hasattr(dataset, attribute_name)
+        and dataset.get(attribute_name)
+        or dataset.file_meta.get(attribute_name, "")
     )
     return str(value)
+
+
+def print_json(headers, body_rows):
+    print(json.dumps([dict(zip(headers, row)) for row in body_rows], indent=2))
 
 
 def print_table(headers, body_rows):
@@ -133,16 +165,26 @@ def print_table(headers, body_rows):
 
     widths = find_column_widths(headers, body_rows)
     column_indices = range(len(headers))
-    print("  ".join([headers[i] + (widths[i] - len(headers[i])) * " " for i in column_indices]))
+    print(
+        "  ".join(
+            [headers[i] + (widths[i] - len(headers[i])) * " " for i in column_indices]
+        )
+    )
     print("  ".join(["-" * widths[i] for i in column_indices]))
 
     for result in body_rows:
-        print("  ".join([result[i] + (widths[i] - len(result[i])) * " " for i in column_indices]))
+        print(
+            "  ".join(
+                [result[i] + (widths[i] - len(result[i])) * " " for i in column_indices]
+            )
+        )
 
 
 def cli():
     import sys
+
     return main(sys.argv[1:])
+
 
 if __name__ == "__main__":
     sys.exit(cli())
