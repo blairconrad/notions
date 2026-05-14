@@ -16,6 +16,7 @@ find-indicom = "notions_dicom.find_indicom:cli"
 describe-tag = "notions_dicom.describe_tag:cli"
 inflate-dicom = "notions_dicom.inflate_dicom:cli"
 dicommuter = "notions_dicom.dicommuter:cli"
+organize-dicom = "notions_dicom.organize_dicom:cli"
 
 [tool.setuptools.packages.find]
 where = ["."]
