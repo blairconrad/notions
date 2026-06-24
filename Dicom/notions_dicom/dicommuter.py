@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# /// script
+# dependencies = [
+#   "pydicom",
+# ]
+# ///
 # -*- coding: utf8 -*-
 """dicommuter, a DICOM manuplator that uses pydicom
 
@@ -172,7 +177,7 @@ class Dicommuter(object):
                 func()
 
 
-if __name__ == "__main__":
+def cli():
     import sys
 
     # If we see command-line arguments, interpret them as a stack state
@@ -187,6 +192,7 @@ if __name__ == "__main__":
     commuter = Dicommuter()
     if len(sys.argv[1:]) > 0:
         commuter.execute(sys.argv[1:])
+        return 0
     else:
         prompt = Dicommuter.__name__.lower() + "> "
         print(Dicommuter.__name__, "says hello.")
@@ -201,3 +207,8 @@ if __name__ == "__main__":
                 break
             commuter.execute(line.split())
             print([format_item(item) for item in commuter.stack])
+        return 0
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(cli())

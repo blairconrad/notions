@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "notions-dicom-tools"
+version = "0.0.0"
+requires-python = ">=3.14"
+dependencies = ["pydicom"]
+
+[project.scripts]
+adopt-dicom = "notions_dicom.adopt_dicom:cli"
+summarize-dicom = "notions_dicom.summarize_dicom:cli"
+set-sop-uid = "notions_dicom.set_referenced_sop_instance_uid:cli"
+find-indicom = "notions_dicom.find_indicom:cli"
+describe-tag = "notions_dicom.describe_tag:cli"
+inflate-dicom = "notions_dicom.inflate_dicom:cli"
+dicommuter = "notions_dicom.dicommuter:cli"
+organize-dicom = "notions_dicom.organize_dicom:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["notions_dicom"]

@@ -99,5 +99,9 @@ def main(arguments):
         outfile.write(decompressed_rest)
 
 
+def cli():
+    import sys
+    return main(sys.argv[1:])
+
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(cli())
