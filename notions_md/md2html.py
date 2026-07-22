@@ -33,7 +33,10 @@ MERMAID_CDN = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
 
 
 def md_to_html(md_text: str, title: str = "") -> str:
-    body = markdown.markdown(md_text, extensions=["fenced_code", "tables", "toc"])
+    body = markdown.markdown(
+        md_text,
+        extensions=["fenced_code", "tables", "toc", "pymdownx.tilde"],
+    )
 
     def replace_mermaid(m: re.Match) -> str:
         return f'<div class="mermaid">\n{html.unescape(m.group(1))}\n</div>'

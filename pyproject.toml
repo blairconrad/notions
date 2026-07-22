@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "notions-tools"
 version = "0.0.0"
 requires-python = ">=3.11"
-dependencies = ["markdown", "pydicom"]
+dependencies = ["markdown", "pydicom", "pymdown-extensions"]
 
 [project.scripts]
 md2html = "notions_md.md2html:cli"
