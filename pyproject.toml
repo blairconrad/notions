@@ -20,8 +20,8 @@ dicommuter = "notions_dicom.dicommuter:cli"
 organize-dicom = "notions_dicom.organize_dicom:cli"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["notions_md", "notions_dicom"]
+where = [".", "Dicom"]
+include = ["notions_md*", "notions_dicom*"]
 
 [tool.black]
 line-length = 120
