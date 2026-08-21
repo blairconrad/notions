@@ -39,6 +39,15 @@ from pygments.formatters import HtmlFormatter
 
 MERMAID_CDN = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
 
+# YAML frontmatter (--- ... --- at the very start of the file) is metadata,
+# not content, so it's stripped before conversion in both modes.
+FRONTMATTER_RE = re.compile(r"\A---[ \t]*\n.*?\n---[ \t]*\n?", re.DOTALL)
+
+
+def strip_frontmatter(md_text: str) -> str:
+    return FRONTMATTER_RE.sub("", md_text, count=1)
+
+
 # codehilite (fenced ```lang blocks) intercepts every fenced code block,
 # including ```mermaid ones, before we ever see a "language-mermaid" class to
 # detect. So mermaid blocks are pulled out of the raw Markdown text up front
@@ -270,6 +279,7 @@ def md_to_html(md_text: str, title: str = "", theme_name: str = DEFAULT_THEME) -
         raise ValueError(f"Unknown theme '{theme_name}'. Valid options: {valid}")
     theme = THEMES[theme_name]
 
+    md_text = strip_frontmatter(md_text)
     md_text, mermaid_blocks = extract_mermaid_blocks(md_text)
     body = markdown.markdown(
         md_text,
@@ -380,6 +390,7 @@ def md_to_html_safe(
         raise ValueError(f"Unknown theme '{theme_name}'. Valid options: {valid}")
     theme = THEMES[theme_name]
 
+    md_text = strip_frontmatter(md_text)
     if MERMAID_FENCE_RE.search(md_text):
         print(
             "warning: mermaid fenced code block(s) found, but --safe mode cannot "
