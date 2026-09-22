@@ -23,6 +23,11 @@ Obsidian-style [[wikilinks]] (with an optional |alias) are also converted:
 to the source file, otherwise it's rendered as plain text (its target can't
 be resolved, e.g. a reference into another vault).
 
+Standard mode also adds a sticky side table of contents (from the document's
+headings) unless the source already places a [TOC] marker itself. --safe mode
+never adds one, since ServiceNow output has no <style> block to support it
+and the collapsed h3/h4 heading levels would make it redundant.
+
 Usage:
     md2html file.md [file2.md ...]              # standard, blue-topaz theme
     md2html file.md -o output.html
@@ -45,6 +50,35 @@ from bs4 import BeautifulSoup, Comment
 from pygments.formatters import HtmlFormatter
 
 MERMAID_CDN = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
+
+# Highlights whichever TOC entry corresponds to the section currently in
+# view. Watches each heading the TOC links to and marks its link "active"
+# once the heading crosses a band near the top of the viewport (the -70%
+# bottom rootMargin keeps that band thin, so normally only one heading is
+# "current" at a time even with short sections).
+TOC_SCROLLSPY_JS = """
+<script>
+(function () {
+  var links = document.querySelectorAll('.toc a[href^="#"]');
+  if (!links.length) return;
+  var targets = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) targets.push([el, a]);
+  });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var match = targets.find(function (t) { return t[0] === entry.target; });
+      if (!match) return;
+      links.forEach(function (a) { a.classList.remove('active'); });
+      match[1].classList.add('active');
+    });
+  }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+  targets.forEach(function (t) { observer.observe(t[0]); });
+})();
+</script>
+"""
 
 # YAML frontmatter (--- ... --- at the very start of the file) is metadata,
 # not content, so it's stripped before conversion in both modes.
@@ -83,6 +117,10 @@ def restore_mermaid_blocks(body_html: str, blocks: list[str]) -> str:
 
 
 MD_EXTENSIONS = ["fenced_code", "codehilite", "tables", "sane_lists", "toc", "pymdownx.tilde"]
+
+# toc extension's default [TOC] marker (must be alone on its own line); used
+# to detect whether the source already placed it explicitly.
+TOC_MARKER_RE = re.compile(r"^\[TOC\][ \t]*$", re.MULTILINE)
 
 # ---------------------------------------------------------------------------
 # Obsidian-style [[wikilinks]].
@@ -195,6 +233,12 @@ THEMES = {
             6: "font-weight:300; line-height:1.2; margin-top:1em; margin-bottom:0.3em; color:#555; text-transform:uppercase; letter-spacing:0.03em;",
         },
         "hr": "height:1px; border:none; background-color:#ddd; margin:1em 0;",
+        "toc_box": (
+            "border:1px solid #ddd; border-radius:4px; padding:0.75em 1.25em; "
+            "margin:0 0 1.5em 0; background:#f7f7f7;"
+        ),
+        "toc_title": "font-weight:600; color:#333;",
+        "toc_active": "color:#3498db; font-weight:600;",
         "blockquote": (
             "margin:0.5em 0 1em 0; padding-left:1em; "
             "border-left:3px solid rgba(0,0,0,0.1); color:#555; font-style:italic;"
@@ -250,6 +294,12 @@ THEMES = {
             6: "font-weight:600; font-size:1em; line-height:1.3; margin-top:1em; margin-bottom:0.3em; color:#89B9E6;",
         },
         "hr": "height:1px; border:none; background-color:#7d7d7d; margin:1em 0;",
+        "toc_box": (
+            "border:1px solid #42A1FA; border-radius:4px; padding:0.75em 1.25em; "
+            "margin:0 0 1.5em 0; background:rgba(66,161,250,0.06);"
+        ),
+        "toc_title": "font-weight:600; color:#08377D;",
+        "toc_active": "color:#0E63B9; font-weight:600;",
         "blockquote": (
             "margin:0.5em 0 1em 0; padding:0.4em 1em; "
             "border-left:3px solid #42A1FA; background:#d5d5d52c; "
@@ -317,7 +367,7 @@ def build_css(theme: dict) -> str:
         f"h{level} {{ {style} }}" for level, style in sorted(theme["headings"].items())
     )
     return f"""
-body {{ max-width: 960px; margin: 2em auto; {theme["outer"]} }}
+body {{ max-width: 1400px; margin: 2em auto; padding: 0 2em; {theme["outer"]} }}
 {heading_rules}
 hr {{ {theme["hr"]} }}
 blockquote {{ {theme["blockquote"]} }}
@@ -332,6 +382,19 @@ tr:nth-child(even) {{ {theme["tr_even"]} }}
 tr:nth-child(odd) {{ {theme["tr_odd"]} }}
 a {{ {theme["link"]} }}
 .mermaid {{ text-align: center; margin: 1.5em 0; }}
+.page-layout {{ display: flex; align-items: flex-start; gap: 2.5em; }}
+.page-layout > .content {{ flex: 1 1 auto; min-width: 0; max-width: 900px; order: 1; }}
+.toc {{ {theme["toc_box"]} flex: 0 0 280px; position: sticky; top: 1.5em;
+  max-height: calc(100vh - 3em); overflow-y: auto; order: 2; }}
+.toc .toctitle {{ {theme["toc_title"]} display: block; margin-bottom: 0.4em; }}
+.toc ul {{ margin: 0.2em 0 0 0; padding-left: 0; list-style: none; }}
+.toc li {{ padding-left: 1.2em; text-indent: -1.2em; }}
+.toc a {{ text-decoration: none; border-bottom: none; }}
+.toc a.active {{ {theme["toc_active"]} }}
+@media (max-width: 900px) {{
+  .page-layout {{ display: block; }}
+  .toc {{ position: static; max-height: none; margin-bottom: 1.5em; }}
+}}
 {pygments_css(theme)}
 """
 
@@ -354,6 +417,39 @@ def wrap_document(
 </html>"""
 
 
+def drop_title_heading(toc_tokens: list[dict]) -> list[dict]:
+    """Remove the document's own title (its first top-level heading) from a TOC tree.
+
+    A link back to the top of the page it's already on isn't useful, but
+    later top-level (h1) headings are meaningful section dividers (e.g.
+    "Part I", "Part II") and must be kept. So only the very first entry is
+    dropped, and its own children (headings that appeared before the first
+    such divider) are promoted to take its place rather than lost.
+    """
+    if not toc_tokens or toc_tokens[0]["level"] != 1:
+        return toc_tokens
+    title, *rest = toc_tokens
+    return title["children"] + rest
+
+
+def render_toc(toc_tokens: list[dict], toc_title: str) -> str:
+    """Render a TOC token tree (as produced by the toc extension) to HTML."""
+
+    def render_list(tokens: list[dict]) -> str:
+        if not tokens:
+            return ""
+        items = "".join(
+            f'<li><a href="#{t["id"]}">{t["html"]}</a>{render_list(t["children"])}</li>'
+            for t in tokens
+        )
+        return f"<ul>{items}</ul>"
+
+    list_html = render_list(toc_tokens)
+    if not list_html:
+        return ""
+    return f'<div class="toc"><span class="toctitle">{toc_title}</span>{list_html}</div>'
+
+
 def md_to_html(
     md_text: str,
     title: str = "",
@@ -369,12 +465,31 @@ def md_to_html(
     md_text = strip_frontmatter(md_text)
     md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
     md_text, mermaid_blocks = extract_mermaid_blocks(md_text)
-    body = markdown.markdown(
-        md_text,
+    md = markdown.Markdown(
         extensions=MD_EXTENSIONS,
-        extension_configs={"codehilite": {"guess_lang": False, "css_class": "codehilite"}},
+        extension_configs={
+            "codehilite": {"guess_lang": False, "css_class": "codehilite"},
+            # toc_depth "1-2" keeps h1 section dividers (e.g. "Part I",
+            # "Part II") alongside their nested h2 headings, and stops there
+            # so the side nav doesn't descend into every sub-heading. The
+            # document's own h1 title is dropped separately below.
+            "toc": {"title": "Contents", "toc_depth": "1-2"},
+        },
     )
+    body = md.convert(md_text)
     body = restore_mermaid_blocks(body, mermaid_blocks)
+
+    # The toc extension only inserts its generated TOC where a [TOC] marker
+    # appears in the source; since notebooks rarely add one, build a sticky
+    # side nav from it automatically here unless the document already placed
+    # the marker itself or has no (non-title) headings at all.
+    toc_tokens = drop_title_heading(md.toc_tokens)
+    toc_html = render_toc(toc_tokens, "Contents")
+    if toc_html and not TOC_MARKER_RE.search(md_text):
+        body = (
+            f'<div class="page-layout">\n{toc_html}\n<div class="content">\n{body}\n</div>\n</div>'
+            f"{TOC_SCROLLSPY_JS}"
+        )
 
     return wrap_document(
         title,
@@ -382,6 +497,7 @@ def md_to_html(
         style_block=f"<style>{build_css(theme)}</style>",
         extra_head=f'<script src="{MERMAID_CDN}"></script>',
     )
+
 
 
 def sanitize(soup: BeautifulSoup) -> None:
