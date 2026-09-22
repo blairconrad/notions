@@ -17,6 +17,12 @@ neutral palette), with syntax-highlighted (Pygments) fenced code blocks:
   allowed), so fenced ```mermaid``` blocks are left as plain code and a
   warning is printed.
 
+Obsidian-style [[wikilinks]] (with an optional |alias) are also converted:
+[[#Heading text]] links to a heading anchor in the same document, and
+[[Page name]] links to a sibling Page name.html if Page name.md exists next
+to the source file, otherwise it's rendered as plain text (its target can't
+be resolved, e.g. a reference into another vault).
+
 Usage:
     md2html file.md [file2.md ...]              # standard, blue-topaz theme
     md2html file.md -o output.html
@@ -32,6 +38,7 @@ import html
 import pathlib
 import re
 import sys
+import unicodedata
 
 import markdown
 from bs4 import BeautifulSoup, Comment
@@ -74,7 +81,82 @@ def restore_mermaid_blocks(body_html: str, blocks: list[str]) -> str:
 
     return MERMAID_PLACEHOLDER_RE.sub(repl, body_html)
 
+
 MD_EXTENSIONS = ["fenced_code", "codehilite", "tables", "sane_lists", "toc", "pymdownx.tilde"]
+
+# ---------------------------------------------------------------------------
+# Obsidian-style [[wikilinks]].
+#
+# Two shapes are handled, both with an optional |alias:
+#   [[#Heading text|alias]]  - link to a heading within this same document.
+#   [[Page name|alias]]      - link to another note; resolved to a sibling
+#                              .html file if the matching .md exists next to
+#                              the source file, otherwise rendered as plain
+#                              text (there's nowhere for it to point).
+#
+# Converted to plain Markdown link syntax *before* the file is handed to the
+# markdown library, so normal link rendering (and --safe sanitizing) applies.
+# ---------------------------------------------------------------------------
+
+WIKILINK_RE = re.compile(r"\[\[([^\[\]|]+)(?:\|([^\[\]]+))?\]\]")
+
+# Fenced code blocks are excluded before scanning for ATX headers below, so
+# a '#' comment inside a shell/Python code sample isn't mistaken for a heading.
+FENCE_RE = re.compile(r"^```.*?^```[ \t]*$\n?", re.DOTALL | re.MULTILINE)
+ATX_HEADER_RE = re.compile(r"^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$", re.MULTILINE)
+
+
+def slugify(text: str) -> str:
+    """Replicate python-markdown's 'toc' extension default (ASCII) slugify.
+
+    Wikilinks to headings need to resolve to the same #id the toc extension
+    assigns to that heading, so the anchor actually lands on the target.
+    """
+    value = unicodedata.normalize("NFKD", text)
+    value = value.encode("ascii", "ignore").decode("ascii")
+    value = re.sub(r"[^\w\s-]", "", value).strip().lower()
+    return re.sub(r"[-\s]+", "-", value)
+
+
+def build_heading_slug_map(md_text: str) -> dict[str, str]:
+    """Map each heading's literal text to the #id toc will give it.
+
+    Mirrors toc's de-duplication of repeated headings (id, id_1, id_2, ...).
+    """
+    slug_map: dict[str, str] = {}
+    seen: dict[str, int] = {}
+    for m in ATX_HEADER_RE.finditer(FENCE_RE.sub("", md_text)):
+        text = m.group(1).strip()
+        base_slug = slugify(text)
+        count = seen.get(base_slug, 0)
+        seen[base_slug] = count + 1
+        slug_map.setdefault(text, base_slug if count == 0 else f"{base_slug}_{count}")
+    return slug_map
+
+
+def convert_wikilinks(
+    md_text: str, heading_slugs: dict[str, str], src_path: pathlib.Path | None
+) -> str:
+    def repl(m: re.Match) -> str:
+        target = m.group(1).strip()
+        alias = m.group(2).strip() if m.group(2) else None
+
+        if target.startswith("#"):
+            heading = target[1:].strip()
+            slug = heading_slugs.get(heading) or slugify(heading)
+            text = alias or heading
+            return f"[{text}]({''.join(('#', slug))})"
+
+        display = alias or target
+        if src_path is not None:
+            candidate = src_path.parent / f"{target}.md"
+            if candidate.exists():
+                return f"[{display}]({candidate.with_suffix('.html').name})"
+        # No resolvable target (e.g. a reference into another vault/wiki):
+        # fall back to plain text rather than leaving literal [[...]] behind.
+        return display
+
+    return WIKILINK_RE.sub(repl, md_text)
 
 # ---------------------------------------------------------------------------
 # --safe mode style palettes (inline styles only; no <style> block allowed).
@@ -272,7 +354,12 @@ def wrap_document(
 </html>"""
 
 
-def md_to_html(md_text: str, title: str = "", theme_name: str = DEFAULT_THEME) -> str:
+def md_to_html(
+    md_text: str,
+    title: str = "",
+    theme_name: str = DEFAULT_THEME,
+    src_path: pathlib.Path | None = None,
+) -> str:
     """Standard mode: full document, themed <style> block, Mermaid via CDN script."""
     if theme_name not in THEMES:
         valid = ", ".join(sorted(THEMES))
@@ -280,6 +367,7 @@ def md_to_html(md_text: str, title: str = "", theme_name: str = DEFAULT_THEME) -
     theme = THEMES[theme_name]
 
     md_text = strip_frontmatter(md_text)
+    md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
     md_text, mermaid_blocks = extract_mermaid_blocks(md_text)
     body = markdown.markdown(
         md_text,
@@ -307,10 +395,12 @@ def sanitize(soup: BeautifulSoup) -> None:
 
     for tag in soup.find_all(True):
         for attr in list(tag.attrs):
-            # Strip event handlers, and drop 'id'/'class' left by markdown
-            # extensions (e.g. toc) since they serve no purpose without a
-            # <style> block and ServiceNow output should stay style-only.
-            if attr.lower().startswith("on") or attr in ("id", "class"):
+            # Strip event handlers, and drop 'class' left by markdown
+            # extensions since it serves no purpose without a <style> block
+            # and ServiceNow output should stay style-only. 'id' is kept:
+            # heading ids are still needed as jump targets for in-document
+            # anchors (e.g. from converted [[#Heading]] wikilinks).
+            if attr.lower().startswith("on") or attr == "class":
                 del tag.attrs[attr]
 
         if tag.name == "a" and "href" in tag.attrs:
@@ -382,7 +472,10 @@ def restyle_misc(soup: BeautifulSoup, theme: dict) -> None:
 
 
 def md_to_html_safe(
-    md_text: str, title: str = "", theme_name: str = DEFAULT_THEME
+    md_text: str,
+    title: str = "",
+    theme_name: str = DEFAULT_THEME,
+    src_path: pathlib.Path | None = None,
 ) -> str:
     """Safe mode: ServiceNow-safe styling (inline styles only, sanitized, no script)."""
     if theme_name not in THEMES:
@@ -391,6 +484,7 @@ def md_to_html_safe(
     theme = THEMES[theme_name]
 
     md_text = strip_frontmatter(md_text)
+    md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
     if MERMAID_FENCE_RE.search(md_text):
         print(
             "warning: mermaid fenced code block(s) found, but --safe mode cannot "
@@ -431,9 +525,9 @@ def convert(
     md_text = src.read_text(encoding="utf-8")
     title = src.stem.replace("-", " ").replace("_", " ")
     output = (
-        md_to_html_safe(md_text, title=title, theme_name=theme)
+        md_to_html_safe(md_text, title=title, theme_name=theme, src_path=src)
         if safe
-        else md_to_html(md_text, title=title, theme_name=theme)
+        else md_to_html(md_text, title=title, theme_name=theme, src_path=src)
     )
     dst.write_text(output, encoding="utf-8")
     print(f"  {src} -> {dst}")
