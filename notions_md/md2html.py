@@ -116,7 +116,89 @@ def restore_mermaid_blocks(body_html: str, blocks: list[str]) -> str:
     return MERMAID_PLACEHOLDER_RE.sub(repl, body_html)
 
 
-MD_EXTENSIONS = ["fenced_code", "codehilite", "tables", "sane_lists", "toc", "pymdownx.tilde"]
+# pymdownx.superfences (rather than fenced_code) so ``` blocks nested inside
+# list items work; pymdownx.highlight keeps the same "codehilite" wrapper
+# class and Pygments styling that codehilite produced.
+MD_EXTENSIONS = [
+    "pymdownx.superfences",
+    "pymdownx.highlight",
+    "tables",
+    "sane_lists",
+    "toc",
+    "pymdownx.tilde",
+]
+
+LIST_MARKER_RE = re.compile(r"^( *)([-*+]|\d+[.)])( +)\S")
+FENCE_OPEN_RE = re.compile(r"^( *)(`{3,}|~{3,})")
+
+
+def normalize_list_indentation(md_text: str) -> str:
+    """Re-indent nested list content to 4 spaces per level.
+
+    CommonMark (and most editors) nest a list item's content under its
+    marker's content column, so "1. x" nests with 3 spaces and "- x" with 2.
+    Python-Markdown only recognises nesting in multiples of 4 spaces, so
+    sub-lists and fenced code blocks indented the CommonMark way come out
+    flat. Each nested line is shifted so its indent is 4 * depth, keeping any
+    extra indentation beyond the parent item's content column.
+    """
+    out: list[str] = []
+    content_columns: list[int] = []  # content column of each open list item
+    fence: tuple[str, int, int] | None = None  # (delimiter, original indent, new indent)
+
+    for line in md_text.split("\n"):
+        stripped = line.lstrip(" ")
+        indent = len(line) - len(stripped)
+
+        if fence is not None:
+            delimiter, fence_indent, new_indent = fence
+            closing = stripped.rstrip()
+            if closing.startswith(delimiter) and not closing.strip(delimiter[0]):
+                fence = None
+            out.append(
+                " " * max(new_indent + indent - fence_indent, 0) + stripped if stripped else line
+            )
+            continue
+
+        if not stripped:
+            out.append(line)
+            continue
+
+        while content_columns and content_columns[-1] > indent:
+            content_columns.pop()
+        parent_column = content_columns[-1] if content_columns else 0
+
+        if indent - parent_column >= 4:
+            # Indented code block (or code inside a list item): its content,
+            # including list-looking lines, is literal. Shift it with its parent.
+            out.append(" " * (4 * len(content_columns) + indent - parent_column) + stripped)
+            continue
+
+        marker = LIST_MARKER_RE.match(line)
+        if marker:
+            new_indent = 4 * len(content_columns)
+            content_column = indent + len(marker.group(2)) + len(marker.group(3))
+            content_columns.append(content_column)
+            out.append(" " * new_indent + stripped)
+            # A fence can open on the marker line itself ("- ```").
+            opener = FENCE_OPEN_RE.match(line[content_column:])
+            if opener:
+                fence = (opener.group(2), content_column, 4 * len(content_columns))
+            continue
+
+        if indent == 0:
+            content_columns.clear()
+        if content_columns:
+            new_indent = 4 * len(content_columns) + indent - parent_column
+        else:
+            new_indent = indent
+
+        opener = FENCE_OPEN_RE.match(line)
+        if opener:
+            fence = (opener.group(2), indent, new_indent)
+        out.append(" " * new_indent + stripped)
+
+    return "\n".join(out)
 
 # toc extension's default [TOC] marker (must be alone on its own line); used
 # to detect whether the source already placed it explicitly.
@@ -464,11 +546,12 @@ def md_to_html(
 
     md_text = strip_frontmatter(md_text)
     md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
+    md_text = normalize_list_indentation(md_text)
     md_text, mermaid_blocks = extract_mermaid_blocks(md_text)
     md = markdown.Markdown(
         extensions=MD_EXTENSIONS,
         extension_configs={
-            "codehilite": {"guess_lang": False, "css_class": "codehilite"},
+            "pymdownx.highlight": {"guess_lang": False, "css_class": "codehilite"},
             # toc_depth "1-2" keeps h1 section dividers (e.g. "Part I",
             # "Part II") alongside their nested h2 headings, and stops there
             # so the side nav doesn't descend into every sub-heading. The
@@ -601,6 +684,7 @@ def md_to_html_safe(
 
     md_text = strip_frontmatter(md_text)
     md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
+    md_text = normalize_list_indentation(md_text)
     if MERMAID_FENCE_RE.search(md_text):
         print(
             "warning: mermaid fenced code block(s) found, but --safe mode cannot "
@@ -612,7 +696,8 @@ def md_to_html_safe(
         md_text,
         extensions=MD_EXTENSIONS,
         extension_configs={
-            "codehilite": {
+            "pymdownx.highlight": {
+                "css_class": "codehilite",
                 "guess_lang": False,
                 "noclasses": True,
                 "pygments_style": theme["pygments_style"],

@@ -307,6 +307,74 @@ class TestMdToHtmlSafe:
         assert "some-external-page" in output
 
 
+NESTED_LIST_WITH_FENCE = (
+    "1. **First**\n"
+    "2. **Second**\n"
+    "   1. Run:\n"
+    "      ```\n"
+    "      logTrace io.undertow\n"
+    "      ```\n"
+    "   2. Next\n"
+    "3. **Third**\n"
+)
+
+
+class TestNestedListsAndFences:
+    @pytest.mark.parametrize("render", [md2html.md_to_html, md2html.md_to_html_safe])
+    def test_threeSpaceIndentedSublistIsNested(self, render):
+        soup = BeautifulSoup(render(NESTED_LIST_WITH_FENCE, title="t"), "html.parser")
+
+        outer = soup.find("ol")
+        assert len(outer.find_all("li", recursive=False)) == 3
+        inner = outer.find_all("li", recursive=False)[1].find("ol")
+        assert [li.get_text(" ", strip=True).split()[0] for li in inner.find_all("li", recursive=False)] == [
+            "Run:",
+            "Next",
+        ]
+
+    @pytest.mark.parametrize("render", [md2html.md_to_html, md2html.md_to_html_safe])
+    def test_fencedBlockInsideListItemIsABlockNotInlineCode(self, render):
+        soup = BeautifulSoup(render(NESTED_LIST_WITH_FENCE, title="t"), "html.parser")
+
+        pre = soup.find("pre")
+        assert pre is not None
+        assert "logTrace io.undertow" in pre.get_text()
+        assert pre.find_parent("li") is not None
+
+    def test_twoSpaceBulletNestingIsNested(self):
+        out = md2html.normalize_list_indentation("- a\n  - b\n    - c\n- d\n")
+        assert out == "- a\n    - b\n        - c\n- d\n"
+
+    def test_topLevelFenceAndIndentedCodeBlocksAreUntouched(self):
+        text = "para\n\n```\n- not a list\n  1. nor this\n```\n\n    indented code\n"
+        assert md2html.normalize_list_indentation(text) == text
+
+
+class TestNormalizeListIndentationEdgeCases:
+    def test_closingFenceWithTrailingWhitespaceEndsTheFence(self):
+        text = "```\ncode\n```  \t\n- a\n  - b\n"
+        assert md2html.normalize_list_indentation(text) == "```\ncode\n```  \t\n- a\n    - b\n"
+
+    def test_indentedCodeWithListSyntaxIsLeftLiteral(self):
+        text = "para\n\n    - literal\n      - child\n"
+        assert md2html.normalize_list_indentation(text) == text
+
+    def test_indentedCodeInsideListItemKeepsRelativeIndentation(self):
+        text = "- a\n\n      - literal\n        - child\n"
+        assert (
+            md2html.normalize_list_indentation(text)
+            == "- a\n\n        - literal\n          - child\n"
+        )
+
+    def test_fenceOpenedOnListMarkerLineKeepsContentRelativeIndentation(self):
+        text = "- ```\n  - x\n    - y\n  ```\n"
+        assert md2html.normalize_list_indentation(text) == "- ```\n    - x\n      - y\n    ```\n"
+
+    def test_topLevelFenceIndentedUpToThreeSpacesIsLiteral(self):
+        text = " ```\n - x\n   - y\n ```\n"
+        assert md2html.normalize_list_indentation(text) == text
+
+
 class TestConvert:
     def test_writesHtmlFileWithResolvedWikilinks(self, tmp_path):
         src = tmp_path / "notebook.md"
