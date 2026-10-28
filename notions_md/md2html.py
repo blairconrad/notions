@@ -44,10 +44,15 @@ import pathlib
 import re
 import sys
 import unicodedata
+from urllib.parse import quote
 
-import markdown
 from bs4 import BeautifulSoup, Comment
+from markdown_it import MarkdownIt
+from markdown_it.token import Token
+from pygments import highlight as pygments_highlight
 from pygments.formatters import HtmlFormatter
+from pygments.lexers import TextLexer, get_lexer_by_name
+from pygments.util import ClassNotFound
 
 MERMAID_CDN = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
 
@@ -89,38 +94,183 @@ def strip_frontmatter(md_text: str) -> str:
     return FRONTMATTER_RE.sub("", md_text, count=1)
 
 
-# codehilite (fenced ```lang blocks) intercepts every fenced code block,
-# including ```mermaid ones, before we ever see a "language-mermaid" class to
-# detect. So mermaid blocks are pulled out of the raw Markdown text up front
-# and spliced back in as <div class="mermaid"> after conversion.
-MERMAID_FENCE_RE = re.compile(r"^```mermaid[ \t]*\n(.*?)^```[ \t]*$\n?", re.DOTALL | re.MULTILINE)
-MERMAID_PLACEHOLDER = "\uE000MERMAID_BLOCK_{index}\uE000"
-MERMAID_PLACEHOLDER_RE = re.compile(r"<p>\uE000MERMAID_BLOCK_(\d+)\uE000</p>")
+# Heading levels listed in the side TOC. "1-2" keeps h1 section dividers
+# (e.g. "Part I", "Part II") alongside their nested h2 headings, and stops
+# there so the side nav doesn't descend into every sub-heading. The
+# document's own h1 title is dropped separately (drop_title_heading).
+TOC_MAX_LEVEL = 2
+# An explicit [TOC] marker lists every level in --safe mode (python-markdown's
+# toc default); in standard mode it uses TOC_MAX_LEVEL, like the side nav.
+SAFE_TOC_MAX_LEVEL = 6
+TOC_MARKER = "[TOC]"
 
 
-def extract_mermaid_blocks(md_text: str) -> tuple[str, list[str]]:
-    """Replace ```mermaid fences with placeholder paragraphs; return text + block contents."""
-    blocks: list[str] = []
+def make_highlighter(theme: dict, noclasses: bool):
+    """Pygments highlighter for fenced code: returns a <div class="codehilite"> block.
 
-    def repl(m: re.Match) -> str:
-        blocks.append(m.group(1))
-        return f"\n{MERMAID_PLACEHOLDER.format(index=len(blocks) - 1)}\n\n"
+    noclasses=True (--safe) inlines the colours as style="..." attributes;
+    otherwise the token classes are styled by pygments_css() in the <style> block.
+    """
+    formatter = HtmlFormatter(
+        cssclass="codehilite",
+        noclasses=noclasses,
+        style=theme["pygments_style"],
+        wrapcode=True,
+    )
 
-    return MERMAID_FENCE_RE.sub(repl, md_text), blocks
+    def highlight(code: str, lang: str, _attrs: str) -> str:
+        try:
+            lexer = get_lexer_by_name(lang) if lang else TextLexer()
+        except ClassNotFound:
+            lexer = TextLexer()
+        return pygments_highlight(code, lexer, formatter)
+
+    return highlight
 
 
-def restore_mermaid_blocks(body_html: str, blocks: list[str]) -> str:
-    def repl(m: re.Match) -> str:
-        return f'<div class="mermaid">\n{blocks[int(m.group(1))]}</div>'
-
-    return MERMAID_PLACEHOLDER_RE.sub(repl, body_html)
+# python-markdown's toc de-duplicates ids by bumping a trailing _N (or adding _1).
+ID_COUNT_RE = re.compile(r"^(.*)_([0-9]+)$")
+ANCHOR_HTML_RE = re.compile(r"^</?a[\s>]", re.IGNORECASE)
 
 
-MD_EXTENSIONS = ["fenced_code", "codehilite", "tables", "sane_lists", "toc", "pymdownx.tilde"]
+def unique_id(slug: str, used: set[str]) -> str:
+    """Replicate python-markdown's toc duplicate-id algorithm (e.g. rate_1 -> rate_2)."""
+    while slug in used or not slug:
+        m = ID_COUNT_RE.match(slug)
+        slug = f"{m.group(1)}_{int(m.group(2)) + 1}" if m else f"{slug}_1"
+    used.add(slug)
+    return slug
 
-# toc extension's default [TOC] marker (must be alone on its own line); used
-# to detect whether the source already placed it explicitly.
-TOC_MARKER_RE = re.compile(r"^\[TOC\][ \t]*$", re.MULTILINE)
+
+def heading_text(inline: Token) -> str:
+    """Plain text of a heading; line breaks (multi-line setext headings) count as spaces."""
+    parts = []
+    for child in inline.children:
+        if child.type in ("text", "code_inline"):
+            parts.append(child.content)
+        elif child.type in ("softbreak", "hardbreak"):
+            parts.append(" ")
+    return "".join(parts)
+
+
+def assign_heading_ids(state) -> None:
+    """markdown-it core rule: give each heading the same #id python-markdown's toc did.
+
+    Wikilinks to headings (see build_heading_slug_map) depend on these ids.
+    Collects (level, id, inline token) for every heading into env["headings"].
+    """
+    used: set[str] = set()
+    headings = state.env.setdefault("headings", [])
+    for i, token in enumerate(state.tokens):
+        if token.type != "heading_open":
+            continue
+        inline = state.tokens[i + 1]
+        slug = unique_id(slugify(heading_text(inline)), used)
+        token.attrSet("id", slug)
+        headings.append((int(token.tag[1:]), slug, inline))
+
+
+def new_parser() -> MarkdownIt:
+    """CommonMark with tables, strikethrough and heading ids."""
+    md = MarkdownIt("commonmark")
+    md.enable(["table", "strikethrough"])
+    md.core.ruler.push("heading_ids", assign_heading_ids)
+    return md
+
+
+def toc_label_html(md: MarkdownIt, env: dict, inline: Token) -> str:
+    """Heading text as HTML for a TOC entry, minus links (the entry is itself a link)."""
+    children = [
+        child
+        for child in inline.children
+        if child.type not in ("link_open", "link_close")
+        and not (child.type == "html_inline" and ANCHOR_HTML_RE.match(child.content))
+    ]
+    return md.renderer.renderInline(children, md.options, env)
+
+
+def build_toc_tokens(md: MarkdownIt, env: dict, max_level: int) -> list[dict]:
+    """Nest the collected headings (levels <= max_level) into a TOC token tree."""
+    roots: list[dict] = []
+    stack: list[dict] = []
+    for level, slug, inline in env.get("headings", []):
+        if level > max_level:
+            continue
+        node = {
+            "level": level,
+            "id": slug,
+            "html": toc_label_html(md, env, inline),
+            "children": [],
+        }
+        while stack and stack[-1]["level"] >= level:
+            stack.pop()
+        (stack[-1]["children"] if stack else roots).append(node)
+        stack.append(node)
+    return roots
+
+
+def render_markdown(md_text: str, theme: dict, safe: bool) -> tuple[str, list[dict], bool]:
+    """Render Markdown to (HTML body, side-nav TOC tree, whether a [TOC] marker was expanded)."""
+    md = new_parser()
+
+    def expand_toc_marker(state) -> None:
+        """Replace a paragraph that is just [TOC] with the rendered table of contents."""
+        max_level = SAFE_TOC_MAX_LEVEL if safe else TOC_MAX_LEVEL
+        tokens = state.tokens
+        i = 0
+        while i + 2 < len(tokens):
+            opening, inline, closing = tokens[i : i + 3]
+            if (
+                opening.type == "paragraph_open"
+                and inline.type == "inline"
+                and inline.content.strip() == TOC_MARKER
+                # A [TOC] reference-link definition makes this a link, not the marker.
+                and all(child.type == "text" for child in inline.children)
+                and closing.type == "paragraph_close"
+            ):
+                toc = Token("html_block", "", 0)
+                toc.content = render_toc(build_toc_tokens(md, state.env, max_level), "Contents") + "\n"
+                tokens[i : i + 3] = [toc]
+                state.env["toc_placed"] = True
+            i += 1
+
+    md.core.ruler.push("toc_marker", expand_toc_marker)
+
+    highlight = make_highlighter(theme, noclasses=safe)
+
+    # Rendered here rather than via markdown-it's `highlight` option, which
+    # only accepts output starting with "<pre" and would wrap our
+    # <div class="codehilite"> in a second <pre><code>.
+    def render_fence(self, tokens, idx, options, env):
+        token = tokens[idx]
+        lang = token.info.strip().split(maxsplit=1)[0] if token.info.strip() else ""
+        if lang == "mermaid":
+            if safe:
+                env["mermaid_skipped"] = True
+            else:
+                # Source is left unescaped, as before: mermaid diagrams use tags like <br/>.
+                return f'<div class="mermaid">\n{token.content}</div>\n'
+        return highlight(token.content, lang, "")
+
+    def render_code_block(self, tokens, idx, options, env):
+        return highlight(tokens[idx].content, "", "")
+
+    md.add_render_rule("fence", render_fence)
+    md.add_render_rule("code_block", render_code_block)
+    # ~~text~~ was <del> under python-markdown; markdown-it emits <s>.
+    md.add_render_rule("s_open", lambda self, tokens, idx, options, env: "<del>")
+    md.add_render_rule("s_close", lambda self, tokens, idx, options, env: "</del>")
+
+    env: dict = {}
+    body = md.render(md_text, env)
+    if env.get("mermaid_skipped"):
+        print(
+            "warning: mermaid fenced code block(s) found, but --safe mode cannot "
+            "render Mermaid (no <script> allowed); left as plain code.",
+            file=sys.stderr,
+        )
+    return body, build_toc_tokens(md, env, TOC_MAX_LEVEL), env.get("toc_placed", False)
+
 
 # ---------------------------------------------------------------------------
 # Obsidian-style [[wikilinks]].
@@ -138,11 +288,6 @@ TOC_MARKER_RE = re.compile(r"^\[TOC\][ \t]*$", re.MULTILINE)
 
 WIKILINK_RE = re.compile(r"\[\[([^\[\]|]+)(?:\|([^\[\]]+))?\]\]")
 
-# Fenced code blocks are excluded before scanning for ATX headers below, so
-# a '#' comment inside a shell/Python code sample isn't mistaken for a heading.
-FENCE_RE = re.compile(r"^```.*?^```[ \t]*$\n?", re.DOTALL | re.MULTILINE)
-ATX_HEADER_RE = re.compile(r"^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$", re.MULTILINE)
-
 
 def slugify(text: str) -> str:
     """Replicate python-markdown's 'toc' extension default (ASCII) slugify.
@@ -157,18 +302,17 @@ def slugify(text: str) -> str:
 
 
 def build_heading_slug_map(md_text: str) -> dict[str, str]:
-    """Map each heading's literal text to the #id toc will give it.
+    """Map each heading's literal text to the #id it gets when rendered.
 
-    Mirrors toc's de-duplication of repeated headings (id, id_1, id_2, ...).
+    Parses with the same parser and id allocation as rendering, so headings
+    nested in lists or hidden in code blocks are counted exactly as they are
+    in the output. Runs of whitespace in the text are collapsed to one space.
     """
+    env: dict = {}
+    new_parser().parse(md_text, env)
     slug_map: dict[str, str] = {}
-    seen: dict[str, int] = {}
-    for m in ATX_HEADER_RE.finditer(FENCE_RE.sub("", md_text)):
-        text = m.group(1).strip()
-        base_slug = slugify(text)
-        count = seen.get(base_slug, 0)
-        seen[base_slug] = count + 1
-        slug_map.setdefault(text, base_slug if count == 0 else f"{base_slug}_{count}")
+    for _level, slug, inline in env.get("headings", []):
+        slug_map.setdefault(" ".join(inline.content.split()), slug)
     return slug_map
 
 
@@ -180,7 +324,7 @@ def convert_wikilinks(
         alias = m.group(2).strip() if m.group(2) else None
 
         if target.startswith("#"):
-            heading = target[1:].strip()
+            heading = " ".join(target[1:].split())
             slug = heading_slugs.get(heading) or slugify(heading)
             text = alias or heading
             return f"[{text}]({''.join(('#', slug))})"
@@ -189,7 +333,7 @@ def convert_wikilinks(
         if src_path is not None:
             candidate = src_path.parent / f"{target}.md"
             if candidate.exists():
-                return f"[{display}]({candidate.with_suffix('.html').name})"
+                return f"[{display}]({quote(candidate.with_suffix('.html').name)})"
         # No resolvable target (e.g. a reference into another vault/wiki):
         # fall back to plain text rather than leaving literal [[...]] behind.
         return display
@@ -373,7 +517,7 @@ hr {{ {theme["hr"]} }}
 blockquote {{ {theme["blockquote"]} }}
 .codehilite {{ {theme["code_chrome"]} }}
 pre {{ {theme["pre"]} }}
-pre code {{ background: none; padding: 0; color: inherit; font-family: inherit; }}
+pre code {{ background: none; padding: 0; color: inherit; font-family: inherit; font-size: inherit; }}
 code {{ {theme["inline_code"]} }}
 table {{ {theme["table"]} }}
 th {{ {theme["th"]} }}
@@ -464,28 +608,14 @@ def md_to_html(
 
     md_text = strip_frontmatter(md_text)
     md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
-    md_text, mermaid_blocks = extract_mermaid_blocks(md_text)
-    md = markdown.Markdown(
-        extensions=MD_EXTENSIONS,
-        extension_configs={
-            "codehilite": {"guess_lang": False, "css_class": "codehilite"},
-            # toc_depth "1-2" keeps h1 section dividers (e.g. "Part I",
-            # "Part II") alongside their nested h2 headings, and stops there
-            # so the side nav doesn't descend into every sub-heading. The
-            # document's own h1 title is dropped separately below.
-            "toc": {"title": "Contents", "toc_depth": "1-2"},
-        },
-    )
-    body = md.convert(md_text)
-    body = restore_mermaid_blocks(body, mermaid_blocks)
+    body, toc_tokens_raw, toc_placed = render_markdown(md_text, theme, safe=False)
 
-    # The toc extension only inserts its generated TOC where a [TOC] marker
-    # appears in the source; since notebooks rarely add one, build a sticky
-    # side nav from it automatically here unless the document already placed
-    # the marker itself or has no (non-title) headings at all.
-    toc_tokens = drop_title_heading(md.toc_tokens)
+    # A [TOC] marker is expanded in place by render_markdown. Notebooks rarely
+    # add one, so otherwise build a sticky side nav automatically, unless the
+    # document has no (non-title) headings at all.
+    toc_tokens = drop_title_heading(toc_tokens_raw)
     toc_html = render_toc(toc_tokens, "Contents")
-    if toc_html and not TOC_MARKER_RE.search(md_text):
+    if toc_html and not toc_placed:
         body = (
             f'<div class="page-layout">\n{toc_html}\n<div class="content">\n{body}\n</div>\n</div>'
             f"{TOC_SCROLLSPY_JS}"
@@ -601,24 +731,8 @@ def md_to_html_safe(
 
     md_text = strip_frontmatter(md_text)
     md_text = convert_wikilinks(md_text, build_heading_slug_map(md_text), src_path)
-    if MERMAID_FENCE_RE.search(md_text):
-        print(
-            "warning: mermaid fenced code block(s) found, but --safe mode cannot "
-            "render Mermaid (no <script> allowed); left as plain code.",
-            file=sys.stderr,
-        )
 
-    raw_body = markdown.markdown(
-        md_text,
-        extensions=MD_EXTENSIONS,
-        extension_configs={
-            "codehilite": {
-                "guess_lang": False,
-                "noclasses": True,
-                "pygments_style": theme["pygments_style"],
-            }
-        },
-    )
+    raw_body, _, _ = render_markdown(md_text, theme, safe=True)
 
     soup = BeautifulSoup(raw_body, "html.parser")
     restyle_codehilite_wrapper(soup, theme)
